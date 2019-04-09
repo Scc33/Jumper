@@ -20,6 +20,8 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
+    void setSmallScreen();
+    
     int screenW;
     int screenH;
     

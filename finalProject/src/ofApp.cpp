@@ -4,10 +4,7 @@
 void ofApp::setup() {
     ofSetWindowTitle("Game");
     
-    screenW = ofGetScreenWidth();
-    screenH = ofGetScreenHeight();
-    ofSetWindowPosition(screenW / 4 - 150, screenH / 4 - 150);
-    
+    setSmallScreen();
     bFullscreen = false;
     
     ofSetVerticalSync(true);
@@ -45,22 +42,6 @@ void ofApp::update(){
     
     if (keyIsDown['d']) {
         ballPositionX += 10;
-    }
-    
-    if (keyIsDown['f']) {
-        bFullscreen = !bFullscreen;
-        
-        if (!bFullscreen) {
-            ofSetWindowShape(300,300);
-            ofSetFullscreen(false);
-            
-            // figure out how to put the window in the center:
-            int screenW = ofGetScreenWidth();
-            int screenH = ofGetScreenHeight();
-            ofSetWindowPosition(screenW/2 - 150, screenH/2 - 150);
-        } else if (bFullscreen == true) {
-            ofSetFullscreen(true);
-        }
     }
     
     if (bFullscreen) {
@@ -130,6 +111,20 @@ void ofApp::draw() {
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
     keyIsDown[key] = true;
+    
+    if (keyIsDown['f']) {
+        bFullscreen = !bFullscreen;
+        
+        if (!bFullscreen) {
+            //ofSetWindowShape(300,300);
+            ofSetFullscreen(false);
+            
+            // figure out how to put the window in the center:
+            setSmallScreen();
+        } else if (bFullscreen == true) {
+            ofSetFullscreen(true);
+        }
+    }
 }
 
 //--------------------------------------------------------------
@@ -180,4 +175,10 @@ void ofApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){
     
+}
+
+void ofApp::setSmallScreen() {
+    screenW = ofGetScreenWidth();
+    screenH = ofGetScreenHeight();
+    ofSetWindowPosition(screenW / 4 - 150, screenH / 4 - 150);
 }
