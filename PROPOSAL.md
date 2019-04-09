@@ -13,7 +13,12 @@
  4. Sound for each movement the character can take and the ability to toggle it on and off
  5. Difficulty settings which would change how points are scored
  6. Varying obstacles which will make the game more interesting
+ 7. A marketplace which allows for the spending of points earned in game to unlock new gamemodes and skins
 
 ## Outside Library
 
 Sound drastically adds to any game, but in this case I only have small plans for how to use sound, so I don't plan on using a sound library as my main outside library.
+
+https://github.com/vanderlin/ofxBox2d
+
+https://github.com/bernardoaraujor/ofxGameOfLife
