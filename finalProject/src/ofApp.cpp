@@ -22,10 +22,10 @@ void ofApp::setup() {
     
     backgroundY = 0;
     
-    int setX = 0;
+    int setX = ofGetWidth();
     for (int i = 0; i < 10; ++i) {
         backgroundX[i] = setX;
-        setX += 100;
+        setX -= 100;
     }
 }
 
@@ -49,13 +49,13 @@ void ofApp::update(){
         ballPositionX = 0;
         ballVelocityX *= -1;
         if (!bFullscreen){
-            ofSetWindowPosition(posx-10, posy);
+            ofSetWindowPosition(posx - 10, posy);
         }
     } else if (ballPositionX > ofGetWidth()) {
         ballPositionX = ofGetWidth();
         ballVelocityX *= -1;
         if (!bFullscreen) {
-            ofSetWindowPosition(posx+10, posy);
+            ofSetWindowPosition(posx + 10, posy);
         }
     }
     
@@ -63,20 +63,20 @@ void ofApp::update(){
         ballPositionY = 0;
         ballVelocityY *= -1;
         if (!bFullscreen) {
-            ofSetWindowPosition(posx, posy-10);
+            ofSetWindowPosition(posx, posy - 10);
         }
     } else if (ballPositionY > ofGetHeight()) {
         ballPositionY = ofGetHeight();
         ballVelocityY *= -1;
         if (!bFullscreen) {
-            ofSetWindowPosition(posx, posy+10);
+            ofSetWindowPosition(posx, posy + 10);
         }
     }
     
     for (int i = 0; i < 10; ++i) {
-        ++backgroundX[i];
-        if (backgroundX[i] > ofGetWidth()) {
-            backgroundX[i] = 0;
+        --backgroundX[i];
+        if (backgroundX[i] < 0) {
+            backgroundX[i] = ofGetWidth();
         }
     }
 }
