@@ -1,13 +1,12 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-void ofApp::setup(){
-    
+void ofApp::setup() {
     int screenW = ofGetScreenWidth();
     int screenH = ofGetScreenHeight();
-    ofSetWindowPosition(screenW/2-300/2, screenH/2-300/2);
+    ofSetWindowPosition(screenW / 4 - 150, screenH / 4 - 150);
     
-    bFullscreen    = 0;
+    bFullscreen = 0;
     
     // lets set the initial window pos
     // and background color
@@ -25,48 +24,44 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    ofSetWindowTitle("Game");
     
-    // update our window title with the framerate and the position of the window
-    // [zach fix] ofSetWindowTitle(ofToString(ofGetFrameRate(), 2)+":fps - pos ("+ofToString((int)windowX)+","+ofToString((int)windowY)+")");
-    
-    
-    if(bFullscreen){
+    if (bFullscreen) {
         ofHideCursor();
-    }else{
+    } else {
         ofShowCursor();
     }
     
-    
-    ballPositionX += ballVelocityX;
-    ballPositionY += ballVelocityY;
+    //ballPositionX += ballVelocityX;
+    //ballPositionY += ballVelocityY;
     
     int posx = ofGetWindowPositionX();
     int posy = ofGetWindowPositionY();
     
-    if (ballPositionX < 0){
+    if (ballPositionX < 0) {
         ballPositionX = 0;
         ballVelocityX *= -1;
         if (!bFullscreen){
             ofSetWindowPosition(posx-10, posy);
         }
-    } else if (ballPositionX > ofGetWidth()){
+    } else if (ballPositionX > ofGetWidth()) {
         ballPositionX = ofGetWidth();
         ballVelocityX *= -1;
-        if (!bFullscreen){
+        if (!bFullscreen) {
             ofSetWindowPosition(posx+10, posy);
         }
     }
     
-    if (ballPositionY < 0){
+    if (ballPositionY < 0) {
         ballPositionY = 0;
         ballVelocityY *= -1;
-        if (!bFullscreen){
+        if (!bFullscreen) {
             ofSetWindowPosition(posx, posy-10);
         }
-    } else if (ballPositionY > ofGetHeight()){
+    } else if (ballPositionY > ofGetHeight()) {
         ballPositionY = ofGetHeight();
         ballVelocityY *= -1;
-        if (!bFullscreen){
+        if (!bFullscreen) {
             ofSetWindowPosition(posx, posy+10);
         }
     }
@@ -74,23 +69,10 @@ void ofApp::update(){
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){
+void ofApp::draw() {
     ofSetupScreen();
     
     ofSetHexColor(0x999999);
-    
-    // lets show our window pos in pixels
-    // macs actually start the Y pos from 40
-    vagRounded.drawString("window pos ("+ofToString(ofGetWindowPositionX())+", "+ofToString( ofGetWindowPositionY())+")", 10, 25);
-    
-    if(!bFullscreen){
-        vagRounded.drawString("press f to enter fullscreen", -140 + ofGetWidth()/2, ofGetHeight()/2);
-        vagRounded.drawString("window is normal", -100 + ofGetWidth()/2, ofGetHeight() - 10);
-    } else {
-        vagRounded.drawString("press f to exit fullscreen", -150 + ofGetWidth()/2, ofGetHeight()/2);
-        vagRounded.drawString("window is fullscreen", -140 + ofGetWidth()/2, ofGetHeight() - 10);
-    }
-    
     
     ofSetHexColor(0xFFFFFF);
     ofDrawCircle(ballPositionX, ballPositionY, 15);
@@ -98,20 +80,34 @@ void ofApp::draw(){
 
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key){
+void ofApp::keyPressed(int key) {
+    if (key == 'a') {
+        ballPositionX -= 10;
+    }
     
-    if(key == 'f'){
-        
+    if (key == 'w') {
+        ballPositionY -= 10;
+    }
+    
+    if (key == 's') {
+        ballPositionY += 10;
+    }
+    
+    if (key == 'd') {
+        ballPositionX += 10;
+    }
+    
+    if (key == 'f') {
         bFullscreen = !bFullscreen;
         
-        if(!bFullscreen){
+        if (!bFullscreen) {
             ofSetWindowShape(300,300);
             ofSetFullscreen(false);
             // figure out how to put the window in the center:
             int screenW = ofGetScreenWidth();
             int screenH = ofGetScreenHeight();
-            ofSetWindowPosition(screenW/2-300/2, screenH/2-300/2);
-        } else if(bFullscreen == 1){
+            ofSetWindowPosition(screenW/2 - 150, screenH/2 - 150);
+        } else if (bFullscreen == 1) {
             ofSetFullscreen(true);
         }
     }
