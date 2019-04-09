@@ -2,18 +2,18 @@
 
 //--------------------------------------------------------------
 void ofApp::setup() {
+    ofSetWindowTitle("Game");
+    
     screenW = ofGetScreenWidth();
     screenH = ofGetScreenHeight();
     ofSetWindowPosition(screenW / 4 - 150, screenH / 4 - 150);
     
     bFullscreen = false;
     
-    // lets set the initial window pos
-    // and background color
-    // ofSetVerticalSync(true);
+    ofSetVerticalSync(true);
     ofSetFrameRate(60);
     
-    ofBackground(50,50,50);
+    ofBackground(0,0,0);
     
     ballPositionX = 150;
     ballPositionY = 150;
@@ -31,7 +31,37 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    ofSetWindowTitle("Game");
+    if (keyIsDown['a']) {
+        ballPositionX -= 10;
+    }
+    
+    if (keyIsDown['w']) {
+        ballPositionY -= 10;
+    }
+    
+    if (keyIsDown['s']) {
+        ballPositionY += 10;
+    }
+    
+    if (keyIsDown['d']) {
+        ballPositionX += 10;
+    }
+    
+    if (keyIsDown['f']) {
+        bFullscreen = !bFullscreen;
+        
+        if (!bFullscreen) {
+            ofSetWindowShape(300,300);
+            ofSetFullscreen(false);
+            
+            // figure out how to put the window in the center:
+            int screenW = ofGetScreenWidth();
+            int screenH = ofGetScreenHeight();
+            ofSetWindowPosition(screenW/2 - 150, screenH/2 - 150);
+        } else if (bFullscreen == true) {
+            ofSetFullscreen(true);
+        }
+    }
     
     if (bFullscreen) {
         ofHideCursor();
@@ -85,7 +115,7 @@ void ofApp::update(){
 void ofApp::draw() {
     ofSetupScreen();
     
-    ofSetHexColor(0x999999);
+    //ofSetHexColor(0x999999);
     
     ofSetHexColor(0xFFFFFF);
     for (float x : backgroundX) {
@@ -99,42 +129,12 @@ void ofApp::draw() {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-    if (key == 'a') {
-        ballPositionX -= 10;
-    }
-    
-    if (key == 'w') {
-        ballPositionY -= 10;
-    }
-    
-    if (key == 's') {
-        ballPositionY += 10;
-    }
-    
-    if (key == 'd') {
-        ballPositionX += 10;
-    }
-    
-    if (key == 'f') {
-        bFullscreen = !bFullscreen;
-        
-        if (!bFullscreen) {
-            ofSetWindowShape(300,300);
-            ofSetFullscreen(false);
-            
-            // figure out how to put the window in the center:
-            int screenW = ofGetScreenWidth();
-            int screenH = ofGetScreenHeight();
-            ofSetWindowPosition(screenW/2 - 150, screenH/2 - 150);
-        } else if (bFullscreen == true) {
-            ofSetFullscreen(true);
-        }
-    }
+    keyIsDown[key] = true;
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-    
+    keyIsDown[key] = false;
 }
 
 //--------------------------------------------------------------

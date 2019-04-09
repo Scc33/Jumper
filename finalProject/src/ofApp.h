@@ -32,4 +32,6 @@ public:
     
     float backgroundY;
     float backgroundX[10];
+    
+    bool keyIsDown[255];
 };
