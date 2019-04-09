@@ -2,11 +2,11 @@
 
 //--------------------------------------------------------------
 void ofApp::setup() {
-    int screenW = ofGetScreenWidth();
-    int screenH = ofGetScreenHeight();
+    screenW = ofGetScreenWidth();
+    screenH = ofGetScreenHeight();
     ofSetWindowPosition(screenW / 4 - 150, screenH / 4 - 150);
     
-    bFullscreen = 0;
+    bFullscreen = false;
     
     // lets set the initial window pos
     // and background color
@@ -15,11 +15,18 @@ void ofApp::setup() {
     
     ofBackground(50,50,50);
     
-    
     ballPositionX = 150;
     ballPositionY = 150;
     ballVelocityX = ofRandom(-5,5);
     ballVelocityY = ofRandom(-5,5);
+    
+    backgroundY = 0;
+    
+    int setX = 0;
+    for (int i = 0; i < 10; ++i) {
+        backgroundX[i] = setX;
+        setX += 100;
+    }
 }
 
 //--------------------------------------------------------------
@@ -66,6 +73,12 @@ void ofApp::update(){
         }
     }
     
+    for (int i = 0; i < 10; ++i) {
+        ++backgroundX[i];
+        if (backgroundX[i] > ofGetWidth()) {
+            backgroundX[i] = 0;
+        }
+    }
 }
 
 //--------------------------------------------------------------
@@ -75,6 +88,11 @@ void ofApp::draw() {
     ofSetHexColor(0x999999);
     
     ofSetHexColor(0xFFFFFF);
+    for (float x : backgroundX) {
+        ofDrawRectangle(x, backgroundY, 10, screenH);
+    }
+    
+    ofSetHexColor(0xAAAAAA);
     ofDrawCircle(ballPositionX, ballPositionY, 15);
 }
 
@@ -103,11 +121,12 @@ void ofApp::keyPressed(int key) {
         if (!bFullscreen) {
             ofSetWindowShape(300,300);
             ofSetFullscreen(false);
+            
             // figure out how to put the window in the center:
             int screenW = ofGetScreenWidth();
             int screenH = ofGetScreenHeight();
             ofSetWindowPosition(screenW/2 - 150, screenH/2 - 150);
-        } else if (bFullscreen == 1) {
+        } else if (bFullscreen == true) {
             ofSetFullscreen(true);
         }
     }

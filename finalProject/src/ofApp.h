@@ -3,7 +3,6 @@
 #include "ofMain.h"
 
 class ofApp : public ofBaseApp {
-    
 public:
     void setup();
     void update();
@@ -21,10 +20,16 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
+    int screenW;
+    int screenH;
+    
     bool bFullscreen;
     
     float ballPositionX;
     float ballPositionY;
     float ballVelocityX;
     float ballVelocityY;
+    
+    float backgroundY;
+    float backgroundX[10];
 };
