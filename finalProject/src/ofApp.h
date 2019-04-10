@@ -4,6 +4,9 @@
 #include "ofxGameOfLife.h"
 
 class ofApp : public ofBaseApp {
+private:
+    const int cellSize = 8;
+    
 public:
     void setup();
     void update();
@@ -23,13 +26,11 @@ public:
     
     ofxGameOfLife game;
     
-    void setSmallScreen();
+    void setScreenSize();
     void setInitialBackground();
     
     int screenW;
     int screenH;
-    
-    bool bFullscreen;
     
     float ballPositionX;
     float ballPositionY;
