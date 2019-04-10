@@ -1,1 +1,3 @@
-# Final Project
+# Final Project - Platformer
+
+A classic platform game.
