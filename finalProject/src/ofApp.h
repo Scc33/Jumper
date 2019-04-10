@@ -5,7 +5,7 @@
 
 class ofApp : public ofBaseApp {
 private:
-    const int cellSize = 8;
+    const int cellSize = 10;
     
 public:
     void setup();
@@ -26,21 +26,12 @@ public:
     
     ofxGameOfLife game;
     
-    void setScreenSize();
-    void setInitialBackground();
-    
     void drawPlayer();
-    
-    int screenW;
-    int screenH;
     
     float ballPositionX;
     float ballPositionY;
     float ballVelocityX;
     float ballVelocityY;
-    
-    float backgroundY;
-    float backgroundX[10];
     
     bool keyIsDown[255];
 };

@@ -4,16 +4,14 @@
 void ofApp::setup() {
     ofSetWindowTitle("Game");
     
-    setScreenSize();
+    ofSetFullscreen(true);
     
     ofSetFrameRate(60);
     
     ofBackground(0,0,0);
     
-    ballPositionX = 0;
-    ballPositionY = 0;
-    
-    //setInitialBackground();
+    ballPositionX = 1;
+    ballPositionY = 1;
     
     game.setup(ofGetWidth(), ofGetHeight(), cellSize);
 }
@@ -24,7 +22,6 @@ void ofApp::update() {
     
     if (keyIsDown['a']) {
         ballPositionX -= 1;
-        //game.getCell(ballPositionX, ballPositionY).currState = true;
     }
     
     if (keyIsDown['w']) {
@@ -39,23 +36,21 @@ void ofApp::update() {
         ballPositionX += 1;
     }
     
-    if (ballPositionX < 0) {
-        ballPositionX = 0;
-    } else if (ballPositionX > ofGetWidth()) {
-        ballPositionX = ofGetWidth();
+    if (ballPositionX < 1) {
+        ballPositionX = 1;
+    } else if (ballPositionX > game.getCols() - 2) {
+        ballPositionX = game.getCols() - 2;
     }
     
-    if (ballPositionY < 0) {
-        ballPositionY = 0;
-    } else if (ballPositionY > ofGetHeight()) {
-        ballPositionY = ofGetHeight();
+    if (ballPositionY < 1) {
+        ballPositionY = 1;
+    } else if (ballPositionY > game.getRows() - 4) {
+        ballPositionY = game.getRows() - 4;
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-    ofSetupScreen();
-    
     for (int i = 0; i < game.getCols(); i++) {
         for (int j = 0; j < game.getRows(); j++) {
             ofSetColor(150, 150, 150);
@@ -121,20 +116,6 @@ void ofApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){
     
-}
-
-void ofApp::setScreenSize() {
-    screenW = ofGetScreenWidth();
-    screenH = ofGetScreenHeight();
-    ofSetWindowPosition(screenW / 4 - 150, screenH / 4 - 150);
-}
-
-void ofApp::setInitialBackground() {
-    int setX = ofGetWidth();
-    for (int i = 0; i < 10; ++i) {
-        backgroundX[i] = setX;
-        setX -= 500;
-    }
 }
 
 void ofApp::drawPlayer() {
