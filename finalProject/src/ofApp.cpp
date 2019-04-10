@@ -13,7 +13,7 @@ void ofApp::setup() {
     ballPositionX = 0;
     ballPositionY = 0;
     
-    setInitialBackground();
+    //setInitialBackground();
     
     game.setup(ofGetWidth(), ofGetHeight(), cellSize);
 }
@@ -23,19 +23,20 @@ void ofApp::update() {
     game.update();
     
     if (keyIsDown['a']) {
-        ballPositionX -= 3;
+        ballPositionX -= 1;
+        //game.getCell(ballPositionX, ballPositionY).currState = true;
     }
     
     if (keyIsDown['w']) {
-        ballPositionY -= 3;
+        ballPositionY -= 1;
     }
     
     if (keyIsDown['s']) {
-        ballPositionY += 3;
+        ballPositionY += 1;
     }
     
     if (keyIsDown['d']) {
-        ballPositionX += 3;
+        ballPositionX += 1;
     }
     
     if (ballPositionX < 0) {
@@ -48,13 +49,6 @@ void ofApp::update() {
         ballPositionY = 0;
     } else if (ballPositionY > ofGetHeight()) {
         ballPositionY = ofGetHeight();
-    }
-    
-    for (int i = 0; i < 10; ++i) {
-        --backgroundX[i];
-        if (backgroundX[i] < 0) {
-            backgroundX[i] = ofGetWidth();
-        }
     }
 }
 
@@ -70,10 +64,7 @@ void ofApp::draw() {
         }
     }
     
-    cell thisCell = game.getCell(ballPositionX, ballPositionY);
-    ofSetColor(0, 255, 0);
-    ofFill();
-    ofDrawRectangle(ballPositionX*cellSize, ballPositionY*cellSize, cellSize, cellSize);
+    drawPlayer();
 }
 
 
@@ -144,4 +135,20 @@ void ofApp::setInitialBackground() {
         backgroundX[i] = setX;
         setX -= 500;
     }
+}
+
+void ofApp::drawPlayer() {
+    ofSetColor(0, 255, 0);
+    ofFill();
+    
+    ofDrawRectangle(ballPositionX*cellSize, ballPositionY*cellSize, cellSize, cellSize);
+    ofDrawRectangle((ballPositionX+1)*cellSize, ballPositionY*cellSize, cellSize, cellSize);
+    ofDrawRectangle((ballPositionX-1)*cellSize, ballPositionY*cellSize, cellSize, cellSize);
+    ofDrawRectangle(ballPositionX*cellSize, (ballPositionY-1)*cellSize, cellSize, cellSize);
+    ofDrawRectangle(ballPositionX*cellSize, (ballPositionY+1)*cellSize, cellSize, cellSize);
+    ofDrawRectangle(ballPositionX*cellSize, (ballPositionY+2)*cellSize, cellSize, cellSize);
+    ofDrawRectangle((ballPositionX-1)*cellSize, (ballPositionY+2)*cellSize, cellSize, cellSize);
+    ofDrawRectangle((ballPositionX+1)*cellSize, (ballPositionY+2)*cellSize, cellSize, cellSize);
+    ofDrawRectangle((ballPositionX-1)*cellSize, (ballPositionY+3)*cellSize, cellSize, cellSize);
+    ofDrawRectangle((ballPositionX+1)*cellSize, (ballPositionY+3)*cellSize, cellSize, cellSize);
 }

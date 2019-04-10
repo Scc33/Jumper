@@ -29,6 +29,8 @@ public:
     void setScreenSize();
     void setInitialBackground();
     
+    void drawPlayer();
+    
     int screenW;
     int screenH;
     
