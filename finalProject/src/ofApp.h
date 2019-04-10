@@ -34,4 +34,5 @@ public:
     float ballVelocityY;
     
     bool keyIsDown[255];
+    int starts[10];
 };

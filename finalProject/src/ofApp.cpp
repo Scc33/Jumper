@@ -20,6 +20,9 @@ void ofApp::setup() {
 void ofApp::update() {
     game.update();
     
+    int tempX = ballPositionX;
+    int tempY = ballPositionY;
+    
     if (keyIsDown['a']) {
         ballPositionX -= 1;
     }
@@ -28,7 +31,7 @@ void ofApp::update() {
         ballPositionY -= 1;
     }
     
-    if (keyIsDown['s']) {
+    if (keyIsDown['s'] && game.getCell(ballPositionX, ballPositionY + 3).currState != true) {
         ballPositionY += 1;
     }
     
@@ -47,6 +50,13 @@ void ofApp::update() {
     } else if (ballPositionY > game.getRows() - 4) {
         ballPositionY = game.getRows() - 4;
     }
+    
+    if (game.getCell(ballPositionX, ballPositionY + 3).currState == true) {
+        ballPositionX = tempX;
+        ballPositionY = tempY;
+    }
+    
+    std::cout << game.getCell(ballPositionX, ballPositionY + 3).currState << std::endl;
 }
 
 //--------------------------------------------------------------
@@ -55,6 +65,15 @@ void ofApp::draw() {
         for (int j = 0; j < game.getRows(); j++) {
             ofSetColor(150, 150, 150);
             ofNoFill();
+            ofDrawRectangle(i*cellSize, j*cellSize, cellSize, cellSize);
+        }
+    }
+    
+    for (int i = 0; i < 50; i++) {
+        for (int j = game.getRows(); j > 70; j--) {
+            game.getCell(i,j).currState = true;
+            ofSetColor(255,0,0);
+            ofFill();
             ofDrawRectangle(i*cellSize, j*cellSize, cellSize, cellSize);
         }
     }
