@@ -7,7 +7,6 @@ void ofApp::setup() {
     setSmallScreen();
     bFullscreen = false;
     
-    ofSetVerticalSync(true);
     ofSetFrameRate(60);
     
     ofBackground(0,0,0);
@@ -20,24 +19,31 @@ void ofApp::setup() {
     backgroundY = 0;
     
     setInitialBackground();
+    
+    int cellSize = 6;
+    
+    game.setup(ofGetWidth(), ofGetHeight(), cellSize);
+    game.gliderGun(ofGetWidth()/3/cellSize, ofGetHeight()/2/cellSize);
 }
 
 //--------------------------------------------------------------
-void ofApp::update(){
+void ofApp::update() {
+    game.update();
+    
     if (keyIsDown['a']) {
-        ballPositionX -= 10;
+        ballPositionX -= 3;
     }
     
     if (keyIsDown['w']) {
-        ballPositionY -= 10;
+        ballPositionY -= 3;
     }
     
     if (keyIsDown['s']) {
-        ballPositionY += 10;
+        ballPositionY += 3;
     }
     
     if (keyIsDown['d']) {
-        ballPositionX += 10;
+        ballPositionX += 3;
     }
     
     if (bFullscreen) {
@@ -46,38 +52,16 @@ void ofApp::update(){
         ofShowCursor();
     }
     
-    //ballPositionX += ballVelocityX;
-    //ballPositionY += ballVelocityY;
-    
-    int posx = ofGetWindowPositionX();
-    int posy = ofGetWindowPositionY();
-    
     if (ballPositionX < 0) {
         ballPositionX = 0;
-        ballVelocityX *= -1;
-        if (!bFullscreen){
-            ofSetWindowPosition(posx - 10, posy);
-        }
     } else if (ballPositionX > ofGetWidth()) {
         ballPositionX = ofGetWidth();
-        ballVelocityX *= -1;
-        if (!bFullscreen) {
-            ofSetWindowPosition(posx + 10, posy);
-        }
     }
     
     if (ballPositionY < 0) {
         ballPositionY = 0;
-        ballVelocityY *= -1;
-        if (!bFullscreen) {
-            ofSetWindowPosition(posx, posy - 10);
-        }
     } else if (ballPositionY > ofGetHeight()) {
         ballPositionY = ofGetHeight();
-        ballVelocityY *= -1;
-        if (!bFullscreen) {
-            ofSetWindowPosition(posx, posy + 10);
-        }
     }
     
     for (int i = 0; i < 10; ++i) {
@@ -92,15 +76,32 @@ void ofApp::update(){
 void ofApp::draw() {
     ofSetupScreen();
     
+    int cellWidth = 6;
+    int cellHeight = 6;
+    
+    for (int i = 0; i < game.getCols(); i++) {
+        for (int j = 0; j < game.getRows(); j++) {
+            cell thisCell = game.getCell(i, j);
+            ofSetColor(255, 150, 150);
+            ofNoFill();
+            ofDrawRectangle(i*cellWidth, j*cellHeight, cellWidth, cellHeight);
+        }
+    }
+    
+    cell thisCell = game.getCell(ballPositionX, ballPositionY);
+    ofSetColor(0, 255, 0);
+    ofFill();
+    ofDrawRectangle(ballPositionX*cellWidth, ballPositionY*cellHeight, cellWidth, cellHeight);
+    
     //ofSetHexColor(0x999999);
     
-    ofSetHexColor(0xFFFFFF);
+    /*ofSetHexColor(0xFFFFFF);
     for (float x : backgroundX) {
         ofDrawRectangle(x, backgroundY, 10, screenH);
     }
     
     ofSetHexColor(0xAAAAAA);
-    ofDrawCircle(ballPositionX, ballPositionY, 15);
+    ofDrawCircle(ballPositionX, ballPositionY, 15);*/
 }
 
 
@@ -112,10 +113,7 @@ void ofApp::keyPressed(int key) {
         bFullscreen = !bFullscreen;
         
         if (!bFullscreen) {
-            //ofSetWindowShape(300,300);
             ofSetFullscreen(false);
-            
-            // figure out how to put the window in the center:
             setSmallScreen();
         } else if (bFullscreen == true) {
             ofSetFullscreen(true);
