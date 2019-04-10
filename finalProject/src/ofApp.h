@@ -21,6 +21,7 @@ public:
     void gotMessage(ofMessage msg);
     
     void setSmallScreen();
+    void setInitialBackground();
     
     int screenW;
     int screenH;

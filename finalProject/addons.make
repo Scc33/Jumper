@@ -1,1 +1,2 @@
+ofxGameOfLife
 ofxGui

@@ -19,11 +19,7 @@ void ofApp::setup() {
     
     backgroundY = 0;
     
-    int setX = ofGetWidth();
-    for (int i = 0; i < 10; ++i) {
-        backgroundX[i] = setX;
-        setX -= 100;
-    }
+    setInitialBackground();
 }
 
 //--------------------------------------------------------------
@@ -181,4 +177,12 @@ void ofApp::setSmallScreen() {
     screenW = ofGetScreenWidth();
     screenH = ofGetScreenHeight();
     ofSetWindowPosition(screenW / 4 - 150, screenH / 4 - 150);
+}
+
+void ofApp::setInitialBackground() {
+    int setX = ofGetWidth();
+    for (int i = 0; i < 10; ++i) {
+        backgroundX[i] = setX;
+        setX -= 500;
+    }
 }
