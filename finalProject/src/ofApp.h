@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxGameOfLife.h"
+#include "ofxDatGui.h"
 
 class ofApp : public ofBaseApp {
 private:
@@ -40,4 +41,12 @@ public:
     
     bool keyIsDown[255];
     std::vector<int> starts;
+    
+    //Menu stuff
+    int numClicks;
+    bool isFullscreen;
+    ofxDatGuiButton* button;
+    //ofxDatGuiButton* toggle;
+    void positionButtons();
+    void onButtonEvent(ofxDatGuiButtonEvent e);
 };
