@@ -14,6 +14,8 @@ void ofApp::setup() {
     ballPositionY = 1;
     
     game.setup(ofGetWidth(), ofGetHeight(), cellSize);
+    
+    start = 100;
 }
 
 //--------------------------------------------------------------
@@ -56,29 +58,35 @@ void ofApp::update() {
         ballPositionY = tempY;
     }
     
-    std::cout << game.getCell(ballPositionX, ballPositionY + 3).currState << std::endl;
+    //std::cout << game.getCell(ballPositionX, ballPositionY + 3).currState << std::endl;
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-    for (int i = 0; i < game.getCols(); i++) {
-        for (int j = 0; j < game.getRows(); j++) {
-            ofSetColor(150, 150, 150);
-            ofNoFill();
-            ofDrawRectangle(i*cellSize, j*cellSize, cellSize, cellSize);
-        }
-    }
+    drawGridLines();
     
-    for (int i = 0; i < 50; i++) {
+    for (int i = start; i >= start - 50; i--) {
         for (int j = game.getRows(); j > 70; j--) {
-            game.getCell(i,j).currState = true;
+            int setX;
+            if (i >= 0) {
+                setX = i;
+            } else {
+                setX = game.getCols() + i;
+            }
+            
+            game.getCell(setX,j).currState = true;
             ofSetColor(255,0,0);
             ofFill();
-            ofDrawRectangle(i*cellSize, j*cellSize, cellSize, cellSize);
+            ofDrawRectangle(setX*cellSize, j*cellSize, cellSize, cellSize);
         }
     }
     
     drawPlayer();
+    
+    --start;
+    if (start < 0) {
+        start = game.getCols() - 1;
+    }
 }
 
 
@@ -151,4 +159,14 @@ void ofApp::drawPlayer() {
     ofDrawRectangle((ballPositionX+1)*cellSize, (ballPositionY+2)*cellSize, cellSize, cellSize);
     ofDrawRectangle((ballPositionX-1)*cellSize, (ballPositionY+3)*cellSize, cellSize, cellSize);
     ofDrawRectangle((ballPositionX+1)*cellSize, (ballPositionY+3)*cellSize, cellSize, cellSize);
+}
+
+void ofApp::drawGridLines() {
+    for (int i = 0; i < game.getCols(); i++) {
+        for (int j = 0; j < game.getRows(); j++) {
+            ofSetColor(150, 150, 150);
+            ofNoFill();
+            ofDrawRectangle(i*cellSize, j*cellSize, cellSize, cellSize);
+        }
+    }
 }

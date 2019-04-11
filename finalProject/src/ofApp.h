@@ -27,6 +27,7 @@ public:
     ofxGameOfLife game;
     
     void drawPlayer();
+    void drawGridLines();
     
     float ballPositionX;
     float ballPositionY;
@@ -34,5 +35,5 @@ public:
     float ballVelocityY;
     
     bool keyIsDown[255];
-    int starts[10];
+    int start;
 };
