@@ -28,6 +28,8 @@ public:
     
     void drawPlayer();
     void drawGridLines();
+    void drawPlatform(int start);
+    void updatePlatformPosition();
     
     float ballPositionX;
     float ballPositionY;
@@ -35,5 +37,5 @@ public:
     float ballVelocityY;
     
     bool keyIsDown[255];
-    int start;
+    std::vector<int> starts;
 };

@@ -15,7 +15,9 @@ void ofApp::setup() {
     
     game.setup(ofGetWidth(), ofGetHeight(), cellSize);
     
-    start = 100;
+    starts.push_back(47);
+    starts.push_back(95);
+    starts.push_back(143);
 }
 
 //--------------------------------------------------------------
@@ -65,28 +67,12 @@ void ofApp::update() {
 void ofApp::draw() {
     drawGridLines();
     
-    for (int i = start; i >= start - 50; i--) {
-        for (int j = game.getRows(); j > 70; j--) {
-            int setX;
-            if (i >= 0) {
-                setX = i;
-            } else {
-                setX = game.getCols() + i;
-            }
-            
-            game.getCell(setX,j).currState = true;
-            ofSetColor(255,0,0);
-            ofFill();
-            ofDrawRectangle(setX*cellSize, j*cellSize, cellSize, cellSize);
-        }
-    }
+    drawPlatform(starts.at(0));
+    drawPlatform(starts.at(1));
+    drawPlatform(starts.at(2));
+    updatePlatformPosition();
     
     drawPlayer();
-    
-    --start;
-    if (start < 0) {
-        start = game.getCols() - 1;
-    }
 }
 
 
@@ -167,6 +153,34 @@ void ofApp::drawGridLines() {
             ofSetColor(150, 150, 150);
             ofNoFill();
             ofDrawRectangle(i*cellSize, j*cellSize, cellSize, cellSize);
+        }
+    }
+}
+
+void ofApp::drawPlatform(int start) {
+    for (int i = start; i >= start - 20; i--) {
+        for (int j = game.getRows(); j > 70; j--) {
+            int setX;
+            if (i >= 0) {
+                setX = i;
+            } else {
+                setX = game.getCols() + i;
+            }
+            
+            game.getCell(setX,j).currState = true;
+            ofSetColor(255,0,0);
+            ofFill();
+            ofDrawRectangle(setX*cellSize, j*cellSize, cellSize, cellSize);
+        }
+    }
+}
+
+void ofApp::updatePlatformPosition() {
+    for (int i = 0; i < starts.size(); i++) {
+        starts.at(i)--;
+        
+        if (starts.at(i) < 0) {
+            starts.at(i) = game.getCols() - 1;
         }
     }
 }
