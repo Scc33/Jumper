@@ -5,7 +5,7 @@
 
 class ofApp : public ofBaseApp {
 private:
-    const int cellSize = 10;
+    const int cellSize = 5;
     
 public:
     void setup();
@@ -30,6 +30,8 @@ public:
     void drawGridLines();
     void drawPlatform(int start);
     void updatePlatformPosition();
+    
+    int gravityCalculation();
     
     float ballPositionX;
     float ballPositionY;

@@ -60,6 +60,8 @@ void ofApp::update() {
         ballPositionY = tempY;
     }
     
+    
+    //gravityCalculation();
     //std::cout << game.getCell(ballPositionX, ballPositionY + 3).currState << std::endl;
 }
 
@@ -167,7 +169,7 @@ void ofApp::drawPlatform(int start) {
                 setX = game.getCols() + i;
             }
             
-            game.getCell(setX,j).currState = true;
+            //game.getCell(setX,j).currState = true;
             ofSetColor(255,0,0);
             ofFill();
             ofDrawRectangle(setX*cellSize, j*cellSize, cellSize, cellSize);
@@ -182,5 +184,11 @@ void ofApp::updatePlatformPosition() {
         if (starts.at(i) < 0) {
             starts.at(i) = game.getCols() - 1;
         }
+    }
+}
+
+int ofApp::gravityCalculation() {
+    if (ballPositionY < game.getRows() + 10) {
+        ++ballPositionY;
     }
 }
