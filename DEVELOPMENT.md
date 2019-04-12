@@ -1,5 +1,5 @@
 # Development
-**Week One**\
+**Week One**
 
 *4/8/19*\
 To start development I began thinking about ideas that I would like to create. After some thought I decided that I wanted to make an old school platformer game. I started development by pulling up one of the examples and using it as inspiration for how to start and for basic setup/boilerplate code.
@@ -21,6 +21,9 @@ I wasn't sure how to create a menu using the standard ofGui so I started looking
 Link to outside library: https://github.com/braitsch/ofxDatGui
 
 *4/11/19*\
+Still struggling with my collision bug, today I decided to take a different route and work on other projects that need to be done. First I updated the game screen with platforms that move across the screen. This is import to the final version of the game and working on it now will help me understand how to improve it later on. Once I had created these platforms I began exmperimenting with ofxDatGui. I determined from this experimentation that this would be a good addon, so I added a dependency of it to my project. Finally, I added a simple button from ofxDatGui to the project just to test that the dependency was working properly.
+
+*4/12/10*\
 
 **Week Two**
 
