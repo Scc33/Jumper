@@ -13,6 +13,8 @@ void ofApp::setup() {
     
     ballPositionX = 1;
     ballPositionY = 1;
+    ballVelocityX = ofRandom(-1,1);
+    ballVelocityY = ofRandom(-1,1);
     
     game.setup(ofGetWidth(), ofGetHeight(), cellSize);
     
@@ -88,6 +90,28 @@ void ofApp::update() {
         
         //gravityCalculation();
         //std::cout << game.getCell(ballPositionX, ballPositionY + 3).currState << std::endl;
+    } else {
+        ballPositionX += ballVelocityX;
+        ballPositionY += ballVelocityY;
+        
+        int posx = ofGetWindowPositionX();
+        int posy = ofGetWindowPositionY();
+        
+        if (ballPositionX < 1) {
+            ballPositionX = 1;
+            ballVelocityX *= -1;
+        } else if (ballPositionX > game.getCols() - 2) {
+            ballPositionX = game.getCols() - 2;
+            ballVelocityX *= -1;
+        }
+        
+        if (ballPositionY < 1) {
+            ballPositionY = 1;
+            ballVelocityY *= -1;
+        } else if (ballPositionY > game.getRows() - 4){
+            ballPositionY = game.getRows() - 4;
+            ballVelocityY *= -1;
+        }
     }
 }
 
@@ -103,6 +127,8 @@ void ofApp::draw() {
         
         drawPlayer();
     } else {
+        drawPlayer();
+        
         startGameButton->draw();
         settingsButton->draw();
         highScoreButton->draw();
@@ -232,6 +258,9 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
     // we can compare our button pointer to the target of the event //
     if (e.target == startGameButton) {
         gameRunning = true;
+        ballPositionX = 1;
+        ballPositionX = 1;
+        
     } else if (e.target == settingsButton) {
 
         
