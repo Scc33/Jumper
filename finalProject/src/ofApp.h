@@ -42,10 +42,13 @@ public:
     bool keyIsDown[255];
     std::vector<int> starts;
     
+    bool gameRunning;
+    
     //Menu stuff
     int numClicks;
     bool isFullscreen;
     ofxDatGuiButton* button;
+    ofxDatGuiButton* startGameButton;
     //ofxDatGuiButton* toggle;
     void positionButtons();
     void onButtonEvent(ofxDatGuiButtonEvent e);

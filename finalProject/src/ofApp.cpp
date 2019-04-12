@@ -23,76 +23,85 @@ void ofApp::setup() {
     
     // instantiate a basic button and a toggle button //
     button = new ofxDatGuiButton("CLICK ME");
+    startGameButton = new ofxDatGuiButton("Start");
     //toggle = new ofxDatGuiToggle("TOGGLE FULLSCREEN", false);
     
     // position the components in the middle of the screen //
     positionButtons();
     
     // and register to listen for events //
+    startGameButton->onButtonEvent(this, &ofApp::onButtonEvent);
     button->onButtonEvent(this, &ofApp::onButtonEvent);
     //toggle->onButtonEvent(this, &ofApp::onButtonEvent);
+    
+    gameRunning = false;
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
-    game.update();
-    
+    startGameButton->update();
     button->update();
     //toggle->update();
     
-    int tempX = ballPositionX;
-    int tempY = ballPositionY;
-    
-    if (keyIsDown['a']) {
-        ballPositionX -= 1;
+    if (gameRunning) {
+        game.update();
+        
+        int tempX = ballPositionX;
+        int tempY = ballPositionY;
+        
+        if (keyIsDown['a']) {
+            ballPositionX -= 1;
+        }
+        
+        if (keyIsDown['w']) {
+            ballPositionY -= 1;
+        }
+        
+        if (keyIsDown['s'] && game.getCell(ballPositionX, ballPositionY + 3).currState != true) {
+            ballPositionY += 1;
+        }
+        
+        if (keyIsDown['d']) {
+            ballPositionX += 1;
+        }
+        
+        if (ballPositionX < 1) {
+            ballPositionX = 1;
+        } else if (ballPositionX > game.getCols() - 2) {
+            ballPositionX = game.getCols() - 2;
+        }
+        
+        if (ballPositionY < 1) {
+            ballPositionY = 1;
+        } else if (ballPositionY > game.getRows() - 4) {
+            ballPositionY = game.getRows() - 4;
+        }
+        
+        if (game.getCell(ballPositionX, ballPositionY + 3).currState == true) {
+            ballPositionX = tempX;
+            ballPositionY = tempY;
+        }
+        
+        //gravityCalculation();
+        //std::cout << game.getCell(ballPositionX, ballPositionY + 3).currState << std::endl;
     }
-    
-    if (keyIsDown['w']) {
-        ballPositionY -= 1;
-    }
-    
-    if (keyIsDown['s'] && game.getCell(ballPositionX, ballPositionY + 3).currState != true) {
-        ballPositionY += 1;
-    }
-    
-    if (keyIsDown['d']) {
-        ballPositionX += 1;
-    }
-    
-    if (ballPositionX < 1) {
-        ballPositionX = 1;
-    } else if (ballPositionX > game.getCols() - 2) {
-        ballPositionX = game.getCols() - 2;
-    }
-    
-    if (ballPositionY < 1) {
-        ballPositionY = 1;
-    } else if (ballPositionY > game.getRows() - 4) {
-        ballPositionY = game.getRows() - 4;
-    }
-    
-    if (game.getCell(ballPositionX, ballPositionY + 3).currState == true) {
-        ballPositionX = tempX;
-        ballPositionY = tempY;
-    }
-    
-    
-    //gravityCalculation();
-    //std::cout << game.getCell(ballPositionX, ballPositionY + 3).currState << std::endl;
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-    drawGridLines();
-    
-    drawPlatform(starts.at(0));
-    drawPlatform(starts.at(1));
-    drawPlatform(starts.at(2));
-    updatePlatformPosition();
-    
-    drawPlayer();
-    
-    button->draw();
+    if (gameRunning) {
+        drawGridLines();
+        
+        drawPlatform(starts.at(0));
+        drawPlatform(starts.at(1));
+        drawPlatform(starts.at(2));
+        updatePlatformPosition();
+        
+        drawPlayer();
+    } else {
+        startGameButton->draw();
+        button->draw();
+    }
     //toggle->draw();
 }
 
@@ -212,8 +221,7 @@ int ofApp::gravityCalculation() {
     }
 }
 
-void ofApp::onButtonEvent(ofxDatGuiButtonEvent e)
-{
+void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
     // we have a couple ways to figure out which button was clicked //
     
     // we can compare our button pointer to the target of the event //
@@ -226,7 +234,9 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e)
         }
         
         // or we can check against the label of the event target //
-    }   else if(e.target->getLabel() == "TOGGLE FULLSCREEN"){
+    } else if (e.target == startGameButton) {
+        gameRunning = true;
+    } else if (e.target->getLabel() == "TOGGLE FULLSCREEN"){
         isFullscreen =!isFullscreen;
         ofSetFullscreen(isFullscreen);
         if (!isFullscreen) {
@@ -237,8 +247,7 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e)
     }
 }
 
-void ofApp::positionButtons()
-{
-    button->setPosition(ofGetWidth()/2 - button->getWidth()/2, ofGetHeight()/2 - button->getHeight());
-    //toggle->setPosition(button->getX(), button->getY() + button->getHeight() + 20);
+void ofApp::positionButtons() {
+    startGameButton->setPosition(ofGetWidth()/2 - button->getWidth()/2, ofGetHeight()/2 - button->getHeight());
+    button->setPosition(startGameButton->getX(), startGameButton->getY() + startGameButton->getHeight() + 20);
 }
