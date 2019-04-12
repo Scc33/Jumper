@@ -23,7 +23,10 @@ Link to outside library: https://github.com/braitsch/ofxDatGui
 *4/11/19*\
 Still struggling with my collision bug, today I decided to take a different route and work on other projects that need to be done. First I updated the game screen with platforms that move across the screen. This is import to the final version of the game and working on it now will help me understand how to improve it later on. Once I had created these platforms I began exmperimenting with ofxDatGui. I determined from this experimentation that this would be a good addon, so I added a dependency of it to my project. Finally, I added a simple button from ofxDatGui to the project just to test that the dependency was working properly.
 
-*4/12/10*\
+*4/12/19*\
+Today was all about creating a menu screen using ofxDatGui. From my experimentation yesterday I had pretty good idea of how the library worked, so I was able to easily add a few more buttons. I struggled with the font size being too small for awhile, but eventually I discovered the library supports creating and importing outside themes. So, I created my own theme with a larger font size and used that. Once I had my basic menu layout down I decided the screen looked too bare. Earlier when I was first experimenting with openFrameworks I had seen an example where a ball bounced randomly around the screen, so I took a little inspiration from this example. Instead of a ball randomly bouncing around the screen, I have my player randomly bounce around the screen and I am really satisfied with how it turned out.
+
+*4/13/19*\
 
 **Week Two**
 
