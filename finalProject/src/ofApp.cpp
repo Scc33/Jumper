@@ -23,8 +23,9 @@ void ofApp::setup() {
     numClicks = 0;
     
     // instantiate a basic button and a toggle button //
-    button = new ofxDatGuiButton("CLICK ME");
     startGameButton = new ofxDatGuiButton("Start");
+    settingsButton = new ofxDatGuiButton("Settings");
+    highScoreButton = new ofxDatGuiButton("High Scores");
     //toggle = new ofxDatGuiToggle("TOGGLE FULLSCREEN", false);
     
     // position the components in the middle of the screen //
@@ -32,7 +33,8 @@ void ofApp::setup() {
     
     // and register to listen for events //
     startGameButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    button->onButtonEvent(this, &ofApp::onButtonEvent);
+    settingsButton->onButtonEvent(this, &ofApp::onButtonEvent);
+    highScoreButton->onButtonEvent(this, &ofApp::onButtonEvent);
     //toggle->onButtonEvent(this, &ofApp::onButtonEvent);
     
     gameRunning = false;
@@ -41,7 +43,8 @@ void ofApp::setup() {
 //--------------------------------------------------------------
 void ofApp::update() {
     startGameButton->update();
-    button->update();
+    settingsButton->update();
+    highScoreButton->update();
     //toggle->update();
     
     if (gameRunning) {
@@ -101,7 +104,8 @@ void ofApp::draw() {
         drawPlayer();
     } else {
         startGameButton->draw();
-        button->draw();
+        settingsButton->draw();
+        highScoreButton->draw();
     }
     //toggle->draw();
 }
@@ -226,17 +230,12 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
     // we have a couple ways to figure out which button was clicked //
     
     // we can compare our button pointer to the target of the event //
-    if (e.target == button){
-        numClicks++;
-        if (numClicks == 1){
-            button->setLabel("YOU CLICKED ME ONCE");
-        }   else{
-            button->setLabel("YOU CLICKED ME "+ofToString(numClicks)+" TIMES");
-        }
+    if (e.target == startGameButton) {
+        gameRunning = true;
+    } else if (e.target == settingsButton) {
+
         
         // or we can check against the label of the event target //
-    } else if (e.target == startGameButton) {
-        gameRunning = true;
     } else if (e.target->getLabel() == "TOGGLE FULLSCREEN"){
         isFullscreen =!isFullscreen;
         ofSetFullscreen(isFullscreen);
@@ -249,8 +248,11 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
 }
 
 void ofApp::setupButtons() {
-    startGameButton->setPosition(ofGetWidth()/2 - button->getWidth()/2, ofGetHeight()/2 - button->getHeight());
-    button->setPosition(startGameButton->getX(), startGameButton->getY() + startGameButton->getHeight() + 20);
+    startGameButton->setPosition(ofGetWidth()/2 - settingsButton->getWidth()/2, ofGetHeight()/2 - 45);
+    settingsButton->setPosition(startGameButton->getX(), startGameButton->getY() + 45);
+    highScoreButton->setPosition(startGameButton->getX(), startGameButton->getY() + 90);
     
-    startGameButton->setTheme(new ofxDatGuiGameTheme(50));
+    startGameButton->setTheme(new ofxDatGuiGameTheme(16));
+    settingsButton->setTheme(new ofxDatGuiGameTheme(16));
+    highScoreButton->setTheme(new ofxDatGuiGameTheme(16));
 }

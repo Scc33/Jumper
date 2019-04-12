@@ -47,8 +47,9 @@ public:
     //Menu stuff
     int numClicks;
     bool isFullscreen;
-    ofxDatGuiButton* button;
     ofxDatGuiButton* startGameButton;
+    ofxDatGuiButton* settingsButton;
+    ofxDatGuiButton* highScoreButton;
     //ofxDatGuiButton* toggle;
     void setupButtons();
     void onButtonEvent(ofxDatGuiButtonEvent e);
