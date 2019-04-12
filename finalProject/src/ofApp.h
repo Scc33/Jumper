@@ -50,6 +50,6 @@ public:
     ofxDatGuiButton* button;
     ofxDatGuiButton* startGameButton;
     //ofxDatGuiButton* toggle;
-    void positionButtons();
+    void setupButtons();
     void onButtonEvent(ofxDatGuiButtonEvent e);
 };

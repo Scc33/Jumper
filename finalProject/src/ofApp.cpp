@@ -1,4 +1,5 @@
 #include "ofApp.h"
+#include "ofxDatGuiGameTheme.h"
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -27,7 +28,7 @@ void ofApp::setup() {
     //toggle = new ofxDatGuiToggle("TOGGLE FULLSCREEN", false);
     
     // position the components in the middle of the screen //
-    positionButtons();
+    setupButtons();
     
     // and register to listen for events //
     startGameButton->onButtonEvent(this, &ofApp::onButtonEvent);
@@ -243,11 +244,13 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
             ofSetWindowShape(1920, 1080);
             ofSetWindowPosition((ofGetScreenWidth()/2)-(1920/2), 0);
         }
-        positionButtons();
+        setupButtons();
     }
 }
 
-void ofApp::positionButtons() {
+void ofApp::setupButtons() {
     startGameButton->setPosition(ofGetWidth()/2 - button->getWidth()/2, ofGetHeight()/2 - button->getHeight());
     button->setPosition(startGameButton->getX(), startGameButton->getY() + startGameButton->getHeight() + 20);
+    
+    startGameButton->setTheme(new ofxDatGuiGameTheme(50));
 }
