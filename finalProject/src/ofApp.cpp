@@ -18,8 +18,6 @@ void ofApp::setup() {
     
     game.setup(ofGetWidth(), ofGetHeight(), cellSize);
     
-    setupPlatforms();
-    
     // instantiate a basic button
     startGameButton = new ofxDatGuiButton("Start");
     settingsButton = new ofxDatGuiButton("Settings");
@@ -109,7 +107,9 @@ void ofApp::draw() {
     if (gameRunning) {
         drawGridLines();
         
-        drawAllPlatforms();
+        ofSetColor(255,0,0);
+        ofFill();
+        ofDrawRectangle(0, game.getRows() * cellSize - 50, game.getCols() * cellSize, 50);
         
         drawPlayer();
     } else {
@@ -201,64 +201,6 @@ void ofApp::drawGridLines() {
             ofDrawRectangle(i*cellSize, j*cellSize, cellSize, cellSize);
         }
     }
-}
-
-void ofApp::drawPlatform(int platform) {
-    for (int i = platforms.at(platform).at(0); i >= platforms.at(platform).at(0) - platforms.at(platform).at(1); i--) {
-        for (int j = game.getRows(); j > 70; j--) {
-            int setX;
-            if (i >= 0) {
-                setX = i;
-            } else {
-                setX = game.getCols() + i;
-            }
-            
-            //game.getCell(setX,j).currState = true;
-            if (setX < game.getCols()) {
-                ofSetColor(255,0,0);
-                ofFill();
-                ofDrawRectangle(setX*cellSize, j*cellSize, cellSize, cellSize);
-            }
-        }
-    }
-}
-
-void ofApp::updatePlatformPositions() {
-    for (int i = 0; i < platforms.size(); i++) {
-        platforms.at(i).at(0)--;
-        
-        if (platforms.at(i).at(0) < 0) {
-            platforms.at(i).at(0) = platforms.at(i).at(2);
-            platforms.at(i).at(1) = ofRandom(10, 50);
-        }
-        
-        //std::cout << platforms.at(i).at(0) << " " << platforms.at(i).at(1) << std::endl;
-    }
-}
-
-void ofApp::drawAllPlatforms() {
-    for (int i = 0; i < platforms.size(); i++) {
-        drawPlatform(i);
-    }
-    updatePlatformPositions();
-}
-
-void ofApp::setupPlatforms() {
-    int platformPos = 0;
-    platforms.resize(10);
-    
-    for (auto curr = platforms.begin(); curr != platforms.end(); curr++) {
-        curr->resize(3);
-        curr->at(0) = platformPos;
-        curr->at(1) = ofRandom(10, 50);
-        curr->at(2) = curr->at(0);
-        platformPos += 50;
-    }
-    
-    for (int i = 0; i < platforms.size(); i++) {
-        std::cout << platforms.at(i).at(0) << " " << platforms.at(i).at(1) << std::endl;
-    }
-    std::cout << std::endl;
 }
 
 int ofApp::gravityCalculation() {

@@ -27,12 +27,10 @@ public:
     
     ofxGameOfLife game;
     
+    //New stuff
+    
     void drawPlayer();
     void drawGridLines();
-    void drawAllPlatforms();
-    void drawPlatform(int platform);
-    void updatePlatformPositions();
-    void setupPlatforms();
     
     int gravityCalculation();
     
