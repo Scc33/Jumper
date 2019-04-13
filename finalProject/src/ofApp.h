@@ -29,8 +29,10 @@ public:
     
     void drawPlayer();
     void drawGridLines();
-    void drawPlatform(int start);
-    void updatePlatformPosition();
+    void drawAllPlatforms();
+    void drawPlatform(int platform);
+    void updatePlatformPositions();
+    void setupPlatforms();
     
     int gravityCalculation();
     
@@ -40,7 +42,7 @@ public:
     float velY;
     
     bool keyIsDown[255];
-    std::vector<int> starts;
+    std::vector<std::vector<int>> platforms;
     
     bool gameRunning;
     

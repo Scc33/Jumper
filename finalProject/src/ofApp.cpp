@@ -18,9 +18,7 @@ void ofApp::setup() {
     
     game.setup(ofGetWidth(), ofGetHeight(), cellSize);
     
-    starts.push_back(47);
-    starts.push_back(95);
-    starts.push_back(143);
+    setupPlatforms();
     
     // instantiate a basic button
     startGameButton = new ofxDatGuiButton("Start");
@@ -88,9 +86,6 @@ void ofApp::update() {
         posX += velX;
         posY += velY;
         
-        int posx = ofGetWindowPositionX();
-        int posy = ofGetWindowPositionY();
-        
         if (posX < 1) {
             posX = 1;
             velX *= -1;
@@ -114,10 +109,7 @@ void ofApp::draw() {
     if (gameRunning) {
         drawGridLines();
         
-        drawPlatform(starts.at(0));
-        drawPlatform(starts.at(1));
-        drawPlatform(starts.at(2));
-        updatePlatformPosition();
+        drawAllPlatforms();
         
         drawPlayer();
     } else {
@@ -211,8 +203,8 @@ void ofApp::drawGridLines() {
     }
 }
 
-void ofApp::drawPlatform(int start) {
-    for (int i = start; i >= start - 20; i--) {
+void ofApp::drawPlatform(int platform) {
+    for (int i = platforms.at(platform).at(0); i >= platforms.at(platform).at(0) - platforms.at(platform).at(1); i--) {
         for (int j = game.getRows(); j > 70; j--) {
             int setX;
             if (i >= 0) {
@@ -222,21 +214,51 @@ void ofApp::drawPlatform(int start) {
             }
             
             //game.getCell(setX,j).currState = true;
-            ofSetColor(255,0,0);
-            ofFill();
-            ofDrawRectangle(setX*cellSize, j*cellSize, cellSize, cellSize);
+            if (setX < game.getCols()) {
+                ofSetColor(255,0,0);
+                ofFill();
+                ofDrawRectangle(setX*cellSize, j*cellSize, cellSize, cellSize);
+            }
         }
     }
 }
 
-void ofApp::updatePlatformPosition() {
-    for (int i = 0; i < starts.size(); i++) {
-        starts.at(i)--;
+void ofApp::updatePlatformPositions() {
+    for (int i = 0; i < platforms.size(); i++) {
+        platforms.at(i).at(0)--;
         
-        if (starts.at(i) < 0) {
-            starts.at(i) = game.getCols() - 1;
+        if (platforms.at(i).at(0) < 0) {
+            platforms.at(i).at(0) = platforms.at(i).at(2);
+            platforms.at(i).at(1) = ofRandom(10, 50);
         }
+        
+        //std::cout << platforms.at(i).at(0) << " " << platforms.at(i).at(1) << std::endl;
     }
+}
+
+void ofApp::drawAllPlatforms() {
+    for (int i = 0; i < platforms.size(); i++) {
+        drawPlatform(i);
+    }
+    updatePlatformPositions();
+}
+
+void ofApp::setupPlatforms() {
+    int platformPos = 0;
+    platforms.resize(10);
+    
+    for (auto curr = platforms.begin(); curr != platforms.end(); curr++) {
+        curr->resize(3);
+        curr->at(0) = platformPos;
+        curr->at(1) = ofRandom(10, 50);
+        curr->at(2) = curr->at(0);
+        platformPos += 50;
+    }
+    
+    for (int i = 0; i < platforms.size(); i++) {
+        std::cout << platforms.at(i).at(0) << " " << platforms.at(i).at(1) << std::endl;
+    }
+    std::cout << std::endl;
 }
 
 int ofApp::gravityCalculation() {
