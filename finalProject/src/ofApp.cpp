@@ -11,10 +11,10 @@ void ofApp::setup() {
     
     ofBackground(0,0,0);
     
-    ballPositionX = 1;
-    ballPositionY = 1;
-    ballVelocityX = ofRandom(-1,1);
-    ballVelocityY = ofRandom(-1,1);
+    posX = 1;
+    posY = 1;
+    velX = ofRandom(-1,1);
+    velY = ofRandom(-1,1);
     
     game.setup(ofGetWidth(), ofGetHeight(), cellSize);
     
@@ -22,22 +22,18 @@ void ofApp::setup() {
     starts.push_back(95);
     starts.push_back(143);
     
-    numClicks = 0;
-    
-    // instantiate a basic button and a toggle button //
+    // instantiate a basic button
     startGameButton = new ofxDatGuiButton("Start");
     settingsButton = new ofxDatGuiButton("Settings");
     highScoreButton = new ofxDatGuiButton("High Scores");
-    //toggle = new ofxDatGuiToggle("TOGGLE FULLSCREEN", false);
     
-    // position the components in the middle of the screen //
+    // position the components in the middle of the screen
     setupButtons();
     
-    // and register to listen for events //
+    // and register to listen for events
     startGameButton->onButtonEvent(this, &ofApp::onButtonEvent);
     settingsButton->onButtonEvent(this, &ofApp::onButtonEvent);
     highScoreButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    //toggle->onButtonEvent(this, &ofApp::onButtonEvent);
     
     gameRunning = false;
 }
@@ -47,70 +43,68 @@ void ofApp::update() {
     startGameButton->update();
     settingsButton->update();
     highScoreButton->update();
-    //toggle->update();
-    
+
     if (gameRunning) {
         game.update();
         
-        int tempX = ballPositionX;
-        int tempY = ballPositionY;
+        int tempX = posX;
+        int tempY = posY;
         
         if (keyIsDown['a']) {
-            ballPositionX -= 1;
+            posX -= 1;
         }
         
         if (keyIsDown['w']) {
-            ballPositionY -= 1;
+            posY -= 1;
         }
         
-        if (keyIsDown['s'] && game.getCell(ballPositionX, ballPositionY + 3).currState != true) {
-            ballPositionY += 1;
+        if (keyIsDown['s'] && game.getCell(posX, posY + 3).currState != true) {
+            posY += 1;
         }
         
         if (keyIsDown['d']) {
-            ballPositionX += 1;
+            posX += 1;
         }
         
-        if (ballPositionX < 1) {
-            ballPositionX = 1;
-        } else if (ballPositionX > game.getCols() - 2) {
-            ballPositionX = game.getCols() - 2;
+        if (posX < 1) {
+            posX = 1;
+        } else if (posX > game.getCols() - 2) {
+            posX = game.getCols() - 2;
         }
         
-        if (ballPositionY < 1) {
-            ballPositionY = 1;
-        } else if (ballPositionY > game.getRows() - 4) {
-            ballPositionY = game.getRows() - 4;
+        if (posY < 1) {
+            posY = 1;
+        } else if (posY > game.getRows() - 4) {
+            posY = game.getRows() - 4;
         }
         
-        if (game.getCell(ballPositionX, ballPositionY + 3).currState == true) {
-            ballPositionX = tempX;
-            ballPositionY = tempY;
+        if (game.getCell(posX, posY + 3).currState == true) {
+            posX = tempX;
+            posY = tempY;
         }
         
         //gravityCalculation();
-        //std::cout << game.getCell(ballPositionX, ballPositionY + 3).currState << std::endl;
     } else {
-        ballPositionX += ballVelocityX;
-        ballPositionY += ballVelocityY;
+        posX += velX;
+        posY += velY;
         
         int posx = ofGetWindowPositionX();
         int posy = ofGetWindowPositionY();
         
-        if (ballPositionX < 1) {
-            ballPositionX = 1;
-            ballVelocityX *= -1;
-        } else if (ballPositionX > game.getCols() - 2) {
-            ballPositionX = game.getCols() - 2;
-            ballVelocityX *= -1;
+        if (posX < 1) {
+            posX = 1;
+            velX *= -1;
+        } else if (posX > game.getCols() - 2) {
+            posX = game.getCols() - 2;
+            velX *= -1;
         }
         
-        if (ballPositionY < 1) {
-            ballPositionY = 1;
-            ballVelocityY *= -1;
-        } else if (ballPositionY > game.getRows() - 4){
-            ballPositionY = game.getRows() - 4;
-            ballVelocityY *= -1;
+        if (posY < 1) {
+            posY = 1;
+            velY *= -1;
+        } else if (posY > game.getRows() - 4){
+            posY = game.getRows() - 4;
+            velY *= -1;
         }
     }
 }
@@ -133,7 +127,6 @@ void ofApp::draw() {
         settingsButton->draw();
         highScoreButton->draw();
     }
-    //toggle->draw();
 }
 
 
@@ -196,16 +189,16 @@ void ofApp::drawPlayer() {
     ofSetColor(0, 255, 0);
     ofFill();
     
-    ofDrawRectangle(ballPositionX*cellSize, ballPositionY*cellSize, cellSize, cellSize);
-    ofDrawRectangle((ballPositionX+1)*cellSize, ballPositionY*cellSize, cellSize, cellSize);
-    ofDrawRectangle((ballPositionX-1)*cellSize, ballPositionY*cellSize, cellSize, cellSize);
-    ofDrawRectangle(ballPositionX*cellSize, (ballPositionY-1)*cellSize, cellSize, cellSize);
-    ofDrawRectangle(ballPositionX*cellSize, (ballPositionY+1)*cellSize, cellSize, cellSize);
-    ofDrawRectangle(ballPositionX*cellSize, (ballPositionY+2)*cellSize, cellSize, cellSize);
-    ofDrawRectangle((ballPositionX-1)*cellSize, (ballPositionY+2)*cellSize, cellSize, cellSize);
-    ofDrawRectangle((ballPositionX+1)*cellSize, (ballPositionY+2)*cellSize, cellSize, cellSize);
-    ofDrawRectangle((ballPositionX-1)*cellSize, (ballPositionY+3)*cellSize, cellSize, cellSize);
-    ofDrawRectangle((ballPositionX+1)*cellSize, (ballPositionY+3)*cellSize, cellSize, cellSize);
+    ofDrawRectangle(posX*cellSize, posY*cellSize, cellSize, cellSize);
+    ofDrawRectangle((posX+1)*cellSize, posY*cellSize, cellSize, cellSize);
+    ofDrawRectangle((posX-1)*cellSize, posY*cellSize, cellSize, cellSize);
+    ofDrawRectangle(posX*cellSize, (posY-1)*cellSize, cellSize, cellSize);
+    ofDrawRectangle(posX*cellSize, (posY+1)*cellSize, cellSize, cellSize);
+    ofDrawRectangle(posX*cellSize, (posY+2)*cellSize, cellSize, cellSize);
+    ofDrawRectangle((posX-1)*cellSize, (posY+2)*cellSize, cellSize, cellSize);
+    ofDrawRectangle((posX+1)*cellSize, (posY+2)*cellSize, cellSize, cellSize);
+    ofDrawRectangle((posX-1)*cellSize, (posY+3)*cellSize, cellSize, cellSize);
+    ofDrawRectangle((posX+1)*cellSize, (posY+3)*cellSize, cellSize, cellSize);
 }
 
 void ofApp::drawGridLines() {
@@ -247,8 +240,8 @@ void ofApp::updatePlatformPosition() {
 }
 
 int ofApp::gravityCalculation() {
-    if (ballPositionY < game.getRows() + 10) {
-        ++ballPositionY;
+    if (posY < game.getRows() + 10) {
+        ++posY;
     }
 }
 
@@ -258,21 +251,10 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
     // we can compare our button pointer to the target of the event //
     if (e.target == startGameButton) {
         gameRunning = true;
-        ballPositionX = 1;
-        ballPositionX = 1;
-        
+        posX = 1;
+        posY = 1;
     } else if (e.target == settingsButton) {
 
-        
-        // or we can check against the label of the event target //
-    } else if (e.target->getLabel() == "TOGGLE FULLSCREEN"){
-        isFullscreen =!isFullscreen;
-        ofSetFullscreen(isFullscreen);
-        if (!isFullscreen) {
-            ofSetWindowShape(1920, 1080);
-            ofSetWindowPosition((ofGetScreenWidth()/2)-(1920/2), 0);
-        }
-        setupButtons();
     }
 }
 

@@ -34,10 +34,10 @@ public:
     
     int gravityCalculation();
     
-    float ballPositionX;
-    float ballPositionY;
-    float ballVelocityX;
-    float ballVelocityY;
+    float posX;
+    float posY;
+    float velX;
+    float velY;
     
     bool keyIsDown[255];
     std::vector<int> starts;
@@ -45,12 +45,10 @@ public:
     bool gameRunning;
     
     //Menu stuff
-    int numClicks;
-    bool isFullscreen;
     ofxDatGuiButton* startGameButton;
     ofxDatGuiButton* settingsButton;
     ofxDatGuiButton* highScoreButton;
-    //ofxDatGuiButton* toggle;
+
     void setupButtons();
     void onButtonEvent(ofxDatGuiButtonEvent e);
 };
