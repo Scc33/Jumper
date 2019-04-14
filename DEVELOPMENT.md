@@ -27,8 +27,13 @@ Still struggling with my collision bug, today I decided to take a different rout
 Today was all about creating a menu screen using ofxDatGui. From my experimentation yesterday I had pretty good idea of how the library worked, so I was able to easily add a few more buttons. I struggled with the font size being too small for awhile, but eventually I discovered the library supports creating and importing outside themes. So, I created my own theme with a larger font size and used that. Once I had my basic menu layout down I decided the screen looked too bare. Earlier when I was first experimenting with openFrameworks I had seen an example where a ball bounced randomly around the screen, so I took a little inspiration from this example. Instead of a ball randomly bouncing around the screen, I have my player randomly bounce around the screen and I am really satisfied with how it turned out.
 
 *4/13/19*\
+First, I tidied up my code base which had become kind of messy after all the exerimentation. Once I had tidied some stuff up I started to work on the platform system again. But after continuing to struggle with designing the platform system, I decided to scrap the whole thing. It was complicated and ugly looking and I though I could do better, so I started to replace it with a floor that had obstacles that poke out of it. This so far has been easier to design and easier to think about than my old approach.
+
+Today, was also my first code review since starting the final project. I recieved final approval for my game under the condition that I move some of the stretch goals into the main goal category. I think I will make my marketplace idea a main goal because it is a significant extension and I am excited to implement it. I will need to update the proposal document to reflect this change.
 
 **Week Two**
+
+*4/14/19*\
 
 **Week Three**
 
