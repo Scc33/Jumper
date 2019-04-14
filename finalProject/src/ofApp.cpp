@@ -40,6 +40,14 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update() {
+    if (keyIsDown['m']) {
+        startMenuRunning = true;
+        gameRunning = false;
+        marketMenuRunning = false;
+        settingsRunning = false;
+        hScoreMenuRunning = false;
+    }
+    
     updateButtons();
     
     if (gameRunning) {
