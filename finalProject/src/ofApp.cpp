@@ -85,7 +85,7 @@ void ofApp::update() {
             posY = tempY;
         }
         
-        //gravityCalculation();
+        gravityCalculation();
     } else {
         posX += velX;
         posY += velY;
@@ -225,7 +225,7 @@ void ofApp::drawObstacles() {
 }
 
 int ofApp::gravityCalculation() {
-    if (posY < game.getRows() + 10) {
+    if (posY < game.getRows() - 34 && !keyIsDown['w']) {
         ++posY;
     }
 }
