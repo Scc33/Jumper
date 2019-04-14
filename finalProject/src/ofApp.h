@@ -6,7 +6,7 @@
 
 class ofApp : public ofBaseApp {
 private:
-    const int cellSize = 5;
+    const int cellSize = 10;
     
 public:
     void setup();

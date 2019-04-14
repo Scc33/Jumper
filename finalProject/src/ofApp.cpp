@@ -11,10 +11,10 @@ void ofApp::setup() {
     
     ofBackground(0,0,0);
     
-    posX = 1;
-    posY = 1;
-    velX = ofRandom(-1,1);
-    velY = ofRandom(-1,1);
+    posX = 5;
+    posY = 5;
+    velX = ofRandom(-0.5,0.5);
+    velY = ofRandom(-0.5,0.5);
     
     obstacles.push_back(35);
     
@@ -115,7 +115,7 @@ void ofApp::draw() {
         
         ofSetColor(255,0,0);
         ofFill();
-        ofDrawRectangle(0, game.getRows() * cellSize - 150, game.getCols() * cellSize, 150);
+        ofDrawRectangle(0, game.getRows() * cellSize - 200, game.getCols() * cellSize, 200);
         
         drawObstacles();
         
@@ -216,7 +216,7 @@ void ofApp::drawObstacles() {
     ofSetColor(255,0,0);
     ofFill();
     
-    ofDrawRectangle(obstacles.at(0), game.getRows() * cellSize - 170, cellSize, cellSize * 4);
+    ofDrawRectangle(obstacles.at(0), game.getRows() * cellSize - 240, cellSize, cellSize * 4);
     obstacles.at(0)--;
     
     if (obstacles.at(0) < 0) {
@@ -225,7 +225,7 @@ void ofApp::drawObstacles() {
 }
 
 int ofApp::gravityCalculation() {
-    if (posY < game.getRows() - 34 && !keyIsDown['w']) {
+    if (posY < game.getRows() - 24 && !keyIsDown['w']) {
         ++posY;
     }
 }
