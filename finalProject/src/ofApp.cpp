@@ -24,14 +24,7 @@ void ofApp::setup() {
     
     game.setup(ofGetWidth(), ofGetHeight(), cellSize);
     
-    // instantiate a basic button
-    startGameButton = new ofxDatGuiButton("Start");
-    marketButton = new ofxDatGuiButton("Market");
-    settingsButton = new ofxDatGuiButton("Settings");
-    highScoreButton = new ofxDatGuiButton("High Scores");
-    exitButton = new ofxDatGuiButton("Exit");
-    
-    // position the components in the middle of the screen and register to listen for events
+    //Position the buttons in the middle of the screen and register to listen for events
     setupButtons();
     
     startMenuRunning = true;
@@ -65,6 +58,18 @@ void ofApp::draw() {
     
     if (gameRunning) {
         drawGame();
+    }
+    
+    if (marketMenuRunning) {
+        
+    }
+    
+    if (settingsRunning) {
+        
+    }
+    
+    if (hScoreMenuRunning) {
+        
     }
 }
 
@@ -193,6 +198,8 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
     } else if (e.target == highScoreButton) {
         startMenuRunning = false;
         hScoreMenuRunning = true;
+    } else if (e.target == exitButton) {
+        ofExit();
     }
 }
 
@@ -205,6 +212,12 @@ void ofApp::updateButtons() {
 }
 
 void ofApp::setupButtons() {
+    startGameButton = new ofxDatGuiButton("Start");
+    marketButton = new ofxDatGuiButton("Market");
+    settingsButton = new ofxDatGuiButton("Settings");
+    highScoreButton = new ofxDatGuiButton("High Scores");
+    exitButton = new ofxDatGuiButton("Exit");
+    
     startGameButton->onButtonEvent(this, &ofApp::onButtonEvent);
     marketButton->onButtonEvent(this, &ofApp::onButtonEvent);
     settingsButton->onButtonEvent(this, &ofApp::onButtonEvent);
