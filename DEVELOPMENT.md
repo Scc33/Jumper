@@ -34,6 +34,13 @@ Today, was also my first code review since starting the final project. I recieve
 **Week Two**
 
 *4/14/19*\
+My work so far on the final project has been extremely scattered. I'll work on one component for awhile only to get distracted by another and forget about my real goal. This has lead me to work on a thousand small tasks without ever getting main functionalities to work. Something I've already learned through this process is I need to set goals for myself before I sit down to code. For me to be my most productive I need to have a specific task in mind and I need to hammer away at that one task. From now on I am going to try and work on this because at the rate I am going I will never produce a playable game.
+
+Apart from what I have learned today I did complete a few tasks. I worked a lot on the control flow of the game and now it is possible to move from one game screen to another with ease. Most of the screens don't do anything yet, but having a flow from screen to screen is making the game feel more real. Gravity was another thing I worked on today and I made it so the player will fall to the ground when they are supposed to now. However, I am still not quite statisfied with how the gravity makes the player look and I will definitely need to tweak it.
+
+The last thing I did today was update the project proposal to reflect what was discussed in code review yesterday and to show that I was using two outside libraries to make my game.
+
+*4/15/19*\
 
 **Week Three**
 
