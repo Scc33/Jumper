@@ -31,87 +31,20 @@ void ofApp::setup() {
     highScoreButton = new ofxDatGuiButton("High Scores");
     exitButton = new ofxDatGuiButton("Exit");
     
-    // position the components in the middle of the screen
+    // position the components in the middle of the screen and register to listen for events
     setupButtons();
-    
-    // and register to listen for events
-    startGameButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    marketButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    settingsButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    highScoreButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    exitButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    
     
     gameRunning = false;
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
-    startGameButton->update();
-    marketButton->update();
-    settingsButton->update();
-    highScoreButton->update();
-    exitButton->update();
-
+    updateButtons();
+    
     if (gameRunning) {
-        game.update();
-        
-        int tempX = posX;
-        int tempY = posY;
-        
-        if (keyIsDown['a']) {
-            posX -= 1;
-        }
-        
-        if (keyIsDown['w']) {
-            posY -= 3;
-        }
-        
-        if (keyIsDown['s'] && game.getCell(posX, posY + 3).currState != true) {
-            posY += 1;
-        }
-        
-        if (keyIsDown['d']) {
-            posX += 1;
-        }
-        
-        if (posX < 1) {
-            posX = 1;
-        } else if (posX > game.getCols() - 2) {
-            posX = game.getCols() - 2;
-        }
-        
-        if (posY < 1) {
-            posY = 1;
-        } else if (posY > game.getRows() - 4) {
-            posY = game.getRows() - 4;
-        }
-        
-        if (game.getCell(posX, posY + 3).currState == true) {
-            posX = tempX;
-            posY = tempY;
-        }
-        
-        gravityCalculation();
+        runGame();
     } else {
-        posX += velX;
-        posY += velY;
-        
-        if (posX < 1) {
-            posX = 1;
-            velX *= -1;
-        } else if (posX > game.getCols() - 2) {
-            posX = game.getCols() - 2;
-            velX *= -1;
-        }
-        
-        if (posY < 1) {
-            posY = 1;
-            velY *= -1;
-        } else if (posY > game.getRows() - 4){
-            posY = game.getRows() - 4;
-            velY *= -1;
-        }
+        runStartMenu();
     }
 }
 
@@ -258,7 +191,21 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
     }
 }
 
+void ofApp::updateButtons() {
+    startGameButton->update();
+    marketButton->update();
+    settingsButton->update();
+    highScoreButton->update();
+    exitButton->update();
+}
+
 void ofApp::setupButtons() {
+    startGameButton->onButtonEvent(this, &ofApp::onButtonEvent);
+    marketButton->onButtonEvent(this, &ofApp::onButtonEvent);
+    settingsButton->onButtonEvent(this, &ofApp::onButtonEvent);
+    highScoreButton->onButtonEvent(this, &ofApp::onButtonEvent);
+    exitButton->onButtonEvent(this, &ofApp::onButtonEvent);
+    
     startGameButton->setPosition(ofGetWidth()/2 - settingsButton->getWidth()/2, ofGetHeight()/2 - 90);
     marketButton->setPosition(startGameButton->getX(), startGameButton->getY() + 45);
     settingsButton->setPosition(startGameButton->getX(), startGameButton->getY() + 90);
@@ -270,4 +217,67 @@ void ofApp::setupButtons() {
     settingsButton->setTheme(new ofxDatGuiGameTheme(16));
     highScoreButton->setTheme(new ofxDatGuiGameTheme(16));
     exitButton->setTheme(new ofxDatGuiGameTheme(16));
+}
+
+void ofApp::runGame() {
+    game.update();
+    
+    int tempX = posX;
+    int tempY = posY;
+    
+    if (keyIsDown['a']) {
+        posX -= 1;
+    }
+    
+    if (keyIsDown['w']) {
+        posY -= 3;
+    }
+    
+    if (keyIsDown['s'] && game.getCell(posX, posY + 3).currState != true) {
+        posY += 1;
+    }
+    
+    if (keyIsDown['d']) {
+        posX += 1;
+    }
+    
+    if (posX < 1) {
+        posX = 1;
+    } else if (posX > game.getCols() - 2) {
+        posX = game.getCols() - 2;
+    }
+    
+    if (posY < 1) {
+        posY = 1;
+    } else if (posY > game.getRows() - 4) {
+        posY = game.getRows() - 4;
+    }
+    
+    if (game.getCell(posX, posY + 3).currState == true) {
+        posX = tempX;
+        posY = tempY;
+    }
+    
+    gravityCalculation();
+}
+
+void ofApp::runStartMenu() {
+    posX += velX;
+    posY += velY;
+    
+    if (posX < 1) {
+        posX = 1;
+        velX *= -1;
+    } else if (posX > game.getCols() - 2) {
+        posX = game.getCols() - 2;
+        velX *= -1;
+    }
+    
+    if (posY < 1) {
+        posY = 1;
+        velY *= -1;
+    } else if (posY > game.getRows() - 4){
+        posY = game.getRows() - 4;
+        velY *= -1;
+    }
 }

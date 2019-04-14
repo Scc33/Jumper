@@ -28,7 +28,8 @@ public:
     
     ofxGameOfLife game;
     
-    //New stuff
+    void runGame();
+    void runStartMenu();
     
     void drawPlayer();
     void drawGridLines();
@@ -55,5 +56,6 @@ public:
     ofxDatGuiButton* exitButton;
 
     void setupButtons();
+    void updateButtons();
     void onButtonEvent(ofxDatGuiButtonEvent e);
 };
