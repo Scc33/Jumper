@@ -49,6 +49,7 @@ public:
     
     //Menu stuff
     ofxDatGuiButton* startGameButton;
+    ofxDatGuiButton* marketButton;
     ofxDatGuiButton* settingsButton;
     ofxDatGuiButton* highScoreButton;
     ofxDatGuiButton* exitButton;

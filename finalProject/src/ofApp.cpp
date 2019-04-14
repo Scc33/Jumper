@@ -11,17 +11,22 @@ void ofApp::setup() {
     
     ofBackground(0,0,0);
     
-    posX = 5;
-    posY = 5;
+    posX = 1;
+    posY = 1;
     velX = ofRandom(-0.5,0.5);
     velY = ofRandom(-0.5,0.5);
     
     obstacles.push_back(35);
+    obstacles.push_back(105);
+    obstacles.push_back(155);
+    obstacles.push_back(175);
+    obstacles.push_back(225);
     
     game.setup(ofGetWidth(), ofGetHeight(), cellSize);
     
     // instantiate a basic button
     startGameButton = new ofxDatGuiButton("Start");
+    marketButton = new ofxDatGuiButton("Market");
     settingsButton = new ofxDatGuiButton("Settings");
     highScoreButton = new ofxDatGuiButton("High Scores");
     exitButton = new ofxDatGuiButton("Exit");
@@ -31,6 +36,7 @@ void ofApp::setup() {
     
     // and register to listen for events
     startGameButton->onButtonEvent(this, &ofApp::onButtonEvent);
+    marketButton->onButtonEvent(this, &ofApp::onButtonEvent);
     settingsButton->onButtonEvent(this, &ofApp::onButtonEvent);
     highScoreButton->onButtonEvent(this, &ofApp::onButtonEvent);
     exitButton->onButtonEvent(this, &ofApp::onButtonEvent);
@@ -42,6 +48,7 @@ void ofApp::setup() {
 //--------------------------------------------------------------
 void ofApp::update() {
     startGameButton->update();
+    marketButton->update();
     settingsButton->update();
     highScoreButton->update();
     exitButton->update();
@@ -124,6 +131,7 @@ void ofApp::draw() {
         drawPlayer();
         
         startGameButton->draw();
+        marketButton->draw();
         settingsButton->draw();
         highScoreButton->draw();
         exitButton->draw();
@@ -216,11 +224,13 @@ void ofApp::drawObstacles() {
     ofSetColor(255,0,0);
     ofFill();
     
-    ofDrawRectangle(obstacles.at(0), game.getRows() * cellSize - 240, cellSize, cellSize * 4);
-    obstacles.at(0)--;
-    
-    if (obstacles.at(0) < 0) {
-        obstacles.at(0) = game.getCols() * cellSize;
+    for (int i = 0; i < obstacles.size(); i++) {
+        ofDrawRectangle(obstacles.at(i), game.getRows() * cellSize - 240, cellSize, cellSize * 4);
+        obstacles.at(i)--;
+        
+        if (obstacles.at(i) < 0) {
+            obstacles.at(i) = game.getCols() * cellSize;
+        }
     }
 }
 
@@ -241,7 +251,7 @@ int ofApp::gravityCalculation() {
 void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
     if (e.target == startGameButton) {
         gameRunning = true;
-        posX = 1;
+        posX = 10;
         posY = 1;
     } else if (e.target == settingsButton) {
 
@@ -250,11 +260,13 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
 
 void ofApp::setupButtons() {
     startGameButton->setPosition(ofGetWidth()/2 - settingsButton->getWidth()/2, ofGetHeight()/2 - 90);
-    settingsButton->setPosition(startGameButton->getX(), startGameButton->getY() + 45);
-    highScoreButton->setPosition(startGameButton->getX(), startGameButton->getY() + 90);
-    exitButton->setPosition(startGameButton->getX(), startGameButton->getY() + 135);
+    marketButton->setPosition(startGameButton->getX(), startGameButton->getY() + 45);
+    settingsButton->setPosition(startGameButton->getX(), startGameButton->getY() + 90);
+    highScoreButton->setPosition(startGameButton->getX(), startGameButton->getY() + 135);
+    exitButton->setPosition(startGameButton->getX(), startGameButton->getY() + 180);
     
     startGameButton->setTheme(new ofxDatGuiGameTheme(16));
+    marketButton->setTheme(new ofxDatGuiGameTheme(16));
     settingsButton->setTheme(new ofxDatGuiGameTheme(16));
     highScoreButton->setTheme(new ofxDatGuiGameTheme(16));
     exitButton->setTheme(new ofxDatGuiGameTheme(16));
