@@ -31,6 +31,9 @@ public:
     
     void drawPlayer();
     void drawGridLines();
+    void drawObstacles();
+    
+    std::vector<int> obstacles;
     
     int gravityCalculation();
     
@@ -40,7 +43,6 @@ public:
     float velY;
     
     bool keyIsDown[255];
-    std::vector<std::vector<int>> platforms;
     
     bool gameRunning;
     
@@ -48,6 +50,7 @@ public:
     ofxDatGuiButton* startGameButton;
     ofxDatGuiButton* settingsButton;
     ofxDatGuiButton* highScoreButton;
+    ofxDatGuiButton* exitButton;
 
     void setupButtons();
     void onButtonEvent(ofxDatGuiButtonEvent e);

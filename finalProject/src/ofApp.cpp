@@ -16,12 +16,15 @@ void ofApp::setup() {
     velX = ofRandom(-1,1);
     velY = ofRandom(-1,1);
     
+    obstacles.push_back(35);
+    
     game.setup(ofGetWidth(), ofGetHeight(), cellSize);
     
     // instantiate a basic button
     startGameButton = new ofxDatGuiButton("Start");
     settingsButton = new ofxDatGuiButton("Settings");
     highScoreButton = new ofxDatGuiButton("High Scores");
+    exitButton = new ofxDatGuiButton("Exit");
     
     // position the components in the middle of the screen
     setupButtons();
@@ -30,6 +33,8 @@ void ofApp::setup() {
     startGameButton->onButtonEvent(this, &ofApp::onButtonEvent);
     settingsButton->onButtonEvent(this, &ofApp::onButtonEvent);
     highScoreButton->onButtonEvent(this, &ofApp::onButtonEvent);
+    exitButton->onButtonEvent(this, &ofApp::onButtonEvent);
+    
     
     gameRunning = false;
 }
@@ -39,6 +44,7 @@ void ofApp::update() {
     startGameButton->update();
     settingsButton->update();
     highScoreButton->update();
+    exitButton->update();
 
     if (gameRunning) {
         game.update();
@@ -109,7 +115,9 @@ void ofApp::draw() {
         
         ofSetColor(255,0,0);
         ofFill();
-        ofDrawRectangle(0, game.getRows() * cellSize - 50, game.getCols() * cellSize, 50);
+        ofDrawRectangle(0, game.getRows() * cellSize - 150, game.getCols() * cellSize, 150);
+        
+        drawObstacles();
         
         drawPlayer();
     } else {
@@ -118,6 +126,7 @@ void ofApp::draw() {
         startGameButton->draw();
         settingsButton->draw();
         highScoreButton->draw();
+        exitButton->draw();
     }
 }
 
@@ -203,6 +212,18 @@ void ofApp::drawGridLines() {
     }
 }
 
+void ofApp::drawObstacles() {
+    ofSetColor(255,0,0);
+    ofFill();
+    
+    ofDrawRectangle(obstacles.at(0), game.getRows() * cellSize - 170, cellSize, cellSize * 4);
+    obstacles.at(0)--;
+    
+    if (obstacles.at(0) < 0) {
+        obstacles.at(0) = game.getCols() * cellSize;
+    }
+}
+
 int ofApp::gravityCalculation() {
     if (posY < game.getRows() + 10) {
         ++posY;
@@ -210,9 +231,6 @@ int ofApp::gravityCalculation() {
 }
 
 void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
-    // we have a couple ways to figure out which button was clicked //
-    
-    // we can compare our button pointer to the target of the event //
     if (e.target == startGameButton) {
         gameRunning = true;
         posX = 1;
@@ -223,11 +241,13 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
 }
 
 void ofApp::setupButtons() {
-    startGameButton->setPosition(ofGetWidth()/2 - settingsButton->getWidth()/2, ofGetHeight()/2 - 45);
+    startGameButton->setPosition(ofGetWidth()/2 - settingsButton->getWidth()/2, ofGetHeight()/2 - 90);
     settingsButton->setPosition(startGameButton->getX(), startGameButton->getY() + 45);
     highScoreButton->setPosition(startGameButton->getX(), startGameButton->getY() + 90);
+    exitButton->setPosition(startGameButton->getX(), startGameButton->getY() + 135);
     
     startGameButton->setTheme(new ofxDatGuiGameTheme(16));
     settingsButton->setTheme(new ofxDatGuiGameTheme(16));
     highScoreButton->setTheme(new ofxDatGuiGameTheme(16));
+    exitButton->setTheme(new ofxDatGuiGameTheme(16));
 }
