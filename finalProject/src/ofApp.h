@@ -7,6 +7,7 @@
 class ofApp : public ofBaseApp {
 private:
     const int cellSize = 10;
+    double airtime = 0;
     
 public:
     void setup();

@@ -57,7 +57,7 @@ void ofApp::update() {
         }
         
         if (keyIsDown['w']) {
-            posY -= 1;
+            posY -= 3;
         }
         
         if (keyIsDown['s'] && game.getCell(posX, posY + 3).currState != true) {
@@ -226,7 +226,15 @@ void ofApp::drawObstacles() {
 
 int ofApp::gravityCalculation() {
     if (posY < game.getRows() - 24 && !keyIsDown['w']) {
-        ++posY;
+        airtime += .1;
+        posY += 1 * airtime;
+    } else {
+        airtime = 0;
+    }
+
+    //Keep player from going inside the ground
+    if (posY > game.getRows() - 24) {
+        posY = game.getRows() - 24;
     }
 }
 
