@@ -26,27 +26,35 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
-    ofxGameOfLife game;
-    
     void runGame();
-    void runStartMenu();
+    void drawGame();
     
+    void runStartMenu();
+    void drawStartMenu();
+    
+    //Draw game
     void drawPlayer();
     void drawGridLines();
     void drawObstacles();
     
+    //Game functionality
+    ofxGameOfLife game;
     std::vector<int> obstacles;
-    
     int gravityCalculation();
+    double posX;
+    double posY;
+    double velX;
+    double velY;
     
-    float posX;
-    float posY;
-    float velX;
-    float velY;
-    
+    //For controls
     bool keyIsDown[255];
     
+    //Control flow variables
+    bool startMenuRunning;
     bool gameRunning;
+    bool marketMenuRunning;
+    bool settingsRunning;
+    bool hScoreMenuRunning;
     
     //Menu stuff
     ofxDatGuiButton* startGameButton;

@@ -34,6 +34,7 @@ void ofApp::setup() {
     // position the components in the middle of the screen and register to listen for events
     setupButtons();
     
+    startMenuRunning = true;
     gameRunning = false;
 }
 
@@ -50,24 +51,12 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
+    if (startMenuRunning) {
+        drawStartMenu();
+    }
+    
     if (gameRunning) {
-        drawGridLines();
-        
-        ofSetColor(255,0,0);
-        ofFill();
-        ofDrawRectangle(0, game.getRows() * cellSize - 200, game.getCols() * cellSize, 200);
-        
-        drawObstacles();
-        
-        drawPlayer();
-    } else {
-        drawPlayer();
-        
-        startGameButton->draw();
-        marketButton->draw();
-        settingsButton->draw();
-        highScoreButton->draw();
-        exitButton->draw();
+        drawGame();
     }
 }
 
@@ -183,11 +172,19 @@ int ofApp::gravityCalculation() {
 
 void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
     if (e.target == startGameButton) {
+        startMenuRunning = false;
         gameRunning = true;
         posX = 10;
         posY = 1;
+    } else if (e.target == marketButton) {
+        startMenuRunning = false;
+        marketMenuRunning = true;
     } else if (e.target == settingsButton) {
-
+        startMenuRunning = false;
+        settingsRunning = true;
+    } else if (e.target == highScoreButton) {
+        startMenuRunning = false;
+        hScoreMenuRunning = true;
     }
 }
 
@@ -261,6 +258,18 @@ void ofApp::runGame() {
     gravityCalculation();
 }
 
+void ofApp::drawGame() {
+    drawGridLines();
+    
+    ofSetColor(255,0,0);
+    ofFill();
+    ofDrawRectangle(0, game.getRows() * cellSize - 200, game.getCols() * cellSize, 200);
+    
+    drawObstacles();
+    
+    drawPlayer();
+}
+
 void ofApp::runStartMenu() {
     posX += velX;
     posY += velY;
@@ -280,4 +289,14 @@ void ofApp::runStartMenu() {
         posY = game.getRows() - 4;
         velY *= -1;
     }
+}
+
+void ofApp::drawStartMenu() {
+    drawPlayer();
+    
+    startGameButton->draw();
+    marketButton->draw();
+    settingsButton->draw();
+    highScoreButton->draw();
+    exitButton->draw();
 }
