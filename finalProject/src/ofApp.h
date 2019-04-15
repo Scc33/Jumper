@@ -3,11 +3,13 @@
 #include "ofMain.h"
 #include "ofxGameOfLife.h"
 #include "ofxDatGui.h"
+#include "player.hpp"
 
 class ofApp : public ofBaseApp {
 private:
     const int cellSize = 10;
     double airtime = 0;
+    Player player;
     
 public:
     void setup();

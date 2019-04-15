@@ -4,17 +4,16 @@
 //--------------------------------------------------------------
 void ofApp::setup() {
     ofSetWindowTitle("Game");
-    
     ofSetFullscreen(true);
-    
     ofSetFrameRate(60);
-    
     ofBackground(0,0,0);
     
     posX = 1;
     posY = 1;
     velX = ofRandom(-0.5,0.5);
     velY = ofRandom(-0.5,0.5);
+    
+    player = Player(posX, posY, cellSize);
     
     obstacles.push_back(35);
     obstacles.push_back(105);
