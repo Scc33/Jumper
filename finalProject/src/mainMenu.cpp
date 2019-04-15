@@ -1,31 +1,50 @@
 #include "mainMenu.hpp"
+#include "player.hpp"
+#include "control.hpp"
+#include "ofApp.h"
+
+/*using namespace control;
 
 mainMenu::mainMenu() {
+    player.setPlayer(posX, posY, cellSize);
 }
 
-/*void mainMenu::runStartMenu() {
+void mainMenu::setMainMenu(int setGameCols, int setGameRows, int setCellSize) {
+    gameCols = setGameCols;
+    gameRows = setGameRows;
+    cellSize = setCellSize;
+}
+
+void mainMenu::setMainMenuPlayer(double setX, double setY, double setVelX, double setVelY) {
+    posX = setX;
+    posY = setY;
+    velX = setVelX;
+    velY = setVelY;
+}
+
+void mainMenu::runStartMenu() {
     posX += velX;
     posY += velY;
     
     if (posX < 1) {
         posX = 1;
         velX *= -1;
-    } else if (posX > game.getCols() - 2) {
-        posX = game.getCols() - 2;
+    } else if (posX > gameCols - 2) {
+        posX = gameCols - 2;
         velX *= -1;
     }
     
     if (posY < 1) {
         posY = 1;
         velY *= -1;
-    } else if (posY > game.getRows() - 4){
-        posY = game.getRows() - 4;
+    } else if (posY > gameRows - 4){
+        posY = gameRows - 4;
         velY *= -1;
     }
 }
 
 void mainMenu::drawStartMenu() {
-    drawPlayer();
+    player.drawPlayer();
     
     startGameButton->draw();
     marketButton->draw();
