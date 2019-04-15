@@ -13,7 +13,7 @@ void ofApp::setup() {
     velX = ofRandom(-0.5,0.5);
     velY = ofRandom(-0.5,0.5);
     
-    player = Player(posX, posY, cellSize);
+    player.setPlayer(posX, posY, cellSize);
     
     obstacles.push_back(35);
     obstacles.push_back(105);

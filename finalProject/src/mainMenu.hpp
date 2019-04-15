@@ -1,5 +1,4 @@
 #pragma once
-#include "ofApp.h"
 #include "ofxDatGui.h"
 #include "ofxDatGuiGameTheme.h"
 

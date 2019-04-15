@@ -1,5 +1,4 @@
 #pragma once
-#include "ofApp.h"
 
 class Player {
 private:
@@ -8,7 +7,9 @@ private:
     int cellSize;
     
 public:
-    Player(double setX, double setY, int setCellSize);
+    Player();
+    
+    void setPlayer(double setX, double setY, int setCellSize);
     
     void updatePlayerLocation(double updateX, double updateY);
     

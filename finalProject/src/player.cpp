@@ -1,17 +1,22 @@
 #include "player.hpp"
+#include "ofMain.h"
 
-player::Player(double setX, double setY, int setCellSize) {
+Player::Player() {
+    
+}
+
+void Player::setPlayer(double setX, double setY, int setCellSize) {
     posX = setX;
     posY = setY;
     cellSize = setCellSize;
 }
 
-void player::updatePlayerLocation(double updateX, double updateY) {
+void Player::updatePlayerLocation(double updateX, double updateY) {
     posX += updateX;
     posY += updateY;
 }
 
-void player::drawPlayer() {
+void Player::drawPlayer() {
     ofSetColor(0, 255, 0);
     ofFill();
     
