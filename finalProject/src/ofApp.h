@@ -9,6 +9,8 @@ class ofApp : public ofBaseApp {
 private:
     const int cellSize = 10;
     double airtime = 0;
+    double chanceOfNewObstacle;
+    double updateChanceOfNewObstacle;
     Player player;
     
 public:

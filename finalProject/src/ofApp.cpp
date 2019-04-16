@@ -15,11 +15,9 @@ void ofApp::setup() {
     
     player.setPlayer(posX, posY, cellSize);
     
-    obstacles.push_back(35);
-    obstacles.push_back(105);
-    obstacles.push_back(155);
-    obstacles.push_back(175);
-    obstacles.push_back(225);
+    obstacles.push_back(ofGetWidth());
+    chanceOfNewObstacle = 0;
+    updateChanceOfNewObstacle = .005;
     
     game.setup(ofGetWidth(), ofGetHeight(), cellSize);
     
@@ -160,10 +158,10 @@ void ofApp::drawObstacles() {
     
     for (int i = 0; i < obstacles.size(); i++) {
         ofDrawRectangle(obstacles.at(i), game.getRows() * cellSize - 240, cellSize, cellSize * 4);
-        obstacles.at(i)--;
+        obstacles.at(i) -= 2;
         
         if (obstacles.at(i) < 0) {
-            obstacles.at(i) = game.getCols() * cellSize;
+            obstacles.erase(obstacles.begin());
         }
     }
 }
@@ -277,6 +275,15 @@ void ofApp::runGame() {
     }
     
     gravityCalculation();
+    
+    //Randomly adds a new obstacle
+    //Chance of new obstacle being creating increases as game goes on
+    chanceOfNewObstacle += ofRandom(0, updateChanceOfNewObstacle);
+    if (ofRandom(0, chanceOfNewObstacle) > 2) {
+        obstacles.push_back(ofGetWidth());
+        chanceOfNewObstacle = 0;
+        updateChanceOfNewObstacle += .001;
+    }
 }
 
 void ofApp::drawGame() {
