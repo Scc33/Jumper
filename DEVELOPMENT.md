@@ -44,6 +44,9 @@ The last thing I did today was update the project proposal to reflect what was d
 Work on the final project will probably be a little slower this week because I have a midterm so I only focused on two small tweaks today. First I tweaked gravity. Now gravity gets stronger the longer the player is off the ground so they will be pulled back to the ground in a more realistic looking manner. After this I split the logic for drawing a player into its own class which was a relatively simple code base improvement. Feeling confident after these two easy fixes I tried to split out drawing and handling of the menus into their own classes. This will make the code more readable and makes sense from a logic point, but I immediately ran into errors. It appears like the menu components from ofxDatGui require being in the main ofApp because they appear to take a reference of it to function. I am not sure how this functionality works and I will need to seriously look into it before I can make more progress in this direction.
 
 *4/16/19*\
+Before today obstacles were only created for testing purposes and to see how it all looked. Today, I switched that so obstacles generate automatically and move across the screen as they did before. As the game goes on the chance of obstacle creation increases which will cause the obstacles to be created closer and closer together as the game progresses. This is one way the game will get harder as it goes on. The other way the game will get harder is by increasing in speed and I intend on implementing that within the next few days.
+
+*4/17/19*\
 
 **Week Three**
 

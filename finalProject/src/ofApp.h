@@ -36,6 +36,8 @@ public:
     void runStartMenu();
     void drawStartMenu();
     
+    void drawHighScores();
+    
     //Draw game
     void drawPlayer();
     void drawGridLines();
