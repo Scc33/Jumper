@@ -50,10 +50,12 @@ void ofApp::update() {
 //--------------------------------------------------------------
 void ofApp::draw() {
     if (startMenuRunning) {
+        ofShowCursor();
         drawStartMenu();
     }
     
     if (gameRunning) {
+        ofHideCursor();
         drawGame();
     }
     
@@ -241,20 +243,24 @@ void ofApp::runGame() {
     int tempX = posX;
     int tempY = posY;
     
+    if (keyIsDown[' ']) {
+        posY -= .8;
+    }
+    
     if (keyIsDown['a']) {
-        posX -= 1;
+        posX -= .8;
     }
     
     if (keyIsDown['w']) {
-        posY -= 1;
+        posY -= .8;
     }
     
     if (keyIsDown['s'] && game.getCell(posX, posY + 3).currState != true) {
-        posY += 1;
+        posY += .8;
     }
     
     if (keyIsDown['d']) {
-        posX += 1;
+        posX += .8;
     }
     
     if (posX < 1) {
