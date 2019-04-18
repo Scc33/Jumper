@@ -47,6 +47,9 @@ Work on the final project will probably be a little slower this week because I h
 Before today obstacles were only created for testing purposes and to see how it all looked. Today, I switched that so obstacles generate automatically and move across the screen as they did before. As the game goes on the chance of obstacle creation increases which will cause the obstacles to be created closer and closer together as the game progresses. This is one way the game will get harder as it goes on. The other way the game will get harder is by increasing in speed and I intend on implementing that within the next few days.
 
 *4/17/19*\
+The second code review of the final project was today. I had been fearing that I was falling behind on my project. It turns out I'm right on track. I didn't have anytime to code today, but I did get some important feedback at code review today and I have some big plans I want to implement within the next few days.
+
+*4/18/19*\
 
 **Week Three**
 
