@@ -68,12 +68,23 @@ public:
     bool settingsRunning;
     bool hScoreMenuRunning;
     
-    //Menu declarations
+    //Start menu buttons
     ofxDatGuiButton* startGameButton;
     ofxDatGuiButton* marketButton;
     ofxDatGuiButton* settingsButton;
     ofxDatGuiButton* highScoreButton;
     ofxDatGuiButton* exitButton;
+    
+    //Market menu buttons
+    ofxDatGuiButton* buyButton;
+    ofxDatGuiButton* blueThemeButton;
+    ofxDatGuiButton* greenThemeButton;
+    ofxDatGuiButton* purpleThemeButton;
+    ofxDatGuiButton* marketBackButton;
+    
+    //Settings menu buttons
+    ofxDatGuiButton* confirmSettingsButton;
+    ofxDatGuiButton* settingsBackButton;
 
     //Buttons
     void setupButtons();
