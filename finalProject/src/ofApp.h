@@ -36,6 +36,12 @@ public:
     void runStartMenu();
     void drawStartMenu();
     
+    void runMarket();
+    void drawMarket();
+    
+    void runSettingsMenu();
+    void drawSettingsMenu();
+    
     void drawHighScores();
     
     //Draw game

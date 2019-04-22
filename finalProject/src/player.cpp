@@ -12,8 +12,8 @@ void Player::setPlayer(double setX, double setY, int setCellSize) {
 }
 
 void Player::updatePlayerLocation(double updateX, double updateY) {
-    posX += updateX;
-    posY += updateY;
+    posX = updateX;
+    posY = updateY;
 }
 
 void Player::drawPlayer() {

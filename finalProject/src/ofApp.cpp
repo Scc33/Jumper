@@ -40,10 +40,24 @@ void ofApp::update() {
     
     updateButtons();
     
+    if (startMenuRunning) {
+        runStartMenu();
+    }
+    
     if (gameRunning) {
         runGame();
-    } else {
-        runStartMenu();
+    }
+    
+    if (marketMenuRunning) {
+        
+    }
+    
+    if (settingsRunning) {
+        
+    }
+    
+    if (hScoreMenuRunning) {
+        
     }
 }
 
@@ -126,22 +140,6 @@ void ofApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){
     
-}
-
-void ofApp::drawPlayer() {
-    ofSetColor(0, 255, 0);
-    ofFill();
-    
-    ofDrawRectangle(posX*cellSize, posY*cellSize, cellSize, cellSize);
-    ofDrawRectangle((posX+1)*cellSize, posY*cellSize, cellSize, cellSize);
-    ofDrawRectangle((posX-1)*cellSize, posY*cellSize, cellSize, cellSize);
-    ofDrawRectangle(posX*cellSize, (posY-1)*cellSize, cellSize, cellSize);
-    ofDrawRectangle(posX*cellSize, (posY+1)*cellSize, cellSize, cellSize);
-    ofDrawRectangle(posX*cellSize, (posY+2)*cellSize, cellSize, cellSize);
-    ofDrawRectangle((posX-1)*cellSize, (posY+2)*cellSize, cellSize, cellSize);
-    ofDrawRectangle((posX+1)*cellSize, (posY+2)*cellSize, cellSize, cellSize);
-    ofDrawRectangle((posX-1)*cellSize, (posY+3)*cellSize, cellSize, cellSize);
-    ofDrawRectangle((posX+1)*cellSize, (posY+3)*cellSize, cellSize, cellSize);
 }
 
 void ofApp::drawGridLines() {
@@ -290,6 +288,8 @@ void ofApp::runGame() {
         chanceOfNewObstacle = 0;
         updateChanceOfNewObstacle += .001;
     }
+    
+    player.updatePlayerLocation(posX, posY);
 }
 
 void ofApp::drawGame() {
@@ -301,7 +301,7 @@ void ofApp::drawGame() {
     
     drawObstacles();
     
-    drawPlayer();
+    player.drawPlayer();
 }
 
 void ofApp::runStartMenu() {
@@ -323,10 +323,12 @@ void ofApp::runStartMenu() {
         posY = game.getRows() - 4;
         velY *= -1;
     }
+    
+    player.updatePlayerLocation(posX, posY);
 }
 
 void ofApp::drawStartMenu() {
-    drawPlayer();
+    player.drawPlayer();
     
     startGameButton->draw();
     marketButton->draw();
