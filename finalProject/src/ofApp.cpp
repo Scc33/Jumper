@@ -30,7 +30,7 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update() {
-    if (keyIsDown['m']) {
+    if (keyIsDown[menuButton]) {
         startMenuRunning = true;
         gameRunning = false;
         marketMenuRunning = false;
@@ -157,7 +157,7 @@ void ofApp::drawObstacles() {
     ofFill();
     
     for (int i = 0; i < obstacles.size(); i++) {
-        ofDrawRectangle(obstacles.at(i), game.getRows() * cellSize - 240, cellSize, cellSize * 4);
+        ofDrawRectangle(obstacles.at(i), game.getRows() * cellSize - 340, cellSize, cellSize * 4);
         obstacles.at(i) -= 2;
         
         if (obstacles.at(i) < 0) {
@@ -167,7 +167,7 @@ void ofApp::drawObstacles() {
 }
 
 int ofApp::gravityCalculation() {
-    if (posY < game.getRows() - 24) {
+    if (posY < game.getRows() - 34) {
         airtime += .02;
         posY += 1 * airtime * airtime;
     } else {
@@ -175,8 +175,8 @@ int ofApp::gravityCalculation() {
     }
 
     //Keep player from going inside the ground
-    if (posY > game.getRows() - 24) {
-        posY = game.getRows() - 24;
+    if (posY > game.getRows() - 34) {
+        posY = game.getRows() - 34;
         airtime = 0;
     }
 }
@@ -297,7 +297,7 @@ void ofApp::drawGame() {
     
     ofSetColor(255,0,0);
     ofFill();
-    ofDrawRectangle(0, game.getRows() * cellSize - 200, game.getCols() * cellSize, 200);
+    ofDrawRectangle(0, game.getRows() * cellSize - 300, game.getCols() * cellSize, 300);
     
     drawObstacles();
     

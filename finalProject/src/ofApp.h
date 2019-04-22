@@ -8,6 +8,7 @@
 class ofApp : public ofBaseApp {
 private:
     const int cellSize = 10;
+    const char menuButton = 'm';
     double airtime = 0;
     double chanceOfNewObstacle;
     double updateChanceOfNewObstacle;
