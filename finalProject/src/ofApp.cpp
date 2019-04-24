@@ -235,6 +235,14 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
     } else if (e.target == hScoresBackButton) {
         startMenuRunning = true;
         hScoreMenuRunning = false;
+    } else if (e.target == blueThemeButton) {
+        
+    } else if (e.target == greenThemeButton) {
+        
+    } else if (e.target == purpleThemeButton) {
+        
+    } else if (e.target == confirmSettingsButton) {
+        
     }
 }
 
@@ -247,7 +255,6 @@ void ofApp::updateButtons() {
     exitButton->update();
     
     //Market menu buttons
-    buyButton->update();
     blueThemeButton->update();
     greenThemeButton->update();
     purpleThemeButton->update();
@@ -288,25 +295,21 @@ void ofApp::setupStartButtons() {
 }
 
 void ofApp::setupMarketButtons() {
-    buyButton = new ofxDatGuiButton("Buy");
     blueThemeButton = new ofxDatGuiButton("Blue theme");
     greenThemeButton = new ofxDatGuiButton("Green theme");
     purpleThemeButton = new ofxDatGuiButton("Purple theme");
     marketBackButton = new ofxDatGuiButton("Back");
     
-    //buyButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    //blueThemeButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    //greenThemeButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    //purpleThemeButton->onButtonEvent(this, &ofApp::onButtonEvent);
+    blueThemeButton->onButtonEvent(this, &ofApp::onButtonEvent);
+    greenThemeButton->onButtonEvent(this, &ofApp::onButtonEvent);
+    purpleThemeButton->onButtonEvent(this, &ofApp::onButtonEvent);
     marketBackButton->onButtonEvent(this, &ofApp::onButtonEvent);
     
-    buyButton->setPosition(ofGetWidth()/2 - settingsButton->getWidth()/2, ofGetHeight()/2 - 90);
-    blueThemeButton->setPosition(startGameButton->getX(), buyButton->getY() + 45);
-    greenThemeButton->setPosition(startGameButton->getX(), buyButton->getY() + 90);
-    purpleThemeButton->setPosition(startGameButton->getX(), buyButton->getY() + 135);
-    marketBackButton->setPosition(startGameButton->getX(), buyButton->getY() + 180);
+    blueThemeButton->setPosition(startGameButton->getX(), ofGetHeight()/2 - 90);
+    greenThemeButton->setPosition(startGameButton->getX(), blueThemeButton->getY() + 45);
+    purpleThemeButton->setPosition(startGameButton->getX(), blueThemeButton->getY() + 90);
+    marketBackButton->setPosition(startGameButton->getX(), blueThemeButton->getY() + 135);
     
-    buyButton->setTheme(new ofxDatGuiGameTheme(16));
     blueThemeButton->setTheme(new ofxDatGuiGameTheme(16));
     greenThemeButton->setTheme(new ofxDatGuiGameTheme(16));
     purpleThemeButton->setTheme(new ofxDatGuiGameTheme(16));
@@ -444,7 +447,6 @@ void ofApp::runMarket() {
 }
 
 void ofApp::drawMarket() {
-    buyButton->draw();
     blueThemeButton->draw();
     greenThemeButton->draw();
     purpleThemeButton->draw();

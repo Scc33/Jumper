@@ -80,7 +80,6 @@ public:
     void setupStartButtons();
     
     //Market menu buttons
-    ofxDatGuiButton* buyButton;
     ofxDatGuiButton* blueThemeButton;
     ofxDatGuiButton* greenThemeButton;
     ofxDatGuiButton* purpleThemeButton;
