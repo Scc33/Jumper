@@ -12,12 +12,8 @@ void ofApp::setup() {
     posY = 1;
     velX = ofRandom(-0.5,0.5);
     velY = ofRandom(-0.5,0.5);
-    
+
     player.setPlayer(posX, posY, cellSize);
-    
-    obstacles.push_back(ofGetWidth());
-    chanceOfNewObstacle = 0;
-    updateChanceOfNewObstacle = .005;
     
     game.setup(ofGetWidth(), ofGetHeight(), cellSize);
     
@@ -159,6 +155,7 @@ void ofApp::drawObstacles() {
         
         if (obstacles.at(i) < 0) {
             obstacles.erase(obstacles.begin());
+            score++;
         }
     }
 }
@@ -193,8 +190,7 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
         std::cout << 0 << std::endl;
         startMenuRunning = false;
         gameRunning = true;
-        posX = 10;
-        posY = 1;
+        setupGame();
     } else if (e.target == marketButton) {
         std::cout << 1 << std::endl;
         startMenuRunning = false;
@@ -372,11 +368,26 @@ void ofApp::drawGame() {
     drawObstacles();
     
     player.drawPlayer();
+    
+    ofDrawBitmapString("You score is " + ofToString(score), ofGetWidth() * 4/5, ofGetHeight() / 10);
+}
+
+void ofApp::setupGame() {
+    airtime = 0;
+    score = 0;
+    
+    posX = 10;
+    posY = 1;
+    
+    obstacles.clear();
+    obstacles.push_back(ofGetWidth());
+    chanceOfNewObstacle = 0;
+    updateChanceOfNewObstacle = .005;
 }
 
 void ofApp::drawGameEnded() {
     ofDrawBitmapString("Game over", 100, 100);
-    ofDrawBitmapString("Your score was... ", 150, 150);
+    ofDrawBitmapString("Your score was... " + ofToString(score), 150, 150);
     ofDrawBitmapString("Press 'm' to go to the main menu", 200, 200);
 }
 

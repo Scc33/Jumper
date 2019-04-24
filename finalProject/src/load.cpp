@@ -29,7 +29,7 @@ bool Loader::ReadScores(std::string fileToReadFrom) {
     return true;
 }
 
-bool Loader::WriteScores(std::string fileToWriteTo) {
+bool Loader::WriteSettings(std::string fileToWriteTo) {
     
 }
 

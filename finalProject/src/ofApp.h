@@ -9,10 +9,11 @@ class ofApp : public ofBaseApp {
 private:
     const int cellSize = 10;
     const char menuButton = 'm';
-    double airtime = 0;
+    double airtime;
     double chanceOfNewObstacle;
     double updateChanceOfNewObstacle;
     Player player;
+    double score;
     
 public:
     void setup();
@@ -33,6 +34,7 @@ public:
     
     void runGame();
     void drawGame();
+    void setupGame();
     
     void drawGameEnded();
     
