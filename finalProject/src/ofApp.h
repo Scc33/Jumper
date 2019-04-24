@@ -67,6 +67,7 @@ public:
     //Control flow variables
     bool startMenuRunning;
     bool gameRunning;
+    bool gameEnded;
     bool marketMenuRunning;
     bool settingsRunning;
     bool hScoreMenuRunning;

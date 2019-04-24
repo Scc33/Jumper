@@ -33,6 +33,7 @@ void ofApp::update() {
     if (keyIsDown[menuButton]) {
         startMenuRunning = true;
         gameRunning = false;
+        gameEnded = true;
         marketMenuRunning = false;
         settingsRunning = false;
         hScoreMenuRunning = false;
@@ -71,10 +72,17 @@ void ofApp::draw() {
     if (gameRunning) {
         if (hasCollided()) {
             gameRunning = false;
+            gameEnded = true;
         }
 
         ofHideCursor();
         drawGame();
+    }
+    
+    if (gameEnded) {
+        ofDrawBitmapString("Game over", 100, 100);
+        ofDrawBitmapString("Your score was... ", 150, 150);
+        ofDrawBitmapString("Press 'm' to go to the main menu", 200, 200);
     }
     
     if (marketMenuRunning) {
@@ -199,6 +207,7 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
     if (e.target == startGameButton) {
         startMenuRunning = false;
         gameRunning = true;
+        gameEnded = false;
         posX = 10;
         posY = 1;
     } else if (e.target == marketButton) {
