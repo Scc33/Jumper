@@ -15,22 +15,23 @@ private:
     Player player;
     double score;
     
+    //For controls
+    bool keyIsDown[255];
+    
+    //Control flow variables
+    bool startMenuRunning;
+    bool gameRunning;
+    bool gameEndedScreen;
+    bool marketMenuRunning;
+    bool settingsRunning;
+    bool hScoreMenuRunning;
+    
 public:
     void setup();
     void update();
     void draw();
-    
     void keyPressed(int key);
     void keyReleased(int key);
-    void mouseMoved(int x, int y );
-    void mouseDragged(int x, int y, int button);
-    void mousePressed(int x, int y, int button);
-    void mouseReleased(int x, int y, int button);
-    void mouseEntered(int x, int y);
-    void mouseExited(int x, int y);
-    void windowResized(int w, int h);
-    void dragEvent(ofDragInfo dragInfo);
-    void gotMessage(ofMessage msg);
     
     void runGame();
     void drawGame();
@@ -50,31 +51,17 @@ public:
     void runHighScores();
     void drawHighScores();
     
-    //Draw game
-    void drawPlayer();
-    void drawGridLines();
-    void drawObstacles();
-    
     //Game functionality
     ofxGameOfLife game;
-    std::vector<int> obstacles;
-    int gravityCalculation();
     double posX;
     double posY;
     double velX;
     double velY;
+    std::vector<int> obstacles;
+    
+    void drawObstacles();
+    int gravityCalculation();
     bool hasCollided();
-    
-    //For controls
-    bool keyIsDown[255];
-    
-    //Control flow variables
-    bool startMenuRunning;
-    bool gameRunning;
-    bool gameEndedScreen;
-    bool marketMenuRunning;
-    bool settingsRunning;
-    bool hScoreMenuRunning;
     
     //Start menu buttons
     ofxDatGuiButton* startGameButton;

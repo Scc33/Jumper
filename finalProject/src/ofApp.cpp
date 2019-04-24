@@ -1,6 +1,10 @@
 #include "ofApp.h"
 #include "ofxDatGuiGameTheme.h"
 
+/*
+ Functions to run openFrameworks
+ */
+
 //--------------------------------------------------------------
 void ofApp::setup() {
     ofSetWindowTitle("Game");
@@ -79,7 +83,6 @@ void ofApp::draw() {
     }
 }
 
-
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
     keyIsDown[key] = true;
@@ -90,60 +93,9 @@ void ofApp::keyReleased(int key){
     keyIsDown[key] = false;
 }
 
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
-    
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
-    
-}
-
-//--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
-    
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
-    
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y){
-    
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y){
-    
-}
-
-//--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
-    
-}
-
-//--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
-    
-}
-
-//--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){
-    
-}
-
-void ofApp::drawGridLines() {
-    for (int i = 0; i < game.getCols(); i++) {
-        for (int j = 0; j < game.getRows(); j++) {
-            ofSetColor(150, 150, 150);
-            ofNoFill();
-            ofDrawRectangle(i*cellSize, j*cellSize, cellSize, cellSize);
-        }
-    }
-}
+/*
+ Game functions
+ */
 
 void ofApp::drawObstacles() {
     ofSetColor(255,0,0);
@@ -359,8 +311,6 @@ void ofApp::runGame() {
 }
 
 void ofApp::drawGame() {
-    drawGridLines();
-    
     ofSetColor(255,0,0);
     ofFill();
     ofDrawRectangle(0, game.getRows() * cellSize - 300, game.getCols() * cellSize, 300);
@@ -369,7 +319,7 @@ void ofApp::drawGame() {
     
     player.drawPlayer();
     
-    ofDrawBitmapString("You score is " + ofToString(score), ofGetWidth() * 4/5, ofGetHeight() / 10);
+    ofDrawBitmapString("Your score is " + ofToString(score), ofGetWidth() * 4 / 5, ofGetHeight() / 10);
 }
 
 void ofApp::setupGame() {
@@ -413,7 +363,6 @@ void ofApp::runStartMenu() {
     
     player.updatePlayerLocation(posX, posY);
     
-    //Start menu buttons
     startGameButton->update();
     marketButton->update();
     settingsButton->update();
@@ -432,7 +381,6 @@ void ofApp::drawStartMenu() {
 }
 
 void ofApp::runMarket() {
-    //Market menu buttons
     blueThemeButton->update();
     greenThemeButton->update();
     purpleThemeButton->update();
@@ -447,7 +395,6 @@ void ofApp::drawMarket() {
 }
 
 void ofApp::runSettingsMenu() {
-    //Settings menu buttons
     confirmSettingsButton->update();
     settingsBackButton->update();
 }
@@ -458,7 +405,6 @@ void ofApp::drawSettingsMenu() {
 }
 
 void ofApp::runHighScores() {
-    //High score buttons
     hScoresBackButton->update();
 }
 
