@@ -5,11 +5,14 @@
 #include "ofxDatGui.h"
 #include "player.hpp"
 #include "load.hpp"
+#include "ofxDatGuiGameTheme.h"
 
 class ofApp : public ofBaseApp {
 private:
+    const ofxDatGuiTheme *gameTheme = new ofxDatGuiGameTheme(16);
     const int cellSize = 10;
     const char menuButton = 'm';
+    
     double airtime;
     double chanceOfNewObstacle;
     double updateChanceOfNewObstacle;
@@ -75,6 +78,10 @@ public:
     ofxDatGuiButton* exitButton;
     void setupStartButtons();
     
+    //Endamge high score input
+    ofxDatGuiTextInput* input;
+    void setupEndgame();
+    
     //Market menu buttons
     ofxDatGuiButton* blueThemeButton;
     ofxDatGuiButton* greenThemeButton;
@@ -91,6 +98,7 @@ public:
     ofxDatGuiButton* hScoresBackButton;
     void setupHScoreButtons();
 
-    //Functions for all buttons
+    //Functions to handle all DatGui events
     void onButtonEvent(ofxDatGuiButtonEvent e);
+    void onTextInputEvent(ofxDatGuiTextInputEvent e);
 };

@@ -1,5 +1,4 @@
 #include "ofApp.h"
-#include "ofxDatGuiGameTheme.h"
 
 /*
  Functions to run openFrameworks
@@ -23,6 +22,7 @@ void ofApp::setup() {
     
     //Position the buttons in the middle of the screen and register to listen for events
     setupStartButtons();
+    setupEndgame();
     setupMarketButtons();
     setupSettingsButtons();
     setupHScoreButtons();
@@ -58,6 +58,8 @@ void ofApp::update() {
             loader::WriteScores("/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/highScores.txt", highScores, highScoreNames);
         }
         runGame();
+    } else if (gameEndedScreen) {
+      input->update();
     } else if (marketMenuRunning) {
         runMarket();
     } else if (settingsRunning) {
@@ -76,6 +78,7 @@ void ofApp::draw() {
         ofHideCursor();
         drawGame();
     } else if (gameEndedScreen) {
+        ofShowCursor();
         drawGameEnded();
     } else if (marketMenuRunning) {
         drawMarket();
@@ -115,6 +118,8 @@ void ofApp::drawObstacles() {
     }
 }
 
+
+//This doesn't seem to work from some angles (Or too fast?)
 bool ofApp::hasCollided() {
     for (int obstacle : obstacles) {
         if (posX * cellSize <= obstacle && posX * cellSize >= obstacle - cellSize && posY > game.getRows() - 36) {
@@ -203,6 +208,13 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
     }
 }
 
+void ofApp::onTextInputEvent(ofxDatGuiTextInputEvent e) {
+    // text input events carry the text of the input field //
+    cout << "From Event Object: " << e.text << endl;
+    // although you can also retrieve it from the event target //
+    cout << "From Event Target: " << e.target->getText() << endl;
+}
+
 void ofApp::setupStartButtons() {
     startGameButton = new ofxDatGuiButton("Start");
     marketButton = new ofxDatGuiButton("Market");
@@ -222,11 +234,28 @@ void ofApp::setupStartButtons() {
     highScoreButton->setPosition(startGameButton->getX(), startGameButton->getY() + 135);
     exitButton->setPosition(startGameButton->getX(), startGameButton->getY() + 180);
     
-    startGameButton->setTheme(new ofxDatGuiGameTheme(16));
-    marketButton->setTheme(new ofxDatGuiGameTheme(16));
-    settingsButton->setTheme(new ofxDatGuiGameTheme(16));
-    highScoreButton->setTheme(new ofxDatGuiGameTheme(16));
-    exitButton->setTheme(new ofxDatGuiGameTheme(16));
+    startGameButton->setTheme(gameTheme);
+    marketButton->setTheme(gameTheme);
+    settingsButton->setTheme(gameTheme);
+    highScoreButton->setTheme(gameTheme);
+    exitButton->setTheme(gameTheme);
+}
+
+void ofApp::setupEndgame() {
+    input = new ofxDatGuiTextInput("TEXT INPUT", "Type Something Here");
+    input->onTextInputEvent(this, &ofApp::onTextInputEvent);
+    input->setFocused(true);
+    input->setWidth(800, .2);
+    input->setPosition(ofGetWidth()/2 - input->getWidth()/2, 240);
+    /*highScoreInput = new ofxDatGuiTextInput("TEXT INPUT", "Type Something Here");
+    
+    highScoreInput->onTextInputEvent(this, &ofApp::onTextInputEvent);
+    
+    highScoreInput->setWidth(ofGetWidth() / 3, .2);
+    
+    highScoreInput->setPosition(ofGetWidth()/2 - startGameButton->getWidth()/2, ofGetHeight()/2 - 90);
+    
+    highScoreInput->setTheme(gameTheme);*/
 }
 
 void ofApp::setupMarketButtons() {
@@ -245,10 +274,10 @@ void ofApp::setupMarketButtons() {
     purpleThemeButton->setPosition(startGameButton->getX(), blueThemeButton->getY() + 90);
     marketBackButton->setPosition(startGameButton->getX(), blueThemeButton->getY() + 135);
     
-    blueThemeButton->setTheme(new ofxDatGuiGameTheme(16));
-    greenThemeButton->setTheme(new ofxDatGuiGameTheme(16));
-    purpleThemeButton->setTheme(new ofxDatGuiGameTheme(16));
-    marketBackButton->setTheme(new ofxDatGuiGameTheme(16));
+    blueThemeButton->setTheme(gameTheme);
+    greenThemeButton->setTheme(gameTheme);
+    purpleThemeButton->setTheme(gameTheme);
+    marketBackButton->setTheme(gameTheme);
 }
 
 void ofApp::setupSettingsButtons() {
@@ -261,8 +290,8 @@ void ofApp::setupSettingsButtons() {
     confirmSettingsButton->setPosition(ofGetWidth()/2 - confirmSettingsButton->getWidth()/2, ofGetHeight()/2 - 90);
     settingsBackButton->setPosition(startGameButton->getX(), confirmSettingsButton->getY() + 45);
     
-    confirmSettingsButton->setTheme(new ofxDatGuiGameTheme(16));
-    settingsBackButton->setTheme(new ofxDatGuiGameTheme(16));
+    confirmSettingsButton->setTheme(gameTheme);
+    settingsBackButton->setTheme(gameTheme);
 }
 
 void ofApp::setupHScoreButtons() {
@@ -272,7 +301,7 @@ void ofApp::setupHScoreButtons() {
     
     hScoresBackButton->setPosition(ofGetWidth()/2 - hScoresBackButton->getWidth()/2, ofGetHeight()/2 + 90);
     
-    hScoresBackButton->setTheme(new ofxDatGuiGameTheme(16));
+    hScoresBackButton->setTheme(gameTheme);
 }
 
 void ofApp::runGame() {
@@ -361,6 +390,7 @@ void ofApp::drawGameEnded() {
     ofDrawBitmapString("Game over", 100, 100);
     ofDrawBitmapString("Your score was... " + ofToString(score), 150, 150);
     ofDrawBitmapString("Press 'm' to go to the main menu", 200, 200);
+    input->draw();
 }
 
 void ofApp::runStartMenu() {
