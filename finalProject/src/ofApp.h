@@ -16,6 +16,7 @@ private:
     Player player;
     double score;
     std::vector<int> highScores;
+    std::vector<std::string> highScoreNames;
     
     //For controls
     bool keyIsDown[255];

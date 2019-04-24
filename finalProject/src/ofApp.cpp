@@ -34,7 +34,7 @@ void ofApp::setup() {
     settingsRunning = false;
     hScoreMenuRunning = false;
     
-    loader::ReadScores("/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/highScores.txt", highScores);
+    loader::ReadScores("/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/highScores.txt", highScores, highScoreNames);
 }
 
 //--------------------------------------------------------------
@@ -55,7 +55,7 @@ void ofApp::update() {
             gameRunning = false;
             gameEndedScreen = true;
             highScores = calcNewHighScores(score, highScores);
-            loader::WriteScores("/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/highScores.txt", highScores);
+            loader::WriteScores("/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/highScores.txt", highScores, highScoreNames);
         }
         runGame();
     } else if (marketMenuRunning) {
@@ -433,8 +433,8 @@ void ofApp::runHighScores() {
 void ofApp::drawHighScores() {
     int pos = ofGetHeight()/2 - 180;
 
-    for (int score : highScores) {
-        ofDrawBitmapString(ofToString(score), ofGetWidth()/2, pos);
+    for (int i = 0; i < highScores.size(); i++) {
+        ofDrawBitmapString(highScoreNames.at(i) + " " + ofToString(highScores.at(i)), ofGetWidth()/2 - hScoresBackButton->getWidth()/2, pos);
         pos += 45;
     }
     

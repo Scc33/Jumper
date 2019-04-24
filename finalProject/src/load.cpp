@@ -1,11 +1,14 @@
 #include "load.hpp"
 
-bool loader::WriteScores(std::string fileToWriteTo, std::vector<int> highScores) {
+bool loader::WriteScores(std::string fileToWriteTo, std::vector<int> highScores, std::vector<std::string> highScoreNames) {
     std::ofstream myfile;
     myfile.open(fileToWriteTo, std::ios::in);
     
     for (int score : highScores) {
         myfile << score << std::endl;
+    }
+    for (std::string name : highScoreNames) {
+        myfile << name << std::endl;
     }
     
     myfile.close();
@@ -15,8 +18,9 @@ bool loader::WriteScores(std::string fileToWriteTo, std::vector<int> highScores)
 
 //Reads the model from a specified file and loads that data into a model object,
 //if can't open the file "Unable to open file" is printed
-bool loader::ReadScores(std::string fileToReadFrom, std::vector<int> &highScores) {
+bool loader::ReadScores(std::string fileToReadFrom, std::vector<int> &highScores, std::vector<std::string> &highScoreNames) {
     highScores.clear();
+    highScoreNames.clear();
     
     std::ifstream myfile (fileToReadFrom);
     std::string line;
@@ -26,9 +30,15 @@ bool loader::ReadScores(std::string fileToReadFrom, std::vector<int> &highScores
         return false;
     }
 
+    int count = 0;
     while (getline(myfile, line)) {
-        int score = std::stoi(line);
-        highScores.push_back(score);
+        if (count < 5) {
+            int score = std::stoi(line);
+            highScores.push_back(score);
+        } else {
+            highScoreNames.push_back(line);
+        }
+        count++;
     }
     
     myfile.close();
