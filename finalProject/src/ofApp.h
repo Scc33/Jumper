@@ -34,6 +34,8 @@ public:
     void runGame();
     void drawGame();
     
+    void drawGameEnded();
+    
     void runStartMenu();
     void drawStartMenu();
     
@@ -43,6 +45,7 @@ public:
     void runSettingsMenu();
     void drawSettingsMenu();
     
+    void runHighScores();
     void drawHighScores();
     
     //Draw game
@@ -66,7 +69,7 @@ public:
     //Control flow variables
     bool startMenuRunning;
     bool gameRunning;
-    bool gameEnded;
+    bool gameEndedScreen;
     bool marketMenuRunning;
     bool settingsRunning;
     bool hScoreMenuRunning;
@@ -96,6 +99,5 @@ public:
     void setupHScoreButtons();
 
     //Functions for all buttons
-    void updateButtons();
     void onButtonEvent(ofxDatGuiButtonEvent e);
 };

@@ -29,7 +29,7 @@ void ofApp::setup() {
     
     startMenuRunning = true;
     gameRunning = false;
-    gameEnded = false;
+    gameEndedScreen = false;
     marketMenuRunning = false;
     settingsRunning = false;
     hScoreMenuRunning = false;
@@ -40,27 +40,19 @@ void ofApp::update() {
     if (keyIsDown[menuButton]) {
         startMenuRunning = true;
         gameRunning = false;
-        gameEnded = false;
+        gameEndedScreen = false;
         marketMenuRunning = false;
         settingsRunning = false;
         hScoreMenuRunning = false;
     }
     
-    updateButtons();
-    
     if (startMenuRunning) {
         runStartMenu();
-    }
-    
-    if (gameRunning) {
+    } else if (gameRunning) {
         runGame();
-    }
-    
-    if (marketMenuRunning) {
+    } else if (marketMenuRunning) {
         runMarket();
-    }
-    
-    if (settingsRunning) {
+    } else if (settingsRunning) {
         runSettingsMenu();
     }
 }
@@ -68,36 +60,23 @@ void ofApp::update() {
 //--------------------------------------------------------------
 void ofApp::draw() {
     if (startMenuRunning) {
-        std::cout << "1" << std::endl;
         ofShowCursor();
         drawStartMenu();
-    }
-    
-    if (gameRunning) {
+    } else if (gameRunning) {
         if (hasCollided()) {
             gameRunning = false;
-            gameEnded = true;
+            gameEndedScreen = true;
         }
 
         ofHideCursor();
         drawGame();
-    }
-    
-    if (gameEnded) {
-        ofDrawBitmapString("Game over", 100, 100);
-        ofDrawBitmapString("Your score was... ", 150, 150);
-        ofDrawBitmapString("Press 'm' to go to the main menu", 200, 200);
-    }
-    
-    if (marketMenuRunning) {
+    } else if (gameEndedScreen) {
+        drawGameEnded();
+    } else if (marketMenuRunning) {
         drawMarket();
-    }
-    
-    if (settingsRunning) {
+    } else if (settingsRunning) {
         drawSettingsMenu();
-    }
-    
-    if (hScoreMenuRunning) {
+    } else if (hScoreMenuRunning) {
         drawHighScores();
     }
 }
@@ -209,30 +188,36 @@ int ofApp::gravityCalculation() {
 
 void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
     if (e.target == startGameButton) {
-        std::cout << "adsf" << std::endl;
+        std::cout << 0 << std::endl;
         startMenuRunning = false;
         gameRunning = true;
-        gameEnded = false;
         posX = 10;
         posY = 1;
     } else if (e.target == marketButton) {
+        std::cout << 1 << std::endl;
         startMenuRunning = false;
         marketMenuRunning = true;
     } else if (e.target == settingsButton) {
+        std::cout << 2 << std::endl;
         startMenuRunning = false;
         settingsRunning = true;
     } else if (e.target == highScoreButton) {
+        std::cout << 3 << std::endl;
         startMenuRunning = false;
         hScoreMenuRunning = true;
     } else if (e.target == exitButton) {
+        std::cout << 4 << std::endl;
         ofExit();
     } else if (e.target == marketBackButton) {
+        std::cout << 5 << std::endl;
         startMenuRunning = true;
         marketMenuRunning = false;
-    } else if (e.target == settingsBackButton) {
+    } /*else if (e.target == settingsBackButton) {
+        std::cout << 6 << std::endl;
         startMenuRunning = true;
         settingsRunning = false;
     } else if (e.target == hScoresBackButton) {
+        std::cout << 7 << std::endl;
         startMenuRunning = true;
         hScoreMenuRunning = false;
     } else if (e.target == blueThemeButton) {
@@ -243,29 +228,7 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
         
     } else if (e.target == confirmSettingsButton) {
         
-    }
-}
-
-void ofApp::updateButtons() {
-    //Start menu buttons
-    startGameButton->update();
-    marketButton->update();
-    settingsButton->update();
-    highScoreButton->update();
-    exitButton->update();
-    
-    //Market menu buttons
-    blueThemeButton->update();
-    greenThemeButton->update();
-    purpleThemeButton->update();
-    marketBackButton->update();
-    
-    //Settings menu buttons
-    confirmSettingsButton->update();
-    settingsBackButton->update();
-    
-    //High score buttons
-    hScoresBackButton->update();
+    }*/
 }
 
 void ofApp::setupStartButtons() {
@@ -281,7 +244,7 @@ void ofApp::setupStartButtons() {
     highScoreButton->onButtonEvent(this, &ofApp::onButtonEvent);
     exitButton->onButtonEvent(this, &ofApp::onButtonEvent);
     
-    startGameButton->setPosition(ofGetWidth()/2 - settingsButton->getWidth()/2, ofGetHeight()/2 - 90);
+    startGameButton->setPosition(ofGetWidth()/2 - startGameButton->getWidth()/2, ofGetHeight()/2 - 90);
     marketButton->setPosition(startGameButton->getX(), startGameButton->getY() + 45);
     settingsButton->setPosition(startGameButton->getX(), startGameButton->getY() + 90);
     highScoreButton->setPosition(startGameButton->getX(), startGameButton->getY() + 135);
@@ -305,7 +268,7 @@ void ofApp::setupMarketButtons() {
     purpleThemeButton->onButtonEvent(this, &ofApp::onButtonEvent);
     marketBackButton->onButtonEvent(this, &ofApp::onButtonEvent);
     
-    blueThemeButton->setPosition(startGameButton->getX(), ofGetHeight()/2 - 90);
+    blueThemeButton->setPosition(ofGetWidth()/2 - blueThemeButton->getWidth()/2, ofGetHeight()/2 - 90);
     greenThemeButton->setPosition(startGameButton->getX(), blueThemeButton->getY() + 45);
     purpleThemeButton->setPosition(startGameButton->getX(), blueThemeButton->getY() + 90);
     marketBackButton->setPosition(startGameButton->getX(), blueThemeButton->getY() + 135);
@@ -320,10 +283,10 @@ void ofApp::setupSettingsButtons() {
     confirmSettingsButton = new ofxDatGuiButton("Confirm");
     settingsBackButton = new ofxDatGuiButton("Back");
     
-    //confirmSettingsButton->onButtonEvent(this, &ofApp::onButtonEvent);
+    confirmSettingsButton->onButtonEvent(this, &ofApp::onButtonEvent);
     settingsBackButton->onButtonEvent(this, &ofApp::onButtonEvent);
     
-    confirmSettingsButton->setPosition(ofGetWidth()/2 - settingsButton->getWidth()/2, ofGetHeight()/2 - 90);
+    confirmSettingsButton->setPosition(ofGetWidth()/2 - confirmSettingsButton->getWidth()/2, ofGetHeight()/2 - 90);
     settingsBackButton->setPosition(startGameButton->getX(), confirmSettingsButton->getY() + 45);
     
     confirmSettingsButton->setTheme(new ofxDatGuiGameTheme(16));
@@ -333,9 +296,9 @@ void ofApp::setupSettingsButtons() {
 void ofApp::setupHScoreButtons() {
     hScoresBackButton = new ofxDatGuiButton("Back");
     
-    //hScoresBackButton->onButtonEvent(this, &ofApp::onButtonEvent);
+    hScoresBackButton->onButtonEvent(this, &ofApp::onButtonEvent);
     
-    hScoresBackButton->setPosition(ofGetWidth()/2 - settingsButton->getWidth()/2, ofGetHeight()/2 - 90);
+    hScoresBackButton->setPosition(ofGetWidth()/2 - hScoresBackButton->getWidth()/2, ofGetHeight()/2 - 90);
     
     hScoresBackButton->setTheme(new ofxDatGuiGameTheme(16));
 }
@@ -409,6 +372,12 @@ void ofApp::drawGame() {
     player.drawPlayer();
 }
 
+void ofApp::drawGameEnded() {
+    ofDrawBitmapString("Game over", 100, 100);
+    ofDrawBitmapString("Your score was... ", 150, 150);
+    ofDrawBitmapString("Press 'm' to go to the main menu", 200, 200);
+}
+
 void ofApp::runStartMenu() {
     posX += velX;
     posY += velY;
@@ -430,6 +399,13 @@ void ofApp::runStartMenu() {
     }
     
     player.updatePlayerLocation(posX, posY);
+    
+    //Start menu buttons
+    startGameButton->update();
+    marketButton->update();
+    settingsButton->update();
+    highScoreButton->update();
+    exitButton->update();
 }
 
 void ofApp::drawStartMenu() {
@@ -443,7 +419,11 @@ void ofApp::drawStartMenu() {
 }
 
 void ofApp::runMarket() {
-    
+    //Market menu buttons
+    blueThemeButton->update();
+    greenThemeButton->update();
+    purpleThemeButton->update();
+    marketBackButton->update();
 }
 
 void ofApp::drawMarket() {
@@ -454,12 +434,19 @@ void ofApp::drawMarket() {
 }
 
 void ofApp::runSettingsMenu() {
-    
+    //Settings menu buttons
+    confirmSettingsButton->update();
+    settingsBackButton->update();
 }
 
 void ofApp::drawSettingsMenu() {
     confirmSettingsButton->draw();
     settingsBackButton->draw();
+}
+
+void ofApp::runHighScores() {
+    //High score buttons
+    hScoresBackButton->update();
 }
 
 void ofApp::drawHighScores() {
