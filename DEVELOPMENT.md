@@ -50,7 +50,23 @@ Before today obstacles were only created for testing purposes and to see how it 
 The second code review of the final project was today. I had been fearing that I was falling behind on my project. It turns out I'm right on track. I didn't have anytime to code today, but I did get some important feedback at code review today and I have some big plans I want to implement within the next few days.
 
 *4/18/19*\
+No work done today.
+
+*4/19/19*\
+No work done today.
+
+*4/20/19*\
+No work done today.
 
 **Week Three**
+
+*4/21/19*\
+Just minor work done today mostly on tidying up, adding catch for testing, and shifted some visuals around to look a little better.
+
+*4/22/19*\
+No work done today.
+
+*4/23/19*\
+Today I took a big step forward for the game, I implemented collision dection. Now the game will end when a player collides with one of the obstacles. Obviously a big component of the game, I had been putting this task off because I thought it would be tough to implement but I was pleasantly suprised. I still need to do some more thorough testing on it, but I am pretty happy with the collision detection system now. I also added more buttons to the game that will be used for the settings, market, and high score screens. This has been routine work in the past but I was running across strange bugs messing up the control flow. I don't know if these bugs are from errors in my logic or because of something I don't know about ofxDatGui yet. I will be exploring this issue more tomorrow. 
 
 **Week Four**
