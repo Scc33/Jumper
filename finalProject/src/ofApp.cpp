@@ -411,5 +411,13 @@ void ofApp::runHighScores() {
 }
 
 void ofApp::drawHighScores() {
+    int pos = ofGetHeight()/2 - 180;
+    std::cout << highScores.size() << std::endl;
+    for (int score : highScores) {
+        std::cout << "asdf" << std::endl;
+        ofDrawBitmapString(ofToString(score), ofGetWidth()/2, pos);
+        pos += 45;
+    }
+    
     hScoresBackButton->draw();
 }
