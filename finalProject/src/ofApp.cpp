@@ -54,6 +54,8 @@ void ofApp::update() {
         runMarket();
     } else if (settingsRunning) {
         runSettingsMenu();
+    } else if (hScoreMenuRunning) {
+        runHighScores();
     }
 }
 
@@ -212,7 +214,7 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
         std::cout << 5 << std::endl;
         startMenuRunning = true;
         marketMenuRunning = false;
-    } /*else if (e.target == settingsBackButton) {
+    } else if (e.target == settingsBackButton) {
         std::cout << 6 << std::endl;
         startMenuRunning = true;
         settingsRunning = false;
@@ -228,7 +230,7 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
         
     } else if (e.target == confirmSettingsButton) {
         
-    }*/
+    }
 }
 
 void ofApp::setupStartButtons() {
@@ -298,7 +300,7 @@ void ofApp::setupHScoreButtons() {
     
     hScoresBackButton->onButtonEvent(this, &ofApp::onButtonEvent);
     
-    hScoresBackButton->setPosition(ofGetWidth()/2 - hScoresBackButton->getWidth()/2, ofGetHeight()/2 - 90);
+    hScoresBackButton->setPosition(ofGetWidth()/2 - hScoresBackButton->getWidth()/2, ofGetHeight()/2 + 90);
     
     hScoresBackButton->setTheme(new ofxDatGuiGameTheme(16));
 }
