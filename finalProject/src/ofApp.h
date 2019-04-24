@@ -45,8 +45,6 @@ public:
     
     void drawHighScores();
     
-    bool hasCollided();
-    
     //Draw game
     void drawPlayer();
     void drawGridLines();
@@ -60,6 +58,7 @@ public:
     double posY;
     double velX;
     double velY;
+    bool hasCollided();
     
     //For controls
     bool keyIsDown[255];
@@ -78,6 +77,7 @@ public:
     ofxDatGuiButton* settingsButton;
     ofxDatGuiButton* highScoreButton;
     ofxDatGuiButton* exitButton;
+    void setupStartButtons();
     
     //Market menu buttons
     ofxDatGuiButton* buyButton;
@@ -85,13 +85,18 @@ public:
     ofxDatGuiButton* greenThemeButton;
     ofxDatGuiButton* purpleThemeButton;
     ofxDatGuiButton* marketBackButton;
+    void setupMarketButtons();
     
     //Settings menu buttons
     ofxDatGuiButton* confirmSettingsButton;
     ofxDatGuiButton* settingsBackButton;
+    void setupSettingsButtons();
+    
+    //High score buttons
+    ofxDatGuiButton* hScoresBackButton;
+    void setupHScoreButtons();
 
-    //Buttons
-    void setupButtons();
+    //Functions for all buttons
     void updateButtons();
     void onButtonEvent(ofxDatGuiButtonEvent e);
 };
