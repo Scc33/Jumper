@@ -69,6 +69,10 @@ void ofApp::draw() {
     }
     
     if (gameRunning) {
+        if (hasCollided()) {
+            gameRunning = false;
+        }
+
         ofHideCursor();
         drawGame();
     }
@@ -164,6 +168,16 @@ void ofApp::drawObstacles() {
             obstacles.erase(obstacles.begin());
         }
     }
+}
+
+bool ofApp::hasCollided() {
+    for (int obstacle : obstacles) {
+        if (posX * cellSize <= obstacle && posX * cellSize >= obstacle - cellSize && posY > game.getRows() - 36) {
+            return true;
+        }
+    }
+    
+    return false;
 }
 
 int ofApp::gravityCalculation() {

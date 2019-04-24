@@ -45,6 +45,8 @@ public:
     
     void drawHighScores();
     
+    bool hasCollided();
+    
     //Draw game
     void drawPlayer();
     void drawGridLines();
