@@ -54,6 +54,7 @@ void ofApp::update() {
         if (hasCollided()) {
             gameRunning = false;
             gameEndedScreen = true;
+            highScores = calcNewHighScores(score, highScores);
             loader::WriteScores("/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/highScores.txt", highScores);
         }
         runGame();
@@ -137,6 +138,25 @@ int ofApp::gravityCalculation() {
         posY = game.getRows() - 34;
         airtime = 0;
     }
+}
+
+std::vector<int> ofApp::calcNewHighScores(int score, std::vector<int> oldHighScores) {
+    std::vector<int> newHighScores;
+    bool newScore = false;
+    
+    for (int i = 0; i < oldHighScores.size(); i++) {
+        if (score >= oldHighScores.at(i) && !newScore) {
+            newHighScores.push_back(score);
+            newScore = true;
+        }
+        newHighScores.push_back(oldHighScores.at(i));
+    }
+    
+    if (newScore) {
+        newHighScores.pop_back();
+    }
+    
+    return newHighScores;
 }
 
 void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
@@ -412,9 +432,8 @@ void ofApp::runHighScores() {
 
 void ofApp::drawHighScores() {
     int pos = ofGetHeight()/2 - 180;
-    std::cout << highScores.size() << std::endl;
+
     for (int score : highScores) {
-        std::cout << "asdf" << std::endl;
         ofDrawBitmapString(ofToString(score), ofGetWidth()/2, pos);
         pos += 45;
     }

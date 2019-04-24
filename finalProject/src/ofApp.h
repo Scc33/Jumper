@@ -64,6 +64,7 @@ public:
     void drawObstacles();
     int gravityCalculation();
     bool hasCollided();
+    std::vector<int> calcNewHighScores(int score, std::vector<int> oldHighScores);
     
     //Start menu buttons
     ofxDatGuiButton* startGameButton;
