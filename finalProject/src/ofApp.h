@@ -4,6 +4,7 @@
 #include "ofxGameOfLife.h"
 #include "ofxDatGui.h"
 #include "player.hpp"
+#include "load.hpp"
 
 class ofApp : public ofBaseApp {
 private:
@@ -14,6 +15,7 @@ private:
     double updateChanceOfNewObstacle;
     Player player;
     double score;
+    std::vector<int> highScores;
     
     //For controls
     bool keyIsDown[255];

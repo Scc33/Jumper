@@ -33,6 +33,8 @@ void ofApp::setup() {
     marketMenuRunning = false;
     settingsRunning = false;
     hScoreMenuRunning = false;
+    
+    loader::ReadScores("/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/highScores.txt", highScores);
 }
 
 //--------------------------------------------------------------
@@ -49,6 +51,11 @@ void ofApp::update() {
     if (startMenuRunning) {
         runStartMenu();
     } else if (gameRunning) {
+        if (hasCollided()) {
+            gameRunning = false;
+            gameEndedScreen = true;
+            loader::WriteScores("/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/highScores.txt", highScores);
+        }
         runGame();
     } else if (marketMenuRunning) {
         runMarket();
@@ -65,11 +72,6 @@ void ofApp::draw() {
         ofShowCursor();
         drawStartMenu();
     } else if (gameRunning) {
-        if (hasCollided()) {
-            gameRunning = false;
-            gameEndedScreen = true;
-        }
-
         ofHideCursor();
         drawGame();
     } else if (gameEndedScreen) {
