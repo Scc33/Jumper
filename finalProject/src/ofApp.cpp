@@ -68,6 +68,7 @@ void ofApp::update() {
 //--------------------------------------------------------------
 void ofApp::draw() {
     if (startMenuRunning) {
+        std::cout << "1" << std::endl;
         ofShowCursor();
         drawStartMenu();
     }
@@ -208,6 +209,7 @@ int ofApp::gravityCalculation() {
 
 void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
     if (e.target == startGameButton) {
+        std::cout << "adsf" << std::endl;
         startMenuRunning = false;
         gameRunning = true;
         gameEnded = false;
@@ -224,6 +226,15 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
         hScoreMenuRunning = true;
     } else if (e.target == exitButton) {
         ofExit();
+    } else if (e.target == marketBackButton) {
+        startMenuRunning = true;
+        marketMenuRunning = false;
+    } else if (e.target == settingsBackButton) {
+        startMenuRunning = true;
+        settingsRunning = false;
+    } else if (e.target == hScoresBackButton) {
+        startMenuRunning = true;
+        hScoreMenuRunning = false;
     }
 }
 
@@ -283,6 +294,12 @@ void ofApp::setupMarketButtons() {
     purpleThemeButton = new ofxDatGuiButton("Purple theme");
     marketBackButton = new ofxDatGuiButton("Back");
     
+    //buyButton->onButtonEvent(this, &ofApp::onButtonEvent);
+    //blueThemeButton->onButtonEvent(this, &ofApp::onButtonEvent);
+    //greenThemeButton->onButtonEvent(this, &ofApp::onButtonEvent);
+    //purpleThemeButton->onButtonEvent(this, &ofApp::onButtonEvent);
+    marketBackButton->onButtonEvent(this, &ofApp::onButtonEvent);
+    
     buyButton->setPosition(ofGetWidth()/2 - settingsButton->getWidth()/2, ofGetHeight()/2 - 90);
     blueThemeButton->setPosition(startGameButton->getX(), buyButton->getY() + 45);
     greenThemeButton->setPosition(startGameButton->getX(), buyButton->getY() + 90);
@@ -300,6 +317,9 @@ void ofApp::setupSettingsButtons() {
     confirmSettingsButton = new ofxDatGuiButton("Confirm");
     settingsBackButton = new ofxDatGuiButton("Back");
     
+    //confirmSettingsButton->onButtonEvent(this, &ofApp::onButtonEvent);
+    settingsBackButton->onButtonEvent(this, &ofApp::onButtonEvent);
+    
     confirmSettingsButton->setPosition(ofGetWidth()/2 - settingsButton->getWidth()/2, ofGetHeight()/2 - 90);
     settingsBackButton->setPosition(startGameButton->getX(), confirmSettingsButton->getY() + 45);
     
@@ -309,6 +329,8 @@ void ofApp::setupSettingsButtons() {
 
 void ofApp::setupHScoreButtons() {
     hScoresBackButton = new ofxDatGuiButton("Back");
+    
+    //hScoresBackButton->onButtonEvent(this, &ofApp::onButtonEvent);
     
     hScoresBackButton->setPosition(ofGetWidth()/2 - settingsButton->getWidth()/2, ofGetHeight()/2 - 90);
     
