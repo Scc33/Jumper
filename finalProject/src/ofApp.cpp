@@ -34,6 +34,8 @@ void ofApp::setup() {
     settingsRunning = false;
     hScoreMenuRunning = false;
     
+    newHighScore = false;
+    
     loader::ReadScores("/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/highScores.txt", highScores, highScoreNames);
 }
 
@@ -54,12 +56,16 @@ void ofApp::update() {
         if (hasCollided()) {
             gameRunning = false;
             gameEndedScreen = true;
-            highScores = calcNewHighScores(score, highScores);
-            loader::WriteScores("/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/highScores.txt", highScores, highScoreNames);
+            newHighScore = isHighScore();
+            if (newHighScore) {
+                highScores = calcNewHighScores(score, highScores);
+                loader::WriteScores("/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/highScores.txt", highScores, highScoreNames);
+                highScoreInput->setFocused(true);
+            }
         }
         runGame();
     } else if (gameEndedScreen) {
-      input->update();
+      highScoreInput->update();
     } else if (marketMenuRunning) {
         runMarket();
     } else if (settingsRunning) {
@@ -143,6 +149,16 @@ int ofApp::gravityCalculation() {
         posY = game.getRows() - 34;
         airtime = 0;
     }
+}
+
+bool ofApp::isHighScore() {
+    for (int oldhighScore : highScores) {
+        if (score >= oldhighScore) {
+            return true;
+        }
+    }
+    
+    return false;
 }
 
 std::vector<int> ofApp::calcNewHighScores(int score, std::vector<int> oldHighScores) {
@@ -242,20 +258,18 @@ void ofApp::setupStartButtons() {
 }
 
 void ofApp::setupEndgame() {
-    input = new ofxDatGuiTextInput("TEXT INPUT", "Type Something Here");
-    input->onTextInputEvent(this, &ofApp::onTextInputEvent);
-    input->setFocused(true);
-    input->setWidth(800, .2);
-    input->setPosition(ofGetWidth()/2 - input->getWidth()/2, 240);
-    /*highScoreInput = new ofxDatGuiTextInput("TEXT INPUT", "Type Something Here");
+    highScoreInput = new ofxDatGuiTextInput("TEXT INPUT", "Type Something Here");
+    highScoreConfirm = new ofxDatGuiButton("Confirm name");
     
     highScoreInput->onTextInputEvent(this, &ofApp::onTextInputEvent);
+    highScoreConfirm->onButtonEvent(this, &ofApp::onButtonEvent);
+
+    highScoreInput->setWidth(800, .2);
+    highScoreInput->setPosition(ofGetWidth()/2 - highScoreInput->getWidth()/2, 240);
+    highScoreConfirm->setPosition(ofGetWidth()/2 - highScoreInput->getWidth()/2, highScoreInput->getY()+60);
     
-    highScoreInput->setWidth(ofGetWidth() / 3, .2);
-    
-    highScoreInput->setPosition(ofGetWidth()/2 - startGameButton->getWidth()/2, ofGetHeight()/2 - 90);
-    
-    highScoreInput->setTheme(gameTheme);*/
+    highScoreInput->setTheme(gameTheme);
+    highScoreConfirm->setTheme(gameTheme);
 }
 
 void ofApp::setupMarketButtons() {
@@ -387,10 +401,17 @@ void ofApp::setupGame() {
 }
 
 void ofApp::drawGameEnded() {
-    ofDrawBitmapString("Game over", 100, 100);
-    ofDrawBitmapString("Your score was... " + ofToString(score), 150, 150);
-    ofDrawBitmapString("Press 'm' to go to the main menu", 200, 200);
-    input->draw();
+    if (newHighScore) {
+        ofDrawBitmapString("Congrats on the new High Score", 100, 100);
+        ofDrawBitmapString("Your score was... " + ofToString(score), 150, 150);
+        ofDrawBitmapString("Please enter in your name", 200, 200);
+        highScoreInput->draw();
+        highScoreConfirm->draw();
+    } else {
+        ofDrawBitmapString("Game over", 100, 100);
+        ofDrawBitmapString("Your score was... " + ofToString(score), 150, 150);
+        ofDrawBitmapString("Press 'm' to go to the main menu", 200, 200);
+    }
 }
 
 void ofApp::runStartMenu() {
