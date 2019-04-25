@@ -1,9 +1,6 @@
 #include "mainMenu.hpp"
 #include "player.hpp"
-#include "control.hpp"
 #include "ofApp.h"
-
-/*using namespace control;
 
 mainMenu::mainMenu() {
     player.setPlayer(posX, posY, cellSize);
@@ -15,11 +12,8 @@ void mainMenu::setMainMenu(int setGameCols, int setGameRows, int setCellSize) {
     cellSize = setCellSize;
 }
 
-void mainMenu::setMainMenuPlayer(double setX, double setY, double setVelX, double setVelY) {
-    posX = setX;
-    posY = setY;
-    velX = setVelX;
-    velY = setVelY;
+void mainMenu::setMainMenuPlayer(Player setPlayer) {
+    player = setPlayer;
 }
 
 void mainMenu::runStartMenu() {
@@ -57,8 +51,7 @@ void mainMenu::onButtonEvent(ofxDatGuiButtonEvent e) {
     if (e.target == startGameButton) {
         startMenuRunning = false;
         gameRunning = true;
-        posX = 10;
-        posY = 1;
+        //setupGame();
     } else if (e.target == marketButton) {
         startMenuRunning = false;
         marketMenuRunning = true;
@@ -89,11 +82,11 @@ void mainMenu::setupButtons() {
     highScoreButton = new ofxDatGuiButton("High Scores");
     exitButton = new ofxDatGuiButton("Exit");
     
-    startGameButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    marketButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    settingsButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    highScoreButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    exitButton->onButtonEvent(this, &ofApp::onButtonEvent);
+    startGameButton->onButtonEvent(this, &mainMenu::onButtonEvent);
+    marketButton->onButtonEvent(this, &mainMenu::onButtonEvent);
+    settingsButton->onButtonEvent(this, &mainMenu::onButtonEvent);
+    highScoreButton->onButtonEvent(this, &mainMenu::onButtonEvent);
+    exitButton->onButtonEvent(this, &mainMenu::onButtonEvent);
     
     startGameButton->setPosition(ofGetWidth()/2 - settingsButton->getWidth()/2, ofGetHeight()/2 - 90);
     marketButton->setPosition(startGameButton->getX(), startGameButton->getY() + 45);
@@ -107,4 +100,3 @@ void mainMenu::setupButtons() {
     highScoreButton->setTheme(new ofxDatGuiGameTheme(16));
     exitButton->setTheme(new ofxDatGuiGameTheme(16));
 }
-*/

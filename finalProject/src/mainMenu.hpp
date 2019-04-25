@@ -2,6 +2,7 @@
 #include "ofxDatGui.h"
 #include "ofxDatGuiGameTheme.h"
 #include "player.hpp"
+#include "globals.hpp"
 
 class mainMenu {
 private:
@@ -21,13 +22,6 @@ private:
     ofxDatGuiButton* highScoreButton;
     ofxDatGuiButton* exitButton;
     
-    //Market menu buttons
-    ofxDatGuiButton* buyButton;
-    ofxDatGuiButton* blueThemeButton;
-    ofxDatGuiButton* greenThemeButton;
-    ofxDatGuiButton* purpleThemeButton;
-    ofxDatGuiButton* marketBackButton;
-    
     //Settings menu buttons
     ofxDatGuiButton* confirmSettingsButton;
     ofxDatGuiButton* settingsBackButton;
@@ -38,7 +32,7 @@ public:
     mainMenu();
     
     void setMainMenu(int setGameCols, int setGameRows, int setCellSize);
-    void setMainMenuPlayer(double setX, double setY, double setVelX, double setVelY);
+    void setMainMenuPlayer(Player setPlayer);
     
     void runStartMenu();
     void drawStartMenu();

@@ -4,14 +4,25 @@
 #include "ofxGameOfLife.h"
 #include "ofxDatGui.h"
 #include "player.hpp"
+#include "mainMenu.hpp"
 #include "load.hpp"
 #include "ofxDatGuiGameTheme.h"
+#include "globals.hpp"
 
 class ofApp : public ofBaseApp {
 private:
     const ofxDatGuiTheme *gameTheme = new ofxDatGuiGameTheme(16);
     const int cellSize = 10;
     const char menuButton = 'm';
+    
+    mainMenu mainM;
+    
+    /*
+    bool fullScreen;
+    double speed;
+    vector<ofColor> backgroundColors;
+    vector<string> colorOptions;
+    string getHex(int hex);*/
     
     double airtime;
     double chanceOfNewObstacle;
@@ -97,6 +108,7 @@ public:
     
     //Settings menu buttons
     ofxDatGuiButton* confirmSettingsButton;
+    //ofxDatGuiDropdown* colorMenu;
     ofxDatGuiButton* settingsBackButton;
     void setupSettingsButtons();
     
@@ -107,4 +119,5 @@ public:
     //Functions to handle all DatGui events
     void onButtonEvent(ofxDatGuiButtonEvent e);
     void onTextInputEvent(ofxDatGuiTextInputEvent e);
+    //void onDropdownEvent(ofxDatGuiDropdownEvent e);
 };

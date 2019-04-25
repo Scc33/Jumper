@@ -10,4 +10,10 @@ namespace loader {
     
     bool WriteSettings(std::string fileToWriteTo);
     bool ReadSettings(std::string fileToReadFrom);
+    
+    bool WriteMarket(std::string fileToWriteTo);
+    bool ReadMarket(std::string fileToReadFrom);
+    
+    bool WriteMoney(std::string fileToWriteTo);
+    bool ReadMoney(std::string fileToReadFrom);
 }

@@ -17,8 +17,10 @@ void ofApp::setup() {
     velY = ofRandom(-0.5,0.5);
 
     player.setPlayer(posX, posY, cellSize);
-    
     game.setup(ofGetWidth(), ofGetHeight(), cellSize);
+    
+    mainM.setMainMenu(game.getCols(), game.getRows(), cellSize);
+    mainM.setMainMenuPlayer(player);
     
     //Position the buttons in the middle of the screen and register to listen for events
     setupStartButtons();
@@ -37,7 +39,18 @@ void ofApp::setup() {
     newHighScore = false;
     newHighScoreName = "";
     
+    /*backgroundColors.push_back(ofColor::fromHex(0xFFD00B));
+    backgroundColors.push_back(ofColor::fromHex(0x2FA1D6));
+    backgroundColors.push_back(ofColor::fromHex(0x1ED36F));
+    backgroundColors.push_back(ofColor::fromHex(0xC63256));
+    
+    for (int i=0; i < backgroundColors.size(); i++) {
+        colorOptions.push_back(getHex(backgroundColors[i].getHex()));
+    }*/
+    
     loader::ReadScores("/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/highScores.txt", highScores, highScoreNames);
+    
+    //loader::ReadSettings();
 }
 
 //--------------------------------------------------------------
@@ -101,6 +114,16 @@ void ofApp::keyPressed(int key) {
 void ofApp::keyReleased(int key){
     keyIsDown[key] = false;
 }
+
+/*
+string ofApp::getHex(int hex) {
+    // convert decimal value to hex //
+    std::stringstream ss;
+    ss<< std::hex << hex;
+    std::string res ( ss.str() );
+    while(res.size() < 6) res+="0";
+    return "#"+ofToUpper(res);
+}*/
 
 /*
  Game functions
@@ -244,6 +267,12 @@ void ofApp::onTextInputEvent(ofxDatGuiTextInputEvent e) {
     newHighScoreName = e.text;
 }
 
+/*
+void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e) {
+    ofSetBackgroundColor(backgroundColors[e.child]);
+    colorMenu->setStripeColor(ofColor::white);
+}*/
+
 void ofApp::setupStartButtons() {
     startGameButton = new ofxDatGuiButton("Start");
     marketButton = new ofxDatGuiButton("Market");
@@ -309,12 +338,19 @@ void ofApp::setupMarketButtons() {
 void ofApp::setupSettingsButtons() {
     confirmSettingsButton = new ofxDatGuiButton("Confirm");
     settingsBackButton = new ofxDatGuiButton("Back");
+    //colorMenu = new ofxDatGuiDropdown("Background Color", colorOptions);
     
     confirmSettingsButton->onButtonEvent(this, &ofApp::onButtonEvent);
     settingsBackButton->onButtonEvent(this, &ofApp::onButtonEvent);
+    //colorMenu->onDropdownEvent(this, &ofApp::onDropdownEvent);
     
     confirmSettingsButton->setPosition(ofGetWidth()/2 - confirmSettingsButton->getWidth()/2, ofGetHeight()/2 - 90);
     settingsBackButton->setPosition(startGameButton->getX(), confirmSettingsButton->getY() + 45);
+    /*
+    colorMenu->setPosition(ofGetWidth()/2 - colorMenu->getWidth()/2, ofGetHeight()/2 - colorMenu->getHeight()/2 - 100);
+    
+    for (int i=0; i<colorMenu->size(); i++) { colorMenu->getChildAt(i)->setStripeColor(backgroundColors[i]);
+    }*/
     
     confirmSettingsButton->setTheme(gameTheme);
     settingsBackButton->setTheme(gameTheme);
@@ -487,11 +523,13 @@ void ofApp::drawMarket() {
 void ofApp::runSettingsMenu() {
     confirmSettingsButton->update();
     settingsBackButton->update();
+    //colorMenu->update();
 }
 
 void ofApp::drawSettingsMenu() {
     confirmSettingsButton->draw();
     settingsBackButton->draw();
+    //colorMenu->draw();
 }
 
 void ofApp::runHighScores() {

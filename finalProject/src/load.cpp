@@ -53,3 +53,19 @@ bool loader::WriteSettings(std::string fileToWriteTo) {
 bool loader::ReadSettings(std::string fileToReadFrom) {
     
 }
+
+bool loader::WriteMarket(std::string fileToWriteTo) {
+    
+}
+
+bool loader::ReadMarket(std::string fileToReadFrom) {
+    
+}
+
+bool loader::WriteMoney(std::string fileToWriteTo) {
+    
+}
+
+bool loader::ReadMoney(std::string fileToReadFrom) {
+    
+}
