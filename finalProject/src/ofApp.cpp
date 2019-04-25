@@ -58,13 +58,6 @@ void ofApp::update() {
             gameRunning = false;
             gameEndedScreen = true;
             newHighScore = isHighScore();
-            if (newHighScore) {
-                int position = 0;
-                highScores = calcNewHighScores(score, highScores, position);
-                highScoreNames = calcNewHighScoreNames(newHighScoreName, highScoreNames);
-                loader::WriteScores("/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/highScores.txt", highScores, highScoreNames);
-                highScoreInput->setFocused(true);
-            }
         }
         runGame();
     } else if (gameEndedScreen) {
@@ -172,19 +165,21 @@ std::vector<int> ofApp::calcNewHighScores(int score, std::vector<int> oldHighSco
         if (score >= oldHighScores.at(i) && !newScore) {
             newHighScores.push_back(score);
             pos = i;
+            newScore = true;
         }
         newHighScores.push_back(oldHighScores.at(i));
     }
-    
-    if (newScore) {
-        newHighScores.pop_back();
-    }
+    newHighScores.pop_back();
     
     return newHighScores;
 }
 
-std::vector<std::string> calcNewHighScoreNames(std::string name, std::vector<std::string> oldHighScoreNames) {
+std::vector<std::string> ofApp::calcNewHighScoreNames(std::string name, std::vector<std::string> oldHighScoreNames, int pos) {
+    std::vector<std::string> newHighScoreNames = oldHighScoreNames;
     
+    oldHighScoreNames.at(pos) = name;
+
+    return newHighScoreNames;
 }
 
 void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
@@ -231,10 +226,18 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
     } else if (e.target == highScoreConfirm) {
         startMenuRunning = true;
         gameEndedScreen = false;
+        
+        std::cout << "asdf" << newHighScoreName << std::endl;
+        int position = 0;
+        
+        highScores = calcNewHighScores(score, highScores, position);
+        highScoreNames = calcNewHighScoreNames(newHighScoreName, highScoreNames, position);
+        loader::WriteScores("/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/highScores.txt", highScores, highScoreNames);
     }
 }
 
 void ofApp::onTextInputEvent(ofxDatGuiTextInputEvent e) {
+    cout << e.text;
     newHighScoreName = e.target->getText();
 }
 
@@ -275,7 +278,7 @@ void ofApp::setupEndgame() {
     highScoreInput->setPosition(ofGetWidth()/2 - highScoreInput->getWidth()/2, 240);
     highScoreConfirm->setPosition(ofGetWidth()/2 - highScoreInput->getWidth()/2, highScoreInput->getY()+60);
     
-    highScoreInput->setTheme(gameTheme);
+    //highScoreInput->setTheme(gameTheme);
     highScoreConfirm->setTheme(gameTheme);
 }
 
@@ -408,6 +411,7 @@ void ofApp::setupGame() {
 }
 
 void ofApp::runGameEnded() {
+    highScoreInput->setFocused(true);
     highScoreInput->update();
     highScoreConfirm->update();
 }
