@@ -58,6 +58,7 @@ void ofApp::update() {
             gameRunning = false;
             gameEndedScreen = true;
             newHighScore = isHighScore();
+            highScoreInput->setFocused(true);
         }
         runGame();
     } else if (gameEndedScreen) {
@@ -234,6 +235,8 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
         highScoreNames = calcNewHighScoreNames(newHighScoreName, highScoreNames, position);
         
         loader::WriteScores("/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/highScores.txt", highScores, highScoreNames);
+        
+        highScoreInput->setFocused(false);
     }
 }
 
@@ -269,14 +272,15 @@ void ofApp::setupStartButtons() {
 
 void ofApp::setupEndgame() {
     highScoreInput = new ofxDatGuiTextInput("TEXT INPUT", "Type Something Here");
+    highScoreConfirm = new ofxDatGuiButton("Confirm name");
+    
     highScoreInput->onTextInputEvent(this, &ofApp::onTextInputEvent);
-    highScoreInput->setFocused(true);
+    highScoreConfirm->onButtonEvent(this, &ofApp::onButtonEvent);
+    
     highScoreInput->setWidth(800, .2);
     highScoreInput->setPosition(ofGetWidth()/2 - highScoreInput->getWidth()/2, 240);
-    
-    highScoreConfirm = new ofxDatGuiButton("Confirm name");
-    highScoreConfirm->onButtonEvent(this, &ofApp::onButtonEvent);
     highScoreConfirm->setPosition(ofGetWidth()/2 - highScoreConfirm->getWidth()/2, ofGetHeight()/2 + 80);
+    
     highScoreConfirm->setTheme(gameTheme);
 }
 
@@ -418,8 +422,7 @@ void ofApp::drawGameEnded() {
         ofDrawBitmapString("Congrats on the new High Score", 100, 100);
         ofDrawBitmapString("Your score was... " + ofToString(score), 150, 150);
         ofDrawBitmapString("Please enter in your name", 200, 200);
-        string str = "Name: "+ highScoreInput->getText();
-        ofDrawBitmapString(str, ofGetWidth()/2 - highScoreConfirm->getWidth()/2, ofGetHeight()/2);
+        highScoreInput->draw();
         highScoreConfirm->draw();
     } else {
         ofDrawBitmapString("Game over", 100, 100);
