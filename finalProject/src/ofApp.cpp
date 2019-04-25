@@ -177,7 +177,9 @@ std::vector<int> ofApp::calcNewHighScores(int score, std::vector<int> oldHighSco
 std::vector<std::string> ofApp::calcNewHighScoreNames(std::string name, std::vector<std::string> oldHighScoreNames, int pos) {
     std::vector<std::string> newHighScoreNames = oldHighScoreNames;
     
-    oldHighScoreNames.at(pos) = name;
+    std::cout << std::endl << oldHighScoreNames.at(pos) << std::endl;
+    newHighScoreNames.at(pos) = name;
+    std::cout << oldHighScoreNames.at(pos) << std::endl;
 
     return newHighScoreNames;
 }
@@ -227,18 +229,19 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
         startMenuRunning = true;
         gameEndedScreen = false;
         
-        std::cout << "asdf" << newHighScoreName << std::endl;
+        std::cout << newHighScoreName << std::endl;
         int position = 0;
         
         highScores = calcNewHighScores(score, highScores, position);
         highScoreNames = calcNewHighScoreNames(newHighScoreName, highScoreNames, position);
+        std::cout << highScoreNames.at(2) << std::endl;
         loader::WriteScores("/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/highScores.txt", highScores, highScoreNames);
     }
 }
 
 void ofApp::onTextInputEvent(ofxDatGuiTextInputEvent e) {
-    cout << e.text;
-    newHighScoreName = e.target->getText();
+    cout << "From Event Object: " << e.text << endl;
+    newHighScoreName = e.text;
 }
 
 void ofApp::setupStartButtons() {
@@ -269,16 +272,14 @@ void ofApp::setupStartButtons() {
 
 void ofApp::setupEndgame() {
     highScoreInput = new ofxDatGuiTextInput("TEXT INPUT", "Type Something Here");
-    highScoreConfirm = new ofxDatGuiButton("Confirm name");
-    
     highScoreInput->onTextInputEvent(this, &ofApp::onTextInputEvent);
-    highScoreConfirm->onButtonEvent(this, &ofApp::onButtonEvent);
-
+    highScoreInput->setFocused(true);
     highScoreInput->setWidth(800, .2);
     highScoreInput->setPosition(ofGetWidth()/2 - highScoreInput->getWidth()/2, 240);
-    highScoreConfirm->setPosition(ofGetWidth()/2 - highScoreInput->getWidth()/2, highScoreInput->getY()+60);
     
-    //highScoreInput->setTheme(gameTheme);
+    highScoreConfirm = new ofxDatGuiButton("Confirm name");
+    highScoreConfirm->onButtonEvent(this, &ofApp::onButtonEvent);
+    highScoreConfirm->setPosition(ofGetWidth()/2 - highScoreConfirm->getWidth()/2, ofGetHeight()/2 + 80);
     highScoreConfirm->setTheme(gameTheme);
 }
 
@@ -411,7 +412,6 @@ void ofApp::setupGame() {
 }
 
 void ofApp::runGameEnded() {
-    highScoreInput->setFocused(true);
     highScoreInput->update();
     highScoreConfirm->update();
 }
@@ -421,7 +421,8 @@ void ofApp::drawGameEnded() {
         ofDrawBitmapString("Congrats on the new High Score", 100, 100);
         ofDrawBitmapString("Your score was... " + ofToString(score), 150, 150);
         ofDrawBitmapString("Please enter in your name", 200, 200);
-        highScoreInput->draw();
+        string str = "Name: "+ highScoreInput->getText();
+        ofDrawBitmapString(str, ofGetWidth()/2 - highScoreConfirm->getWidth()/2, ofGetHeight()/2);
         highScoreConfirm->draw();
     } else {
         ofDrawBitmapString("Game over", 100, 100);
