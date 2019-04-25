@@ -175,46 +175,46 @@ std::vector<int> ofApp::calcNewHighScores(int score, std::vector<int> oldHighSco
 }
 
 std::vector<std::string> ofApp::calcNewHighScoreNames(std::string name, std::vector<std::string> oldHighScoreNames, int pos) {
-    std::vector<std::string> newHighScoreNames = oldHighScoreNames;
+    std::vector<std::string> newHighScoreNames;
     
-    std::cout << std::endl << oldHighScoreNames.at(pos) << std::endl;
-    newHighScoreNames.at(pos) = name;
-    std::cout << oldHighScoreNames.at(pos) << std::endl;
+    int count = 0;
+    std::cout << pos << std::endl;
+    for (int i = 0; i < oldHighScoreNames.size(); i++) {
+        if (count == pos) {
+            newHighScoreNames.push_back(name);
+        }
+        newHighScoreNames.push_back(oldHighScoreNames.at(i));
+        count++;
+    }
+    
+    newHighScoreNames.pop_back();
 
     return newHighScoreNames;
 }
 
 void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
     if (e.target == startGameButton) {
-        std::cout << 0 << std::endl;
         startMenuRunning = false;
         gameRunning = true;
         setupGame();
     } else if (e.target == marketButton) {
-        std::cout << 1 << std::endl;
         startMenuRunning = false;
         marketMenuRunning = true;
     } else if (e.target == settingsButton) {
-        std::cout << 2 << std::endl;
         startMenuRunning = false;
         settingsRunning = true;
     } else if (e.target == highScoreButton) {
-        std::cout << 3 << std::endl;
         startMenuRunning = false;
         hScoreMenuRunning = true;
     } else if (e.target == exitButton) {
-        std::cout << 4 << std::endl;
         ofExit();
     } else if (e.target == marketBackButton) {
-        std::cout << 5 << std::endl;
         startMenuRunning = true;
         marketMenuRunning = false;
     } else if (e.target == settingsBackButton) {
-        std::cout << 6 << std::endl;
         startMenuRunning = true;
         settingsRunning = false;
     } else if (e.target == hScoresBackButton) {
-        std::cout << 7 << std::endl;
         startMenuRunning = true;
         hScoreMenuRunning = false;
     } else if (e.target == blueThemeButton) {
@@ -229,18 +229,15 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
         startMenuRunning = true;
         gameEndedScreen = false;
         
-        std::cout << newHighScoreName << std::endl;
         int position = 0;
-        
         highScores = calcNewHighScores(score, highScores, position);
         highScoreNames = calcNewHighScoreNames(newHighScoreName, highScoreNames, position);
-        std::cout << highScoreNames.at(2) << std::endl;
+        
         loader::WriteScores("/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/highScores.txt", highScores, highScoreNames);
     }
 }
 
 void ofApp::onTextInputEvent(ofxDatGuiTextInputEvent e) {
-    cout << "From Event Object: " << e.text << endl;
     newHighScoreName = e.text;
 }
 
