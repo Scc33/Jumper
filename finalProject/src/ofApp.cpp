@@ -35,6 +35,7 @@ void ofApp::setup() {
     hScoreMenuRunning = false;
     
     newHighScore = false;
+    newHighScoreName = "";
     
     loader::ReadScores("/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/highScores.txt", highScores, highScoreNames);
 }
@@ -58,14 +59,16 @@ void ofApp::update() {
             gameEndedScreen = true;
             newHighScore = isHighScore();
             if (newHighScore) {
-                highScores = calcNewHighScores(score, highScores);
+                int position = 0;
+                highScores = calcNewHighScores(score, highScores, position);
+                highScoreNames = calcNewHighScoreNames(newHighScoreName, highScoreNames);
                 loader::WriteScores("/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/highScores.txt", highScores, highScoreNames);
                 highScoreInput->setFocused(true);
             }
         }
         runGame();
     } else if (gameEndedScreen) {
-      highScoreInput->update();
+        runGameEnded();
     } else if (marketMenuRunning) {
         runMarket();
     } else if (settingsRunning) {
@@ -161,14 +164,14 @@ bool ofApp::isHighScore() {
     return false;
 }
 
-std::vector<int> ofApp::calcNewHighScores(int score, std::vector<int> oldHighScores) {
+std::vector<int> ofApp::calcNewHighScores(int score, std::vector<int> oldHighScores, int &pos) {
     std::vector<int> newHighScores;
     bool newScore = false;
     
     for (int i = 0; i < oldHighScores.size(); i++) {
         if (score >= oldHighScores.at(i) && !newScore) {
             newHighScores.push_back(score);
-            newScore = true;
+            pos = i;
         }
         newHighScores.push_back(oldHighScores.at(i));
     }
@@ -178,6 +181,10 @@ std::vector<int> ofApp::calcNewHighScores(int score, std::vector<int> oldHighSco
     }
     
     return newHighScores;
+}
+
+std::vector<std::string> calcNewHighScoreNames(std::string name, std::vector<std::string> oldHighScoreNames) {
+    
 }
 
 void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
@@ -221,14 +228,14 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
         
     } else if (e.target == confirmSettingsButton) {
         
+    } else if (e.target == highScoreConfirm) {
+        startMenuRunning = true;
+        gameEndedScreen = false;
     }
 }
 
 void ofApp::onTextInputEvent(ofxDatGuiTextInputEvent e) {
-    // text input events carry the text of the input field //
-    cout << "From Event Object: " << e.text << endl;
-    // although you can also retrieve it from the event target //
-    cout << "From Event Target: " << e.target->getText() << endl;
+    newHighScoreName = e.target->getText();
 }
 
 void ofApp::setupStartButtons() {
@@ -398,6 +405,11 @@ void ofApp::setupGame() {
     obstacles.push_back(ofGetWidth());
     chanceOfNewObstacle = 0;
     updateChanceOfNewObstacle = .005;
+}
+
+void ofApp::runGameEnded() {
+    highScoreInput->update();
+    highScoreConfirm->update();
 }
 
 void ofApp::drawGameEnded() {

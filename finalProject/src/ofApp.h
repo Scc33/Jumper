@@ -19,6 +19,7 @@ private:
     Player player;
     double score;
     bool newHighScore;
+    std::string newHighScoreName;
     std::vector<int> highScores;
     std::vector<std::string> highScoreNames;
     
@@ -44,6 +45,7 @@ public:
     void drawGame();
     void setupGame();
     
+    void runGameEnded();
     void drawGameEnded();
     
     void runStartMenu();
@@ -70,7 +72,8 @@ public:
     int gravityCalculation();
     bool hasCollided();
     bool isHighScore();
-    std::vector<int> calcNewHighScores(int score, std::vector<int> oldHighScores);
+    std::vector<int> calcNewHighScores(int score, std::vector<int> oldHighScores, int &pos);
+    std::vector<std::string> calcNewHighScoreNames(std::string name, std::vector<std::string> oldHighScoreNames);
     
     //Start menu buttons
     ofxDatGuiButton* startGameButton;
