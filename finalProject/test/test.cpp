@@ -1,5 +1,6 @@
 #define CATCH_CONFIG_RUNNER
 #include "catch.hpp"
+#include "player.hpp"
 #include "load.hpp"
 
 int main(int argc, char* argv[]) {
@@ -9,8 +10,20 @@ int main(int argc, char* argv[]) {
     return result;
 }
 
-TEST_CASE("Test") {
-    REQUIRE(1 == 1);
+TEST_CASE("Player") {
+    Player player;
+    player.setPlayer(1, 2, 10);
+    
+    SECTION("Create player") {
+        REQUIRE(player.getPosX() == 1);
+        REQUIRE(player.getPosY() == 2);
+    }
+    
+    player.updatePlayerLocation(5, 5);
+    SECTION("Update player") {
+        REQUIRE(player.getPosX() == 5);
+        REQUIRE(player.getPosY() == 5);
+    }
 }
 
 TEST_CASE("Read and writing scores") {

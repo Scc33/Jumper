@@ -31,3 +31,11 @@ void Player::drawPlayer() {
     ofDrawRectangle((posX-1)*cellSize, (posY+3)*cellSize, cellSize, cellSize);
     ofDrawRectangle((posX+1)*cellSize, (posY+3)*cellSize, cellSize, cellSize);
 }
+
+double Player::getPosX() {
+    return posX;
+}
+
+double Player::getPosY() {
+    return posY;
+}

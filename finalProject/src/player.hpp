@@ -14,4 +14,7 @@ public:
     void updatePlayerLocation(double updateX, double updateY);
     
     void drawPlayer();
+    
+    double getPosX();
+    double getPosY();
 };
