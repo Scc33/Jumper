@@ -38,6 +38,7 @@ private:
     bool keyIsDown[255];
     
 public:
+    //openFrameworks functions
     void setup();
     void update();
     void draw();

@@ -1,11 +1,13 @@
 #define CATCH_CONFIG_RUNNER
 #include "ofApp.h"
 #include "catch.hpp"
+
 #include "player.hpp"
 #include "load.hpp"
 #include "mainMenu.hpp"
 #include "highScoreMenu.hpp"
-
+#include "marketMenu.hpp"
+#include "settingsMenu.hpp"
 
 int main(int argc, char* argv[]) {
     // global setup...
@@ -52,12 +54,12 @@ TEST_CASE("High score menu") {
     highScoreMenu hScoreM;
 }
 
-TEST_CASE("Settings menu") {
-    
+TEST_CASE("Market menu") {
+    marketMenu marketM;
 }
 
-TEST_CASE("Market menu") {
-    
+TEST_CASE("Settings menu") {
+    settingsMenu settingsM;
 }
 
 TEST_CASE("Engame") {

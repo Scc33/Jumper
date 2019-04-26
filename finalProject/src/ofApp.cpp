@@ -19,7 +19,6 @@ void ofApp::setup() {
     game.setup(ofGetWidth(), ofGetHeight(), cellSize);
     
     //Position the buttons in the middle of the screen and register to listen for events
-    //setupStartButtons();
     setupEndgame();
     
     loader::ReadScores(hScoreFileLoc, highScores, highScoreNames);
@@ -126,7 +125,6 @@ void ofApp::drawObstacles() {
     }
 }
 
-
 //This doesn't seem to work from some angles (Or too fast?)
 bool ofApp::hasCollided() {
     for (int obstacle : obstacles) {
@@ -138,6 +136,7 @@ bool ofApp::hasCollided() {
     return false;
 }
 
+//Needs tweaking to look better
 int ofApp::gravityCalculation() {
     if (posY < game.getRows() - 34) {
         airtime += .02;
