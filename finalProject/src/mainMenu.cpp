@@ -12,7 +12,7 @@ void mainMenu::setMainMenu(int setGameCols, int setGameRows, int setCellSize) {
     cellSize = setCellSize;
 }
 
-void mainMenu::setMainMenuPlayer(Player setPlayer) {
+void mainMenu::setMainMenuPlayer(Player &setPlayer) {
     player = setPlayer;
 }
 
@@ -35,6 +35,14 @@ void mainMenu::runStartMenu() {
         posY = gameRows - 4;
         velY *= -1;
     }
+    
+    player.updatePlayerLocation(posX, posY);
+    
+    startGameButton->update();
+    marketButton->update();
+    settingsButton->update();
+    highScoreButton->update();
+    exitButton->update();
 }
 
 void mainMenu::drawStartMenu() {
@@ -51,7 +59,6 @@ void mainMenu::onButtonEvent(ofxDatGuiButtonEvent e) {
     if (e.target == startGameButton) {
         startMenuRunning = false;
         gameRunning = true;
-        //setupGame();
     } else if (e.target == marketButton) {
         startMenuRunning = false;
         marketMenuRunning = true;
@@ -64,14 +71,6 @@ void mainMenu::onButtonEvent(ofxDatGuiButtonEvent e) {
     } else if (e.target == exitButton) {
         ofExit();
     }
-}
-
-void mainMenu::updateButtons() {
-    startGameButton->update();
-    marketButton->update();
-    settingsButton->update();
-    highScoreButton->update();
-    exitButton->update();
 }
 
 //Position the buttons in the middle of the screen and register to listen for events

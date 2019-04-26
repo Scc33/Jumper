@@ -28,13 +28,17 @@ void ofApp::setup() {
     setupMarketButtons();
     setupSettingsButtons();
     setupHScoreButtons();
-    
+    /*
     startMenuRunning = true;
     gameRunning = false;
     gameEndedScreen = false;
     marketMenuRunning = false;
     settingsRunning = false;
-    hScoreMenuRunning = false;
+    hScoreMenuRunning = false;*/
+    
+    mainM.setMainMenu(game.getCols(), game.getRows(), cellSize);
+    mainM.setMainMenuPlayer(player);
+    mainM.setupButtons();
     
     newHighScore = false;
     newHighScoreName = "";
@@ -56,7 +60,7 @@ void ofApp::update() {
     }
     
     if (startMenuRunning) {
-        runStartMenu();
+        mainM.runStartMenu();
     } else if (gameRunning) {
         if (hasCollided()) {
             gameRunning = false;
@@ -80,7 +84,7 @@ void ofApp::update() {
 void ofApp::draw() {
     if (startMenuRunning) {
         ofShowCursor();
-        drawStartMenu();
+        mainM.drawStartMenu();
     } else if (gameRunning) {
         ofHideCursor();
         drawGame();

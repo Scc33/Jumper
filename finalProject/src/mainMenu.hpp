@@ -32,13 +32,12 @@ public:
     mainMenu();
     
     void setMainMenu(int setGameCols, int setGameRows, int setCellSize);
-    void setMainMenuPlayer(Player setPlayer);
+    void setMainMenuPlayer(Player &setPlayer);
     
     void runStartMenu();
     void drawStartMenu();
     
     //Buttons
     void setupButtons();
-    void updateButtons();
     void onButtonEvent(ofxDatGuiButtonEvent e);
 };
