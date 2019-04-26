@@ -9,7 +9,7 @@ void ofApp::setup() {
     ofSetWindowTitle("Game");
     ofSetFullscreen(true);
     ofSetFrameRate(60);
-    ofBackground(0,0,0);
+    ofBackground(50, 50, 50);
     
     posX = 1;
     posY = 1;
@@ -121,7 +121,7 @@ string ofApp::getHex(int hex) {
  */
 
 void ofApp::drawObstacles() {
-    ofSetColor(255,0,0);
+    ofSetColor(200,50,50);
     ofFill();
     
     for (int i = 0; i < obstacles.size(); i++) {
@@ -261,7 +261,7 @@ void ofApp::onTextInputEvent(ofxDatGuiTextInputEvent e) {
 
 void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e) {
     ofSetBackgroundColor(colors[e.child]);
-    menu->setStripeColor(ofColor::white);
+    colorMenu->setStripeColor(ofColor::white);
 }
 
 void ofApp::setupStartButtons() {
@@ -348,16 +348,17 @@ void ofApp::setupSettingsButtons() {
     for (int i=0; i<colors.size(); i++) { options.push_back(getHex(colors[i].getHex()));
     }
     
-    menu = new ofxDatGuiDropdown("SELECT A COLOR", options);
+    colorMenu = new ofxDatGuiDropdown("SELECT A COLOR", options);
+    colorMenu->setTheme(gameTheme);
     
-    menu->setPosition(ofGetWidth()/2 - menu->getWidth()/2, confirmSettingsButton->getY() + 90);
+    colorMenu->setPosition(ofGetWidth()/2 - colorMenu->getWidth()/2, confirmSettingsButton->getY() + 90);
     
-    for (int i=0; i<menu->size(); i++) { menu->getChildAt(i)->setStripeColor(colors[i]);
-    }
+    /*for (int i=0; i<colorMenu->size(); i++) { colorMenu->getChildAt(i)->setStripeColor(colors[i]);
+    }*/
     
-    menu->onDropdownEvent(this, &ofApp::onDropdownEvent);
+    colorMenu->onDropdownEvent(this, &ofApp::onDropdownEvent);
     
-    menu->expand();
+    colorMenu->expand();
 }
 
 void ofApp::setupHScoreButtons() {
@@ -467,7 +468,7 @@ void ofApp::drawGameEnded() {
     } else {
         ofDrawBitmapString("Game over", 100, 100);
         ofDrawBitmapString("Your score was... " + ofToString(score), 150, 150);
-        ofDrawBitmapString("Press 'm' to go to the main menu", 200, 200);
+        ofDrawBitmapString("Press 'm' to go to the main colorMenu", 200, 200);
     }
 }
 
@@ -527,13 +528,13 @@ void ofApp::drawMarket() {
 void ofApp::runSettingsMenu() {
     confirmSettingsButton->update();
     settingsBackButton->update();
-    menu->update();
+    colorMenu->update();
 }
 
 void ofApp::drawSettingsMenu() {
     confirmSettingsButton->draw();
     settingsBackButton->draw();
-    menu->draw();
+    colorMenu->draw();
 }
 
 void ofApp::runHighScores() {

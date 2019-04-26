@@ -107,7 +107,7 @@ public:
     
     //Settings menu buttons
     ofxDatGuiButton* confirmSettingsButton;
-    ofxDatGuiDropdown* menu;
+    ofxDatGuiDropdown* colorMenu;
     ofxDatGuiButton* settingsBackButton;
     void setupSettingsButtons();
     
