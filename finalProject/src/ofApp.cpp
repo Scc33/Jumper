@@ -21,7 +21,6 @@ void ofApp::setup() {
     //Position the buttons in the middle of the screen and register to listen for events
     //setupStartButtons();
     setupEndgame();
-    setupSettingsButtons();
     
     loader::ReadScores(hScoreFileLoc, highScores, highScoreNames);
     newHighScore = false;
@@ -35,6 +34,8 @@ void ofApp::setup() {
     hScoreM.setHighScores(highScores, highScoreNames);
     
     marketM.setupMarketButtons();
+    
+    settingsM.setupSettingsButtons();
     
     //loader::ReadSettings();
 }
@@ -70,7 +71,7 @@ void ofApp::update() {
     } else if (marketMenuRunning) {
         marketM.runMarket();
     } else if (settingsRunning) {
-        runSettingsMenu();
+        settingsM.runSettingsMenu();
     } else if (hScoreMenuRunning) {
         hScoreM.runHScoreMenu();
     }
@@ -90,7 +91,7 @@ void ofApp::draw() {
     } else if (marketMenuRunning) {
         marketM.drawMarket();
     } else if (settingsRunning) {
-        drawSettingsMenu();
+        settingsM.drawSettingsMenu();
     } else if (hScoreMenuRunning) {
         hScoreM.drawHighScores();
     }
@@ -104,16 +105,6 @@ void ofApp::keyPressed(int key) {
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
     keyIsDown[key] = false;
-}
-
-
-string ofApp::getHex(int hex) {
-    // convert decimal value to hex //
-    std::stringstream ss;
-    ss<< std::hex << hex;
-    std::string res ( ss.str() );
-    while(res.size() < 6) res+="0";
-    return "#"+ofToUpper(res);
 }
 
 /*
@@ -208,12 +199,7 @@ std::vector<std::string> ofApp::calcNewHighScoreNames(std::string name, std::vec
 }
 
 void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
-    if (e.target == settingsBackButton) {
-        startMenuRunning = true;
-        settingsRunning = false;
-    } else if (e.target == confirmSettingsButton) {
-        
-    } else if (e.target == highScoreConfirm) {
+    if (e.target == highScoreConfirm) {
         startMenuRunning = true;
         gameEndedScreen = false;
         
@@ -232,12 +218,6 @@ void ofApp::onTextInputEvent(ofxDatGuiTextInputEvent e) {
     newHighScoreName = e.text;
 }
 
-
-void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e) {
-    ofSetBackgroundColor(colors[e.child]);
-    colorMenu->setStripeColor(ofColor::white);
-}
-
 void ofApp::setupEndgame() {
     highScoreInput = new ofxDatGuiTextInput("TEXT INPUT", "Type Something Here");
     highScoreConfirm = new ofxDatGuiButton("Confirm name");
@@ -250,42 +230,6 @@ void ofApp::setupEndgame() {
     highScoreConfirm->setPosition(ofGetWidth()/2 - highScoreConfirm->getWidth()/2, ofGetHeight()/2 + 80);
     
     highScoreConfirm->setTheme(gameTheme);
-}
-
-void ofApp::setupSettingsButtons() {
-    confirmSettingsButton = new ofxDatGuiButton("Confirm");
-    settingsBackButton = new ofxDatGuiButton("Back");
-    
-    confirmSettingsButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    settingsBackButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    
-    confirmSettingsButton->setPosition(ofGetWidth()/2 - confirmSettingsButton->getWidth()/2, ofGetHeight()/2 - 90);
-    settingsBackButton->setPosition(ofGetWidth()/2 - settingsBackButton->getWidth()/2, confirmSettingsButton->getY() + 45);
-    
-    confirmSettingsButton->setTheme(gameTheme);
-    settingsBackButton->setTheme(gameTheme);
-    
-    colors.push_back(ofColor::fromHex(0xFFD00B));
-    colors.push_back(ofColor::fromHex(0x2FA1D6));
-    colors.push_back(ofColor::fromHex(0x1ED36F));
-    colors.push_back(ofColor::fromHex(0xC63256));
-    colors.push_back(ofColor::fromHex(0x323232));
-    
-    vector<string> options;
-    for (int i=0; i<colors.size(); i++) { options.push_back(getHex(colors[i].getHex()));
-    }
-    
-    colorMenu = new ofxDatGuiDropdown("SELECT A COLOR", options);
-    colorMenu->setTheme(gameTheme);
-    
-    colorMenu->setPosition(ofGetWidth()/2 - colorMenu->getWidth()/2, confirmSettingsButton->getY() + 90);
-    
-    /*for (int i=0; i<colorMenu->size(); i++) { colorMenu->getChildAt(i)->setStripeColor(colors[i]);
-    }*/
-    
-    colorMenu->onDropdownEvent(this, &ofApp::onDropdownEvent);
-    
-    colorMenu->expand();
 }
 
 void ofApp::runGame() {
@@ -387,16 +331,4 @@ void ofApp::drawGameEnded() {
         ofDrawBitmapString("Your score was... " + ofToString(score), 150, 150);
         ofDrawBitmapString("Press 'm' to go to the main colorMenu", 200, 200);
     }
-}
-
-void ofApp::runSettingsMenu() {
-    confirmSettingsButton->update();
-    settingsBackButton->update();
-    colorMenu->update();
-}
-
-void ofApp::drawSettingsMenu() {
-    confirmSettingsButton->draw();
-    settingsBackButton->draw();
-    colorMenu->draw();
 }

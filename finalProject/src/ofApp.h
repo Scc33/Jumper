@@ -7,6 +7,7 @@
 #include "mainMenu.hpp"
 #include "highScoreMenu.hpp"
 #include "marketMenu.hpp"
+#include "settingsMenu.hpp"
 #include "load.hpp"
 #include "ofxDatGuiGameTheme.h"
 #include "globals.hpp"
@@ -20,12 +21,7 @@ private:
     mainMenu mainM;
     highScoreMenu hScoreM;
     marketMenu marketM;
-    
-    bool fullScreen;
-    double speed;
-    vector<ofColor> colors;
-    vector<string> options;
-    string getHex(int hex);
+    settingsMenu settingsM;
     
     bool gameStarted;
     double airtime;
@@ -55,12 +51,6 @@ public:
     void runGameEnded();
     void drawGameEnded();
     
-    void runMarket();
-    void drawMarket();
-    
-    void runSettingsMenu();
-    void drawSettingsMenu();
-    
     //Game functionality
     ofxGameOfLife game;
     double posX;
@@ -80,12 +70,6 @@ public:
     ofxDatGuiTextInput* highScoreInput;
     ofxDatGuiButton* highScoreConfirm;
     void setupEndgame();
-    
-    //Settings menu buttons
-    ofxDatGuiButton* confirmSettingsButton;
-    ofxDatGuiDropdown* colorMenu;
-    ofxDatGuiButton* settingsBackButton;
-    void setupSettingsButtons();
 
     //Functions to handle all DatGui events
     void onButtonEvent(ofxDatGuiButtonEvent e);
