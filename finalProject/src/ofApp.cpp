@@ -35,7 +35,7 @@ void ofApp::setup() {
     newHighScore = false;
     newHighScoreName = "";
     
-    loader::ReadScores("/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/highScores.txt", highScores, highScoreNames);
+    loader::ReadScores(hScoreFileLoc, highScores, highScoreNames);
     
     //loader::ReadSettings();
 }
@@ -234,7 +234,7 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
         highScores = calcNewHighScores(score, highScores, position);
         highScoreNames = calcNewHighScoreNames(newHighScoreName, highScoreNames, position);
         
-        loader::WriteScores("/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/highScores.txt", highScores, highScoreNames);
+        loader::WriteScores(hScoreFileLoc, highScores, highScoreNames);
         
         highScoreInput->setFocused(false);
     }
@@ -248,32 +248,6 @@ void ofApp::onTextInputEvent(ofxDatGuiTextInputEvent e) {
 void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e) {
     ofSetBackgroundColor(colors[e.child]);
     colorMenu->setStripeColor(ofColor::white);
-}
-
-void ofApp::setupStartButtons() {
-    startGameButton = new ofxDatGuiButton("Start");
-    marketButton = new ofxDatGuiButton("Market");
-    settingsButton = new ofxDatGuiButton("Settings");
-    highScoreButton = new ofxDatGuiButton("High Scores");
-    exitButton = new ofxDatGuiButton("Exit");
-    
-    startGameButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    marketButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    settingsButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    highScoreButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    exitButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    
-    startGameButton->setPosition(ofGetWidth()/2 - startGameButton->getWidth()/2, ofGetHeight()/2 - 90);
-    marketButton->setPosition(startGameButton->getX(), startGameButton->getY() + 45);
-    settingsButton->setPosition(startGameButton->getX(), startGameButton->getY() + 90);
-    highScoreButton->setPosition(startGameButton->getX(), startGameButton->getY() + 135);
-    exitButton->setPosition(startGameButton->getX(), startGameButton->getY() + 180);
-    
-    startGameButton->setTheme(gameTheme);
-    marketButton->setTheme(gameTheme);
-    settingsButton->setTheme(gameTheme);
-    highScoreButton->setTheme(gameTheme);
-    exitButton->setTheme(gameTheme);
 }
 
 void ofApp::setupEndgame() {

@@ -51,9 +51,6 @@ public:
     void runGameEnded();
     void drawGameEnded();
     
-    void runStartMenu();
-    void drawStartMenu();
-    
     void runMarket();
     void drawMarket();
     
@@ -77,14 +74,6 @@ public:
     bool isHighScore();
     std::vector<int> calcNewHighScores(int score, std::vector<int> oldHighScores, int &pos);
     std::vector<std::string> calcNewHighScoreNames(std::string name, std::vector<std::string> oldHighScoreName, int pos);
-    
-    //Start menu buttons
-    ofxDatGuiButton* startGameButton;
-    ofxDatGuiButton* marketButton;
-    ofxDatGuiButton* settingsButton;
-    ofxDatGuiButton* highScoreButton;
-    ofxDatGuiButton* exitButton;
-    void setupStartButtons();
     
     //Endamge high score input
     ofxDatGuiTextInput* highScoreInput;

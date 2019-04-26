@@ -6,3 +6,5 @@ extern bool gameEndedScreen;
 extern bool marketMenuRunning;
 extern bool settingsRunning;
 extern bool hScoreMenuRunning;
+
+extern std::string hScoreFileLoc;
