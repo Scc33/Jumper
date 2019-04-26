@@ -23,7 +23,7 @@ void ofApp::setup() {
     mainM.setMainMenuPlayer(player);
     
     //Position the buttons in the middle of the screen and register to listen for events
-    setupStartButtons();
+    //setupStartButtons();
     setupEndgame();
     setupMarketButtons();
     setupSettingsButtons();
@@ -320,9 +320,9 @@ void ofApp::setupMarketButtons() {
     marketBackButton->onButtonEvent(this, &ofApp::onButtonEvent);
     
     blueThemeButton->setPosition(ofGetWidth()/2 - blueThemeButton->getWidth()/2, ofGetHeight()/2 - 90);
-    greenThemeButton->setPosition(startGameButton->getX(), blueThemeButton->getY() + 45);
-    purpleThemeButton->setPosition(startGameButton->getX(), blueThemeButton->getY() + 90);
-    marketBackButton->setPosition(startGameButton->getX(), blueThemeButton->getY() + 135);
+    greenThemeButton->setPosition(blueThemeButton->getX(), blueThemeButton->getY() + 45);
+    purpleThemeButton->setPosition(blueThemeButton->getX(), blueThemeButton->getY() + 90);
+    marketBackButton->setPosition(blueThemeButton->getX(), blueThemeButton->getY() + 135);
     
     blueThemeButton->setTheme(gameTheme);
     greenThemeButton->setTheme(gameTheme);
@@ -476,7 +476,7 @@ void ofApp::drawGameEnded() {
     }
 }
 
-void ofApp::runStartMenu() {
+/*void ofApp::runStartMenu() {
     posX += velX;
     posY += velY;
     
@@ -513,7 +513,7 @@ void ofApp::drawStartMenu() {
     settingsButton->draw();
     highScoreButton->draw();
     exitButton->draw();
-}
+}*/
 
 void ofApp::runMarket() {
     blueThemeButton->update();
