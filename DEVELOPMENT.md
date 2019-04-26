@@ -81,6 +81,17 @@ Today was the toughest day for me by far. The number of errors I encountered was
 
 Next, I wanted to work on my decomposition. So I tried to split the main menu code out into its own class. I had worked on this earlier without success so this was my second attempt. Things were going well until I couldn't get the classes to share the set of control variables. Nothing I tried worked. I tried global variables which seemed promising but failed with weird errors. I tried passing the control variables into the menu class by reference which failed. Then I tried global variables one more time and it failed again. At this point I had wasted hours of time and I was so flustered I needed to stop. So I took the work that I had currently and split it out into its own branch for looking at later.
 
-Finally, completely upset by my failure to improve my decomposition, I decided to work on a smaller project. I updated the settings menu with a new dropdown bar which allows the user to select a background color. Tomorrow I will save this to a file so that their choice is preserved from launch to launch.
+Finally, completely upset by my failure to improve my decomposition, I decided to work on a smaller project. I updated the settings menu with a new dropdown bar which allows the user to select a background color. Tomorrow I will save this to a file so that their choice is preserved from launch to launch. I also tried to reconfigure my environment to setup testing. Sadly, this did't go very well and at this point I still don't have testing using catch working properly.
+
+*4/26/19*\
+First up today was getting catch working. My solution, while not particularly elegant, works pretty well. I now select which main I want to compile, the test main or the app main. After I got testing working, I tested my reading and writing scores functions and my player drawing creations. After this I sought out help to understand global variables. It turns out I had my declarations correct, but I wasn't initializing them properlly or I would initialize them twice. Still confuses me, but the good news is they work properly which allows for different classes to change them. Since different classes can now alter the global control variables I could start improving my decomposition.
+
+First, I pulled all the code for creating and running the main menu into its own class. This was a pretty long process because the code was rather spaghetti like. After pulling main menu into its own class I repeated the process with the high score menu then with the market menu and finally with the settings menu. Along the way I tested the functionality of the main menu with my now working tester.
+
+Next up on my list of things to-do is create two more classes one for the game ended screen and one for the game screen. Once all the classes are made I can go through and easily write automated tests for them all. Today was an extremely productive day and I think my code readability and style really improved along the way.
+
+*4/27/19*\
 
 **Week Four**
+
+*4/28/19*\
