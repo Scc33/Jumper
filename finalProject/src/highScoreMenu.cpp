@@ -10,7 +10,7 @@ void highScoreMenu::setupHScoreButtons() {
     
     hScoresBackButton->setPosition(ofGetWidth()/2 - hScoresBackButton->getWidth()/2, ofGetHeight()/2 + 90);
     
-    hScoresBackButton->setTheme(gameTheme);
+    hScoresBackButton->setTheme(new ofxDatGuiGameTheme(16));
 }
 
 void highScoreMenu::setHighScores(std::vector<int> setHighScores, std::vector<std::string> setHighScoreNames) {

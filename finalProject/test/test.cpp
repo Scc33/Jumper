@@ -1,7 +1,11 @@
 #define CATCH_CONFIG_RUNNER
+#include "ofApp.h"
 #include "catch.hpp"
 #include "player.hpp"
 #include "load.hpp"
+#include "mainMenu.hpp"
+#include "highScoreMenu.hpp"
+
 
 int main(int argc, char* argv[]) {
     // global setup...
@@ -24,6 +28,40 @@ TEST_CASE("Player") {
         REQUIRE(player.getPosX() == 5);
         REQUIRE(player.getPosY() == 5);
     }
+}
+
+TEST_CASE("Main menu") {
+    mainMenu mainM;
+    mainM.setMainMenu(5, 6, 10);
+    Player player;
+    player.setPlayer(1, 2, 10);
+    mainM.setMainMenuPlayer(player);
+    
+    SECTION("Getters") {
+        REQUIRE(mainM.getCols() == 5);
+        REQUIRE(mainM.getRows() == 6);
+    }
+    
+    SECTION("Player location") {
+        REQUIRE(mainM.getPosX() == 1);
+        REQUIRE(mainM.getPosY() == 1);
+    }
+}
+
+TEST_CASE("High score menu") {
+    highScoreMenu hScoreM;
+}
+
+TEST_CASE("Settings menu") {
+    
+}
+
+TEST_CASE("Market menu") {
+    
+}
+
+TEST_CASE("Engame") {
+    
 }
 
 TEST_CASE("Read and writing scores") {

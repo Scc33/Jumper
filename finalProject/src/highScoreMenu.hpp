@@ -5,7 +5,6 @@
 
 class highScoreMenu {
 private:
-    const ofxDatGuiTheme *gameTheme = new ofxDatGuiGameTheme(16);
     ofxDatGuiButton* hScoresBackButton;
     
     std::vector<int> highScores;

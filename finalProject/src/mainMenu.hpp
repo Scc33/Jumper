@@ -6,8 +6,6 @@
 
 class mainMenu {
 private:
-    const ofxDatGuiTheme *gameTheme = new ofxDatGuiGameTheme(16);
-    
     double posX;
     double posY;
     double velX;
@@ -42,4 +40,9 @@ public:
     //Buttons
     void setupButtons();
     void onButtonEvent(ofxDatGuiButtonEvent e);
+    
+    int getCols();
+    int getRows();
+    int getPosX();
+    int getPosY();
 };
