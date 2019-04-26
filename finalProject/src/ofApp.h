@@ -23,6 +23,7 @@ private:
     vector<string> options;
     string getHex(int hex);
     
+    bool gameStarted;
     double airtime;
     double chanceOfNewObstacle;
     double updateChanceOfNewObstacle;

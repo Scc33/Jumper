@@ -13,8 +13,10 @@ void ofApp::setup() {
     
     posX = 1;
     posY = 1;
-    velX = ofRandom(-0.5,0.5);
-    velY = ofRandom(-0.5,0.5);
+    gameStarted = startMenuRunning;
+    
+    /*velX = ofRandom(-0.5,0.5);
+    velY = ofRandom(-0.5,0.5);*/
 
     player.setPlayer(posX, posY, cellSize);
     game.setup(ofGetWidth(), ofGetHeight(), cellSize);
@@ -50,6 +52,11 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update() {
+    if (startMenuRunning != gameStarted) {
+        setupGame();
+        gameStarted = startMenuRunning;
+    }
+    
     if (keyIsDown[menuButton]) {
         startMenuRunning = true;
         gameRunning = false;

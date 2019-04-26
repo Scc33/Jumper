@@ -42,7 +42,6 @@ void mainMenu::runStartMenu() {
     }
     
     player.updatePlayerLocation(posX, posY);
-    std::cout << player.getPosX() << " " << player.getPosY();
     
     startGameButton->update();
     marketButton->update();
