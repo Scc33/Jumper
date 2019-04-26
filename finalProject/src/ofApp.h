@@ -17,12 +17,11 @@ private:
     
     mainMenu mainM;
     
-    /*
     bool fullScreen;
     double speed;
-    vector<ofColor> backgroundColors;
-    vector<string> colorOptions;
-    string getHex(int hex);*/
+    vector<ofColor> colors;
+    vector<string> options;
+    string getHex(int hex);
     
     double airtime;
     double chanceOfNewObstacle;
@@ -108,7 +107,7 @@ public:
     
     //Settings menu buttons
     ofxDatGuiButton* confirmSettingsButton;
-    //ofxDatGuiDropdown* colorMenu;
+    ofxDatGuiDropdown* menu;
     ofxDatGuiButton* settingsBackButton;
     void setupSettingsButtons();
     
@@ -119,5 +118,5 @@ public:
     //Functions to handle all DatGui events
     void onButtonEvent(ofxDatGuiButtonEvent e);
     void onTextInputEvent(ofxDatGuiTextInputEvent e);
-    //void onDropdownEvent(ofxDatGuiDropdownEvent e);
+    void onDropdownEvent(ofxDatGuiDropdownEvent e);
 };
