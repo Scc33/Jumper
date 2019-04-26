@@ -18,24 +18,23 @@ void ofApp::setup() {
     player.setPlayer(posX, posY, cellSize);
     game.setup(ofGetWidth(), ofGetHeight(), cellSize);
     
-    mainM.setMainMenu(game.getCols(), game.getRows(), cellSize);
-    mainM.setMainMenuPlayer(player);
-    
     //Position the buttons in the middle of the screen and register to listen for events
     //setupStartButtons();
     setupEndgame();
     setupMarketButtons();
     setupSettingsButtons();
-    setupHScoreButtons();
+    //setupHScoreButtons();
+    
+    loader::ReadScores(hScoreFileLoc, highScores, highScoreNames);
+    newHighScore = false;
+    newHighScoreName = "";
     
     mainM.setMainMenu(game.getCols(), game.getRows(), cellSize);
     mainM.setMainMenuPlayer(player);
     mainM.setupButtons();
     
-    newHighScore = false;
-    newHighScoreName = "";
-    
-    loader::ReadScores(hScoreFileLoc, highScores, highScoreNames);
+    hScoreM.setupHScoreButtons();
+    hScoreM.setHighScores(highScores, highScoreNames);
     
     //loader::ReadSettings();
 }
@@ -73,7 +72,7 @@ void ofApp::update() {
     } else if (settingsRunning) {
         runSettingsMenu();
     } else if (hScoreMenuRunning) {
-        runHighScores();
+        hScoreM.runHScoreMenu();
     }
 }
 
@@ -93,7 +92,7 @@ void ofApp::draw() {
     } else if (settingsRunning) {
         drawSettingsMenu();
     } else if (hScoreMenuRunning) {
-        drawHighScores();
+        hScoreM.drawHighScores();
     }
 }
 
@@ -215,10 +214,10 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
     } else if (e.target == settingsBackButton) {
         startMenuRunning = true;
         settingsRunning = false;
-    } else if (e.target == hScoresBackButton) {
+    } /*else if (e.target == hScoresBackButton) {
         startMenuRunning = true;
         hScoreMenuRunning = false;
-    } else if (e.target == blueThemeButton) {
+    }*/ else if (e.target == blueThemeButton) {
         
     } else if (e.target == greenThemeButton) {
         
@@ -235,6 +234,7 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
         highScoreNames = calcNewHighScoreNames(newHighScoreName, highScoreNames, position);
         
         loader::WriteScores(hScoreFileLoc, highScores, highScoreNames);
+        hScoreM.setHighScores(highScores, highScoreNames);
         
         highScoreInput->setFocused(false);
     }
@@ -322,7 +322,7 @@ void ofApp::setupSettingsButtons() {
     colorMenu->expand();
 }
 
-void ofApp::setupHScoreButtons() {
+/*void ofApp::setupHScoreButtons() {
     hScoresBackButton = new ofxDatGuiButton("Back");
     
     hScoresBackButton->onButtonEvent(this, &ofApp::onButtonEvent);
@@ -330,7 +330,7 @@ void ofApp::setupHScoreButtons() {
     hScoresBackButton->setPosition(ofGetWidth()/2 - hScoresBackButton->getWidth()/2, ofGetHeight()/2 + 90);
     
     hScoresBackButton->setTheme(gameTheme);
-}
+}*/
 
 void ofApp::runGame() {
     game.update();
@@ -459,7 +459,7 @@ void ofApp::drawSettingsMenu() {
     colorMenu->draw();
 }
 
-void ofApp::runHighScores() {
+/*void ofApp::runHighScores() {
     hScoresBackButton->update();
 }
 
@@ -473,3 +473,4 @@ void ofApp::drawHighScores() {
     
     hScoresBackButton->draw();
 }
+*/

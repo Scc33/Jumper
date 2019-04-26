@@ -5,6 +5,7 @@
 #include "ofxDatGui.h"
 #include "player.hpp"
 #include "mainMenu.hpp"
+#include "highScoreMenu.hpp"
 #include "load.hpp"
 #include "ofxDatGuiGameTheme.h"
 #include "globals.hpp"
@@ -16,6 +17,7 @@ private:
     const char menuButton = 'm';
     
     mainMenu mainM;
+    highScoreMenu hScoreM;
     
     bool fullScreen;
     double speed;
