@@ -303,6 +303,7 @@ void ofApp::setupSettingsButtons() {
     colors.push_back(ofColor::fromHex(0x2FA1D6));
     colors.push_back(ofColor::fromHex(0x1ED36F));
     colors.push_back(ofColor::fromHex(0xC63256));
+    colors.push_back(ofColor::fromHex(0x323232));
     
     vector<string> options;
     for (int i=0; i<colors.size(); i++) { options.push_back(getHex(colors[i].getHex()));

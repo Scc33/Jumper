@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string>
+#include "ofxDatGuiGameTheme.h"
 
 bool startMenuRunning = true;
 bool gameRunning = false;

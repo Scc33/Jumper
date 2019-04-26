@@ -6,6 +6,8 @@
 
 class mainMenu {
 private:
+    const ofxDatGuiTheme *gameTheme = new ofxDatGuiGameTheme(16);
+    
     double posX;
     double posY;
     double velX;

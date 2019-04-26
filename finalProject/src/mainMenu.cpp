@@ -98,9 +98,9 @@ void mainMenu::setupButtons() {
     highScoreButton->setPosition(startGameButton->getX(), startGameButton->getY() + 135);
     exitButton->setPosition(startGameButton->getX(), startGameButton->getY() + 180);
     
-    startGameButton->setTheme(new ofxDatGuiGameTheme(16));
-    marketButton->setTheme(new ofxDatGuiGameTheme(16));
-    settingsButton->setTheme(new ofxDatGuiGameTheme(16));
-    highScoreButton->setTheme(new ofxDatGuiGameTheme(16));
-    exitButton->setTheme(new ofxDatGuiGameTheme(16));
+    startGameButton->setTheme(gameTheme);
+    marketButton->setTheme(gameTheme);
+    settingsButton->setTheme(gameTheme);
+    highScoreButton->setTheme(gameTheme);
+    exitButton->setTheme(gameTheme);
 }
