@@ -6,6 +6,7 @@
 #include "player.hpp"
 #include "mainMenu.hpp"
 #include "highScoreMenu.hpp"
+#include "marketMenu.hpp"
 #include "load.hpp"
 #include "ofxDatGuiGameTheme.h"
 #include "globals.hpp"
@@ -18,6 +19,7 @@ private:
     
     mainMenu mainM;
     highScoreMenu hScoreM;
+    marketMenu marketM;
     
     bool fullScreen;
     double speed;
@@ -59,9 +61,6 @@ public:
     void runSettingsMenu();
     void drawSettingsMenu();
     
-    void runHighScores();
-    void drawHighScores();
-    
     //Game functionality
     ofxGameOfLife game;
     double posX;
@@ -81,13 +80,6 @@ public:
     ofxDatGuiTextInput* highScoreInput;
     ofxDatGuiButton* highScoreConfirm;
     void setupEndgame();
-    
-    //Market menu buttons
-    ofxDatGuiButton* blueThemeButton;
-    ofxDatGuiButton* greenThemeButton;
-    ofxDatGuiButton* purpleThemeButton;
-    ofxDatGuiButton* marketBackButton;
-    void setupMarketButtons();
     
     //Settings menu buttons
     ofxDatGuiButton* confirmSettingsButton;

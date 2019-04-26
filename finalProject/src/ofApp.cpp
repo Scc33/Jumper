@@ -21,7 +21,6 @@ void ofApp::setup() {
     //Position the buttons in the middle of the screen and register to listen for events
     //setupStartButtons();
     setupEndgame();
-    setupMarketButtons();
     setupSettingsButtons();
     
     loader::ReadScores(hScoreFileLoc, highScores, highScoreNames);
@@ -34,6 +33,8 @@ void ofApp::setup() {
     
     hScoreM.setupHScoreButtons();
     hScoreM.setHighScores(highScores, highScoreNames);
+    
+    marketM.setupMarketButtons();
     
     //loader::ReadSettings();
 }
@@ -67,7 +68,7 @@ void ofApp::update() {
     } else if (gameEndedScreen) {
         runGameEnded();
     } else if (marketMenuRunning) {
-        runMarket();
+        marketM.runMarket();
     } else if (settingsRunning) {
         runSettingsMenu();
     } else if (hScoreMenuRunning) {
@@ -87,7 +88,7 @@ void ofApp::draw() {
         ofShowCursor();
         drawGameEnded();
     } else if (marketMenuRunning) {
-        drawMarket();
+        marketM.drawMarket();
     } else if (settingsRunning) {
         drawSettingsMenu();
     } else if (hScoreMenuRunning) {
@@ -207,18 +208,9 @@ std::vector<std::string> ofApp::calcNewHighScoreNames(std::string name, std::vec
 }
 
 void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
-    if (e.target == marketBackButton) {
-        startMenuRunning = true;
-        marketMenuRunning = false;
-    } else if (e.target == settingsBackButton) {
+    if (e.target == settingsBackButton) {
         startMenuRunning = true;
         settingsRunning = false;
-    } else if (e.target == blueThemeButton) {
-        
-    } else if (e.target == greenThemeButton) {
-        
-    } else if (e.target == purpleThemeButton) {
-        
     } else if (e.target == confirmSettingsButton) {
         
     } else if (e.target == highScoreConfirm) {
@@ -258,28 +250,6 @@ void ofApp::setupEndgame() {
     highScoreConfirm->setPosition(ofGetWidth()/2 - highScoreConfirm->getWidth()/2, ofGetHeight()/2 + 80);
     
     highScoreConfirm->setTheme(gameTheme);
-}
-
-void ofApp::setupMarketButtons() {
-    blueThemeButton = new ofxDatGuiButton("Blue theme");
-    greenThemeButton = new ofxDatGuiButton("Green theme");
-    purpleThemeButton = new ofxDatGuiButton("Purple theme");
-    marketBackButton = new ofxDatGuiButton("Back");
-    
-    blueThemeButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    greenThemeButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    purpleThemeButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    marketBackButton->onButtonEvent(this, &ofApp::onButtonEvent);
-    
-    blueThemeButton->setPosition(ofGetWidth()/2 - blueThemeButton->getWidth()/2, ofGetHeight()/2 - 90);
-    greenThemeButton->setPosition(blueThemeButton->getX(), blueThemeButton->getY() + 45);
-    purpleThemeButton->setPosition(blueThemeButton->getX(), blueThemeButton->getY() + 90);
-    marketBackButton->setPosition(blueThemeButton->getX(), blueThemeButton->getY() + 135);
-    
-    blueThemeButton->setTheme(gameTheme);
-    greenThemeButton->setTheme(gameTheme);
-    purpleThemeButton->setTheme(gameTheme);
-    marketBackButton->setTheme(gameTheme);
 }
 
 void ofApp::setupSettingsButtons() {
@@ -417,20 +387,6 @@ void ofApp::drawGameEnded() {
         ofDrawBitmapString("Your score was... " + ofToString(score), 150, 150);
         ofDrawBitmapString("Press 'm' to go to the main colorMenu", 200, 200);
     }
-}
-
-void ofApp::runMarket() {
-    blueThemeButton->update();
-    greenThemeButton->update();
-    purpleThemeButton->update();
-    marketBackButton->update();
-}
-
-void ofApp::drawMarket() {
-    blueThemeButton->draw();
-    greenThemeButton->draw();
-    purpleThemeButton->draw();
-    marketBackButton->draw();
 }
 
 void ofApp::runSettingsMenu() {
