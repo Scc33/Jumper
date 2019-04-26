@@ -37,15 +37,6 @@ private:
     //For controls
     bool keyIsDown[255];
     
-    //Control flow variables
-    /*
-    bool startMenuRunning;
-    bool gameRunning;
-    bool gameEndedScreen;
-    bool marketMenuRunning;
-    bool settingsRunning;
-    bool hScoreMenuRunning;*/
-    
 public:
     void setup();
     void update();

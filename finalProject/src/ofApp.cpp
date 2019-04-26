@@ -14,9 +14,6 @@ void ofApp::setup() {
     posX = 1;
     posY = 1;
     gameStarted = startMenuRunning;
-    
-    /*velX = ofRandom(-0.5,0.5);
-    velY = ofRandom(-0.5,0.5);*/
 
     player.setPlayer(posX, posY, cellSize);
     game.setup(ofGetWidth(), ofGetHeight(), cellSize);
@@ -30,13 +27,6 @@ void ofApp::setup() {
     setupMarketButtons();
     setupSettingsButtons();
     setupHScoreButtons();
-    /*
-    startMenuRunning = true;
-    gameRunning = false;
-    gameEndedScreen = false;
-    marketMenuRunning = false;
-    settingsRunning = false;
-    hScoreMenuRunning = false;*/
     
     mainM.setMainMenu(game.getCols(), game.getRows(), cellSize);
     mainM.setMainMenuPlayer(player);
@@ -219,22 +209,7 @@ std::vector<std::string> ofApp::calcNewHighScoreNames(std::string name, std::vec
 }
 
 void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
-    if (e.target == startGameButton) {
-        startMenuRunning = false;
-        gameRunning = true;
-        setupGame();
-    } else if (e.target == marketButton) {
-        startMenuRunning = false;
-        marketMenuRunning = true;
-    } else if (e.target == settingsButton) {
-        startMenuRunning = false;
-        settingsRunning = true;
-    } else if (e.target == highScoreButton) {
-        startMenuRunning = false;
-        hScoreMenuRunning = true;
-    } else if (e.target == exitButton) {
-        ofExit();
-    } else if (e.target == marketBackButton) {
+    if (e.target == marketBackButton) {
         startMenuRunning = true;
         marketMenuRunning = false;
     } else if (e.target == settingsBackButton) {
@@ -482,45 +457,6 @@ void ofApp::drawGameEnded() {
         ofDrawBitmapString("Press 'm' to go to the main colorMenu", 200, 200);
     }
 }
-
-/*void ofApp::runStartMenu() {
-    posX += velX;
-    posY += velY;
-    
-    if (posX < 1) {
-        posX = 1;
-        velX *= -1;
-    } else if (posX > game.getCols() - 2) {
-        posX = game.getCols() - 2;
-        velX *= -1;
-    }
-    
-    if (posY < 1) {
-        posY = 1;
-        velY *= -1;
-    } else if (posY > game.getRows() - 4){
-        posY = game.getRows() - 4;
-        velY *= -1;
-    }
-    
-    player.updatePlayerLocation(posX, posY);
-    
-    startGameButton->update();
-    marketButton->update();
-    settingsButton->update();
-    highScoreButton->update();
-    exitButton->update();
-}
-
-void ofApp::drawStartMenu() {
-    player.drawPlayer();
-    
-    startGameButton->draw();
-    marketButton->draw();
-    settingsButton->draw();
-    highScoreButton->draw();
-    exitButton->draw();
-}*/
 
 void ofApp::runMarket() {
     blueThemeButton->update();
