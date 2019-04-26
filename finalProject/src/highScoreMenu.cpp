@@ -1,9 +1,7 @@
 #include "highScoreMenu.hpp"
 #include "ofApp.h"
 
-highScoreMenu::highScoreMenu() {
-
-}
+highScoreMenu::highScoreMenu() {}
 
 void highScoreMenu::setupHScoreButtons() {
     hScoresBackButton = new ofxDatGuiButton("Back");

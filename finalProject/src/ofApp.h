@@ -94,10 +94,6 @@ public:
     ofxDatGuiDropdown* colorMenu;
     ofxDatGuiButton* settingsBackButton;
     void setupSettingsButtons();
-    
-    //High score buttons
-    ofxDatGuiButton* hScoresBackButton;
-    void setupHScoreButtons();
 
     //Functions to handle all DatGui events
     void onButtonEvent(ofxDatGuiButtonEvent e);
