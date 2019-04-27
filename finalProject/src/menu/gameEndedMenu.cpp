@@ -16,6 +16,10 @@ void gameEndedMenu::setupEndgameButtons() {
     highScoreConfirm->setTheme(new ofxDatGuiGameTheme(16));
 }
 
+void gameEndedMenu::setNewScore(int setScore) {
+    score = setScore;
+}
+
 void gameEndedMenu::runGameEnded() {
     highScoreInput->update();
     highScoreConfirm->update();
@@ -35,6 +39,15 @@ void gameEndedMenu::drawGameEnded() {
     }
 }
 
+bool gameEndedMenu::isHighScore() {
+    for (int oldhighScore : highScores) {
+        if (score >= oldhighScore) {
+            return true;
+        }
+    }
+    
+    return false;
+}
 
 void gameEndedMenu::onButtonEvent(ofxDatGuiButtonEvent e) {
     if (e.target == highScoreConfirm) {
@@ -42,11 +55,10 @@ void gameEndedMenu::onButtonEvent(ofxDatGuiButtonEvent e) {
         gameEndedScreen = false;
         
         int position = 0;
-        //highScores = calcNewHighScores(score, highScores, position);
-        //highScoreNames = calcNewHighScoreNames(newHighScoreName, highScoreNames, position);
+        highScores = highScoreCalculator::calcNewHighScores(score, highScores, position);
+        highScoreNames = highScoreCalculator::calcNewHighScoreNames(newHighScoreName, highScoreNames, position);
         
         loader::WriteScores(hScoreFileLoc, highScores, highScoreNames);
-        //hScoreM.setHighScores(highScores, highScoreNames);
         
         highScoreInput->setFocused(false);
     }

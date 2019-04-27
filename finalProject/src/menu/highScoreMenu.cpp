@@ -13,9 +13,8 @@ void highScoreMenu::setupHScoreButtons() {
     hScoresBackButton->setTheme(new ofxDatGuiGameTheme(16));
 }
 
-void highScoreMenu::setHighScores(std::vector<int> setHighScores, std::vector<std::string> setHighScoreNames) {
-    highScores = setHighScores;
-    highScoreNames = setHighScoreNames;
+void highScoreMenu::updateHighScores() {
+    loader::ReadScores(hScoreFileLoc, highScores, highScoreNames);
 }
 
 void highScoreMenu::drawHighScores() {
@@ -30,6 +29,7 @@ void highScoreMenu::drawHighScores() {
 }
 
 void highScoreMenu::runHScoreMenu() {
+    updateHighScores();
     hScoresBackButton->update();
 }
 

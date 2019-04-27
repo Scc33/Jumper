@@ -2,6 +2,7 @@
 #include "ofxDatGui.h"
 #include "ofxDatGuiGameTheme.h"
 #include "globals.hpp"
+#include "load.hpp"
 
 class highScoreMenu {
 private:
@@ -14,7 +15,7 @@ public:
     highScoreMenu();
     
     void setupHScoreButtons();
-    void setHighScores(std::vector<int> setHighScores, std::vector<std::string> setHighScoreNames);
+    void updateHighScores();
     
     void runHScoreMenu();
     

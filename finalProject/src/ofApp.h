@@ -69,9 +69,9 @@ public:
     bool isHighScore();
     
     //Endamge high score input
-    ofxDatGuiTextInput* highScoreInput;
-    ofxDatGuiButton* highScoreConfirm;
-    void setupEndgame();
+    //ofxDatGuiTextInput* highScoreInput;
+    //ofxDatGuiButton* highScoreConfirm;
+    //void setupEndgame();
 
     //Functions to handle all DatGui events
     void onButtonEvent(ofxDatGuiButtonEvent e);

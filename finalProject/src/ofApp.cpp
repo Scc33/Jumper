@@ -19,7 +19,7 @@ void ofApp::setup() {
     game.setup(ofGetWidth(), ofGetHeight(), cellSize);
     
     //Position the buttons in the middle of the screen and register to listen for events
-    setupEndgame();
+    //setupEndgame();
     
     loader::ReadScores(hScoreFileLoc, highScores, highScoreNames);
     newHighScore = false;
@@ -30,7 +30,7 @@ void ofApp::setup() {
     mainM.setupButtons();
     
     hScoreM.setupHScoreButtons();
-    hScoreM.setHighScores(highScores, highScoreNames);
+    hScoreM.updateHighScores();
     
     marketM.setupMarketButtons();
     
@@ -63,12 +63,13 @@ void ofApp::update() {
         if (hasCollided()) {
             gameRunning = false;
             gameEndedScreen = true;
-            newHighScore = isHighScore();
-            highScoreInput->setFocused(true);
+            gameEndedM.setNewScore(score);
+            gameEndedM.newHighScore = gameEndedM.isHighScore();
+            gameEndedM.highScoreInput->setFocused(true);
         }
         runGame();
     } else if (gameEndedScreen) {
-        runGameEnded();
+        gameEndedM.runGameEnded();
     } else if (marketMenuRunning) {
         marketM.runMarket();
     } else if (settingsRunning) {
@@ -88,7 +89,7 @@ void ofApp::draw() {
         drawGame();
     } else if (gameEndedScreen) {
         ofShowCursor();
-        drawGameEnded();
+        gameEndedM.drawGameEnded();
     } else if (marketMenuRunning) {
         marketM.drawMarket();
     } else if (settingsRunning) {
@@ -154,6 +155,7 @@ int ofApp::gravityCalculation() {
     }
 }
 
+/*
 bool ofApp::isHighScore() {
     for (int oldhighScore : highScores) {
         if (score >= oldhighScore) {
@@ -162,9 +164,9 @@ bool ofApp::isHighScore() {
     }
     
     return false;
-}
+}*/
 
-void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
+/*void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
     if (e.target == highScoreConfirm) {
         startMenuRunning = true;
         gameEndedScreen = false;
@@ -174,13 +176,13 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
         highScoreNames = highScoreCalculator::calcNewHighScoreNames(newHighScoreName, highScoreNames, position);
         
         loader::WriteScores(hScoreFileLoc, highScores, highScoreNames);
-        hScoreM.setHighScores(highScores, highScoreNames);
+        hScoreM.updateHighScores();
         
         highScoreInput->setFocused(false);
     }
-}
+}*/
 
-void ofApp::onTextInputEvent(ofxDatGuiTextInputEvent e) {
+/*void ofApp::onTextInputEvent(ofxDatGuiTextInputEvent e) {
     newHighScoreName = e.text;
 }
 
@@ -196,7 +198,7 @@ void ofApp::setupEndgame() {
     highScoreConfirm->setPosition(ofGetWidth()/2 - highScoreConfirm->getWidth()/2, ofGetHeight()/2 + 80);
     
     highScoreConfirm->setTheme(gameTheme);
-}
+}*/
 
 void ofApp::runGame() {
     game.update();
@@ -280,6 +282,7 @@ void ofApp::setupGame() {
     updateChanceOfNewObstacle = .005;
 }
 
+/*
 void ofApp::runGameEnded() {
     highScoreInput->update();
     highScoreConfirm->update();
@@ -298,3 +301,4 @@ void ofApp::drawGameEnded() {
         ofDrawBitmapString("Press 'm' to go to the main colorMenu", 200, 200);
     }
 }
+*/
