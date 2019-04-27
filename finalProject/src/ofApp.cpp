@@ -16,13 +16,12 @@ void ofApp::setup() {
     gameStarted = startMenuRunning;
 
     player.setPlayer(posX, posY, cellSize);
-    game.setup(ofGetWidth(), ofGetHeight(), cellSize);
+    grid.setup(ofGetWidth(), ofGetHeight(), cellSize);
     
     loader::ReadScores(hScoreFileLoc, highScores, highScoreNames);
-    newHighScore = false;
     newHighScoreName = "";
     
-    mainM.setMainMenu(game.getCols(), game.getRows(), cellSize);
+    mainM.setMainMenu(grid.getCols(), grid.getRows(), cellSize);
     mainM.setMainMenuPlayer(player);
     mainM.setupButtons();
     
@@ -115,7 +114,7 @@ void ofApp::drawObstacles() {
     ofFill();
     
     for (int i = 0; i < obstacles.size(); i++) {
-        ofDrawRectangle(obstacles.at(i), game.getRows() * cellSize - 340, cellSize, cellSize * 4);
+        ofDrawRectangle(obstacles.at(i), grid.getRows() * cellSize - 340, cellSize, cellSize * 4);
         obstacles.at(i) -= 2;
         
         if (obstacles.at(i) < 0) {
@@ -128,7 +127,7 @@ void ofApp::drawObstacles() {
 //This doesn't seem to work from some angles (Or too fast?)
 bool ofApp::hasCollided() {
     for (int obstacle : obstacles) {
-        if (posX * cellSize <= obstacle && posX * cellSize >= obstacle - cellSize && posY > game.getRows() - 36) {
+        if (posX * cellSize <= obstacle && posX * cellSize >= obstacle - cellSize && posY > grid.getRows() - 36) {
             return true;
         }
     }
@@ -138,7 +137,7 @@ bool ofApp::hasCollided() {
 
 //Needs tweaking to look better
 int ofApp::gravityCalculation() {
-    if (posY < game.getRows() - 34) {
+    if (posY < grid.getRows() - 34) {
         airtime += .02;
         posY += 1 * airtime * airtime;
     } else {
@@ -146,14 +145,14 @@ int ofApp::gravityCalculation() {
     }
 
     //Keep player from going inside the ground
-    if (posY > game.getRows() - 34) {
-        posY = game.getRows() - 34;
+    if (posY > grid.getRows() - 34) {
+        posY = grid.getRows() - 34;
         airtime = 0;
     }
 }
 
 void ofApp::runGame() {
-    game.update();
+    grid.update();
     
     int tempX = posX;
     int tempY = posY;
@@ -170,7 +169,7 @@ void ofApp::runGame() {
         posY -= .8;
     }
     
-    if (keyIsDown['s'] && game.getCell(posX, posY + 3).currState != true) {
+    if (keyIsDown['s'] && grid.getCell(posX, posY + 3).currState != true) {
         posY += .8;
     }
     
@@ -180,17 +179,17 @@ void ofApp::runGame() {
     
     if (posX < 1) {
         posX = 1;
-    } else if (posX > game.getCols() - 2) {
-        posX = game.getCols() - 2;
+    } else if (posX > grid.getCols() - 2) {
+        posX = grid.getCols() - 2;
     }
     
     if (posY < 1) {
         posY = 1;
-    } else if (posY > game.getRows() - 4) {
-        posY = game.getRows() - 4;
+    } else if (posY > grid.getRows() - 4) {
+        posY = grid.getRows() - 4;
     }
     
-    if (game.getCell(posX, posY + 3).currState == true) {
+    if (grid.getCell(posX, posY + 3).currState == true) {
         posX = tempX;
         posY = tempY;
     }
@@ -212,7 +211,7 @@ void ofApp::runGame() {
 void ofApp::drawGame() {
     ofSetColor(255,0,0);
     ofFill();
-    ofDrawRectangle(0, game.getRows() * cellSize - 300, game.getCols() * cellSize, 300);
+    ofDrawRectangle(0, grid.getRows() * cellSize - 300, grid.getCols() * cellSize, 300);
     
     drawObstacles();
     

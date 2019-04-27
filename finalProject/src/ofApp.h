@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxGameOfLife.h"
 #include "ofxDatGui.h"
+#include "game.hpp"
 #include "player.hpp"
 #include "mainMenu.hpp"
 #include "highScoreMenu.hpp"
@@ -17,9 +18,11 @@
 class ofApp : public ofBaseApp {
 private:
     const ofxDatGuiTheme *gameTheme = new ofxDatGuiGameTheme(16);
-    const int cellSize = 10;
     const char menuButton = 'm';
+    const int cellSize = 10;
+
     
+    Game game;
     mainMenu mainM;
     highScoreMenu hScoreM;
     marketMenu marketM;
@@ -32,7 +35,6 @@ private:
     double updateChanceOfNewObstacle;
     Player player;
     double score;
-    bool newHighScore;
     std::string newHighScoreName;
     std::vector<int> highScores;
     std::vector<std::string> highScoreNames;
@@ -56,7 +58,7 @@ public:
     void drawGameEnded();
     
     //Game functionality
-    ofxGameOfLife game;
+    ofxGameOfLife grid;
     double posX;
     double posY;
     double velX;
