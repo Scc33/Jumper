@@ -91,6 +91,9 @@ First, I pulled all the code for creating and running the main menu into its own
 Next up on my list of things to-do is create two more classes one for the game ended screen and one for the game screen. Once all the classes are made I can go through and easily write automated tests for them all. Today was an extremely productive day and I think my code readability and style really improved along the way.
 
 *4/27/19*\
+With all the new classes I had made yesterday the project was starting to get really cluttered wtih files, so I decided to organize them into separate files all nice and neat. Next I pulled the high score calculator into its own namespace because it is used by multiple classes. Then I migrated the game ended menu into its own class. Finally I pulled the game code into its own class. With this I had completed the long task of decomposing my code. 
+
+Today I also took care of two smaller tasks. One was adding const to all my functions that are const which is an important semantics improvement. The other task was saving the settings color to file so that it is maintained from gameplay to gameplay. Lastly today was another code review and I appear to be on track to finish things up well.
 
 **Week Four**
 
