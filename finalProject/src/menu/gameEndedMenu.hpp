@@ -31,7 +31,7 @@ public:
     void setHighScores(std::vector<int> setHighScores,
                        std::vector<std::string> setHighScoreNames);
     
-    bool isHighScore();
+    bool isHighScore() const;
     
     void onButtonEvent(ofxDatGuiButtonEvent e);
     void onTextInputEvent(ofxDatGuiTextInputEvent e);

@@ -32,10 +32,10 @@ void Player::drawPlayer() {
     ofDrawRectangle((posX+1)*cellSize, (posY+3)*cellSize, cellSize, cellSize);
 }
 
-double Player::getPosX() {
+double Player::getPosX() const {
     return posX;
 }
 
-double Player::getPosY() {
+double Player::getPosY() const {
     return posY;
 }

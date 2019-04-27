@@ -29,7 +29,7 @@ void Game::drawObstacles() {
 }
 
 //This doesn't seem to work from some angles (Or too fast?)
-bool Game::hasCollided() {
+bool Game::hasCollided() const {
     for (int obstacle : obstacles) {
         if (posX * cellSize <= obstacle && posX * cellSize >= obstacle - cellSize && posY > gameRows - 36) {
             return true;
@@ -127,6 +127,6 @@ void Game::setupGame() {
     updateChanceOfNewObstacle = .005;
 }
 
-int Game::getScore() {
+int Game::getScore() const {
     return score;
 }

@@ -42,7 +42,7 @@ void gameEndedMenu::drawGameEnded() {
     }
 }
 
-bool gameEndedMenu::isHighScore() {
+bool gameEndedMenu::isHighScore() const {
     for (int oldhighScore : highScores) {
         if (score >= oldhighScore) {
             return true;

@@ -57,19 +57,16 @@ void settingsMenu::setupSettingsButtons() {
     
     colorMenu->setPosition(ofGetWidth()/2 - colorMenu->getWidth()/2, confirmSettingsButton->getY() + 90);
     
-    /*for (int i=0; i<colorMenu->size(); i++) { colorMenu->getChildAt(i)->setStripeColor(colors[i]);
-     }*/
-    
     colorMenu->onDropdownEvent(this, &settingsMenu::onDropdownEvent);
     
     colorMenu->expand();
 }
 
-string settingsMenu::getHex(int hex) {
+string settingsMenu::getHex(int hex) const {
     // convert decimal value to hex //
     std::stringstream ss;
     ss<< std::hex << hex;
-    std::string res (ss.str());
+    std::string res(ss.str());
     while(res.size() < 6) {
         res += "0";
     }

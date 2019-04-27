@@ -5,11 +5,10 @@ void ofApp::setup() {
     ofSetWindowTitle("Game");
     ofSetFullscreen(true);
     ofSetFrameRate(60);
-    //ofBackground(50, 50, 50);
     
-     int backgroundColor;
-     loader::ReadSettings(settingsFileLoc, backgroundColor);
-     ofBackgroundHex(backgroundColor);
+    int backgroundColor = 0;
+    loader::ReadSettings(settingsFileLoc, backgroundColor);
+    ofBackgroundHex(backgroundColor);
     
     posX = 1;
     posY = 1;

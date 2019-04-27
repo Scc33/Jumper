@@ -16,7 +16,7 @@ private:
     
     vector<ofColor> colors;
     vector<string> options;
-    string getHex(int hex);
+    string getHex(int hex) const;
     
 public:
     settingsMenu();

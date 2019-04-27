@@ -103,18 +103,18 @@ void mainMenu::setupButtons() {
     exitButton->setTheme(new ofxDatGuiGameTheme(16));
 }
 
-int mainMenu::getCols() {
+int mainMenu::getCols() const {
     return gameCols;
 }
 
-int mainMenu::getRows() {
+int mainMenu::getRows() const {
     return gameRows;
 }
 
-int mainMenu::getPosX() {
+int mainMenu::getPosX() const {
     return posX;
 }
 
-int mainMenu::getPosY() {
+int mainMenu::getPosY() const {
     return posY;
 }

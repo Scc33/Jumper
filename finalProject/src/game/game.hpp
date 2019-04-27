@@ -32,7 +32,7 @@ public:
     void drawGame();
     void setupGame();
     
-    bool hasCollided();
+    bool hasCollided() const;
     
-    int getScore();
+    int getScore() const;
 };

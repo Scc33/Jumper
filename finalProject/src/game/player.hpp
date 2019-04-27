@@ -15,6 +15,6 @@ public:
     
     void drawPlayer();
     
-    double getPosX();
-    double getPosY();
+    double getPosX() const;
+    double getPosY() const;
 };

@@ -41,8 +41,8 @@ public:
     void setupButtons();
     void onButtonEvent(ofxDatGuiButtonEvent e);
     
-    int getCols();
-    int getRows();
-    int getPosX();
-    int getPosY();
+    int getCols() const;
+    int getRows() const;
+    int getPosX() const;
+    int getPosY() const;
 };
