@@ -6,10 +6,6 @@ void ofApp::setup() {
     ofSetFullscreen(true);
     ofSetFrameRate(60);
     
-    int backgroundColor = 0;
-    loader::ReadSettings(settingsFileLoc, backgroundColor);
-    ofBackgroundHex(backgroundColor);
-    
     posX = 1;
     posY = 1;
     gameStarted = startMenuRunning;
@@ -32,6 +28,10 @@ void ofApp::setup() {
     settingsM.setupSettingsButtons();
     
     gameEndedM.setupEndgameButtons();
+    
+    int backgroundColor = 0;
+    loader::ReadSettings(settingsFileLoc, backgroundColor);
+    ofSetBackgroundColor(settingsM.colors[backgroundColor]);
 }
 
 //--------------------------------------------------------------

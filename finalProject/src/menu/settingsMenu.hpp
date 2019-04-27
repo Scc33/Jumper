@@ -14,11 +14,12 @@ private:
     bool fullScreen;
     double speed;
     
-    vector<ofColor> colors;
     vector<string> options;
     string getHex(int hex) const;
     
 public:
+    vector<ofColor> colors;
+    
     settingsMenu();
     
     void runSettingsMenu();

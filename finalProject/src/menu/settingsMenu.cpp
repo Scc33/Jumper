@@ -26,7 +26,7 @@ void settingsMenu::onButtonEvent(ofxDatGuiButtonEvent e) {
 void settingsMenu::onDropdownEvent(ofxDatGuiDropdownEvent e) {
     ofSetBackgroundColor(colors[e.child]);
     colorMenu->setStripeColor(ofColor::white);
-    loader::WriteSettings(settingsFileLoc, colors[e.child].getHex());
+    loader::WriteSettings(settingsFileLoc, e.child);
 }
 
 void settingsMenu::setupSettingsButtons() {
@@ -42,14 +42,15 @@ void settingsMenu::setupSettingsButtons() {
     confirmSettingsButton->setTheme(new ofxDatGuiGameTheme(16));
     settingsBackButton->setTheme(new ofxDatGuiGameTheme(16));
     
-    colors.push_back(ofColor::fromHex(0xFFD00B));
-    colors.push_back(ofColor::fromHex(0x2FA1D6));
-    colors.push_back(ofColor::fromHex(0x1ED36F));
-    colors.push_back(ofColor::fromHex(0xC63256));
-    colors.push_back(ofColor::fromHex(0x323232));
+    colors.push_back(ofColor::fromHex(16764939));
+    colors.push_back(ofColor::fromHex(3121622));
+    colors.push_back(ofColor::fromHex(2020207));
+    colors.push_back(ofColor::fromHex(12989014));
+    colors.push_back(ofColor::fromHex(3289650));
     
     vector<string> options;
-    for (int i=0; i<colors.size(); i++) { options.push_back(getHex(colors[i].getHex()));
+    for (int i=0; i<colors.size(); i++) {
+        options.push_back(getHex(colors[i].getHex()));
     }
     
     colorMenu = new ofxDatGuiDropdown("SELECT A COLOR", options);
