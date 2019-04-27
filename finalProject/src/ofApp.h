@@ -9,6 +9,7 @@
 #include "marketMenu.hpp"
 #include "settingsMenu.hpp"
 #include "gameEndedMenu.hpp"
+#include "load.hpp"
 #include "globals.hpp"
 
 class ofApp : public ofBaseApp {

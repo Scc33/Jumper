@@ -46,12 +46,33 @@ bool loader::ReadScores(std::string fileToReadFrom, std::vector<int> &highScores
     return true;
 }
 
-bool loader::WriteSettings(std::string fileToWriteTo) {
+bool loader::WriteSettings(std::string fileToWriteTo, int color) {
+    std::ofstream myfile;
+    myfile.open(fileToWriteTo, std::ios::in);
     
+    myfile << color;
+    
+    myfile.close();
+    
+    return true;
 }
 
-bool loader::ReadSettings(std::string fileToReadFrom) {
+bool loader::ReadSettings(std::string fileToReadFrom, int &color) {
+    std::ifstream myfile (fileToReadFrom);
+    std::string line;
     
+    if (!myfile.is_open()) {
+        std::cout << "Unable to open file" << std::endl << std::endl;
+        return false;
+    }
+    
+    while (getline(myfile, line)) {
+        color = std::stoi(line);
+    }
+    
+    myfile.close();
+    
+    return true;
 }
 
 bool loader::WriteMarket(std::string fileToWriteTo) {

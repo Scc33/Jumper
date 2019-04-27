@@ -8,3 +8,4 @@ extern bool settingsRunning;
 extern bool hScoreMenuRunning;
 
 extern std::string hScoreFileLoc;
+extern std::string settingsFileLoc;

@@ -26,6 +26,7 @@ void settingsMenu::onButtonEvent(ofxDatGuiButtonEvent e) {
 void settingsMenu::onDropdownEvent(ofxDatGuiDropdownEvent e) {
     ofSetBackgroundColor(colors[e.child]);
     colorMenu->setStripeColor(ofColor::white);
+    loader::WriteSettings(settingsFileLoc, colors[e.child].getHex());
 }
 
 void settingsMenu::setupSettingsButtons() {
@@ -68,7 +69,9 @@ string settingsMenu::getHex(int hex) {
     // convert decimal value to hex //
     std::stringstream ss;
     ss<< std::hex << hex;
-    std::string res ( ss.str() );
-    while(res.size() < 6) res+="0";
-    return "#"+ofToUpper(res);
+    std::string res (ss.str());
+    while(res.size() < 6) {
+        res += "0";
+    }
+    return "#" + ofToUpper(res);
 }

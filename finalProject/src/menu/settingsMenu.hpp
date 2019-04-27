@@ -3,6 +3,7 @@
 #include "ofxDatGui.h"
 #include "ofxDatGuiGameTheme.h"
 #include "globals.hpp"
+#include "load.hpp"
 
 class settingsMenu {
 private:
