@@ -18,9 +18,6 @@ void ofApp::setup() {
     player.setPlayer(posX, posY, cellSize);
     game.setup(ofGetWidth(), ofGetHeight(), cellSize);
     
-    //Position the buttons in the middle of the screen and register to listen for events
-    //setupEndgame();
-    
     loader::ReadScores(hScoreFileLoc, highScores, highScoreNames);
     newHighScore = false;
     newHighScoreName = "";
@@ -65,7 +62,6 @@ void ofApp::update() {
             gameEndedScreen = true;
             
             gameEndedM.setNewScore(score);
-            
             gameEndedM.highScoreInput->setFocused(true);
         }
         runGame();
@@ -156,51 +152,6 @@ int ofApp::gravityCalculation() {
     }
 }
 
-/*
-bool ofApp::isHighScore() {
-    for (int oldhighScore : highScores) {
-        if (score >= oldhighScore) {
-            return true;
-        }
-    }
-    
-    return false;
-}*/
-
-/*void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
-    if (e.target == highScoreConfirm) {
-        startMenuRunning = true;
-        gameEndedScreen = false;
-        
-        int position = 0;
-        highScores = highScoreCalculator::calcNewHighScores(score, highScores, position);
-        highScoreNames = highScoreCalculator::calcNewHighScoreNames(newHighScoreName, highScoreNames, position);
-        
-        loader::WriteScores(hScoreFileLoc, highScores, highScoreNames);
-        hScoreM.updateHighScores();
-        
-        highScoreInput->setFocused(false);
-    }
-}*/
-
-/*void ofApp::onTextInputEvent(ofxDatGuiTextInputEvent e) {
-    newHighScoreName = e.text;
-}
-
-void ofApp::setupEndgame() {
-    highScoreInput = new ofxDatGuiTextInput("TEXT INPUT", "Type Something Here");
-    highScoreConfirm = new ofxDatGuiButton("Confirm name");
-    
-    highScoreInput->onTextInputEvent(this, &ofApp::onTextInputEvent);
-    highScoreConfirm->onButtonEvent(this, &ofApp::onButtonEvent);
-    
-    highScoreInput->setWidth(800, .2);
-    highScoreInput->setPosition(ofGetWidth()/2 - highScoreInput->getWidth()/2, 240);
-    highScoreConfirm->setPosition(ofGetWidth()/2 - highScoreConfirm->getWidth()/2, ofGetHeight()/2 + 80);
-    
-    highScoreConfirm->setTheme(gameTheme);
-}*/
-
 void ofApp::runGame() {
     game.update();
     
@@ -282,24 +233,3 @@ void ofApp::setupGame() {
     chanceOfNewObstacle = 0;
     updateChanceOfNewObstacle = .005;
 }
-
-/*
-void ofApp::runGameEnded() {
-    highScoreInput->update();
-    highScoreConfirm->update();
-}
-
-void ofApp::drawGameEnded() {
-    if (newHighScore) {
-        ofDrawBitmapString("Congrats on the new High Score", 100, 100);
-        ofDrawBitmapString("Your score was... " + ofToString(score), 150, 150);
-        ofDrawBitmapString("Please enter in your name", 200, 200);
-        highScoreInput->draw();
-        highScoreConfirm->draw();
-    } else {
-        ofDrawBitmapString("Game over", 100, 100);
-        ofDrawBitmapString("Your score was... " + ofToString(score), 150, 150);
-        ofDrawBitmapString("Press 'm' to go to the main colorMenu", 200, 200);
-    }
-}
-*/

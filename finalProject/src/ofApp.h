@@ -67,14 +67,4 @@ public:
     int gravityCalculation();
     bool hasCollided();
     bool isHighScore();
-    
-    //Endamge high score input
-    //ofxDatGuiTextInput* highScoreInput;
-    //ofxDatGuiButton* highScoreConfirm;
-    //void setupEndgame();
-
-    //Functions to handle all DatGui events
-    void onButtonEvent(ofxDatGuiButtonEvent e);
-    void onTextInputEvent(ofxDatGuiTextInputEvent e);
-    void onDropdownEvent(ofxDatGuiDropdownEvent e);
 };
