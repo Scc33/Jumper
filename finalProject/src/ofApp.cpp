@@ -18,6 +18,9 @@ void ofApp::setup() {
     player.setPlayer(posX, posY, cellSize);
     grid.setup(ofGetWidth(), ofGetHeight(), cellSize);
     
+    game.setGameGrid(grid.getCols(), grid.getRows(), cellSize);
+    game.setGamePlayer(player);
+    
     loader::ReadScores(hScoreFileLoc, highScores, highScoreNames);
     newHighScoreName = "";
     
@@ -40,7 +43,8 @@ void ofApp::setup() {
 //--------------------------------------------------------------
 void ofApp::update() {
     if (startMenuRunning != gameStarted) {
-        setupGame();
+        //setupGame();
+        game.setupGame();
         gameStarted = startMenuRunning;
     }
     
@@ -56,14 +60,15 @@ void ofApp::update() {
     if (startMenuRunning) {
         mainM.runStartMenu();
     } else if (gameRunning) {
-        if (hasCollided()) {
+        if (game.hasCollided()) {
             gameRunning = false;
             gameEndedScreen = true;
             
-            gameEndedM.setNewScore(score);
+            gameEndedM.setNewScore(game.getScore());
             gameEndedM.highScoreInput->setFocused(true);
         }
-        runGame();
+        game.runGame();
+        //runGame();
     } else if (gameEndedScreen) {
         gameEndedM.runGameEnded();
     } else if (marketMenuRunning) {
@@ -82,7 +87,8 @@ void ofApp::draw() {
         mainM.drawStartMenu();
     } else if (gameRunning) {
         ofHideCursor();
-        drawGame();
+        game.drawGame();
+        //drawGame();
     } else if (gameEndedScreen) {
         ofShowCursor();
         gameEndedM.drawGameEnded();
@@ -97,18 +103,18 @@ void ofApp::draw() {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-    keyIsDown[key] = true;
+    game.keyIsDown[key] = true;
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-    keyIsDown[key] = false;
+    game.keyIsDown[key] = false;
 }
 
 /*
  Game functions
  */
-
+/*
 void ofApp::drawObstacles() {
     ofSetColor(200,50,50);
     ofFill();
@@ -232,3 +238,4 @@ void ofApp::setupGame() {
     chanceOfNewObstacle = 0;
     updateChanceOfNewObstacle = .005;
 }
+*/

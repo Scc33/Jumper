@@ -1,17 +1,16 @@
 #pragma once
-#include "ofxGameOfLife.h"
 #include "player.hpp"
 #include <vector>
 
 class Game {
 private:
-    const int cellSize = 10;
-
     double airtime;
     double chanceOfNewObstacle;
     double updateChanceOfNewObstacle;
-    double score;
-    ofxGameOfLife grid;
+    int score;
+    int gameCols;
+    int gameRows;
+    int cellSize;
     double posX;
     double posY;
     double velX;
@@ -26,10 +25,14 @@ public:
     bool keyIsDown[255];
     
     Game();
+    void setGameGrid(int gridCols, int gridRows, int setCellSize);
+    void setGamePlayer(Player &setPlayer);
     
     void runGame();
     void drawGame();
     void setupGame();
     
     bool hasCollided();
+    
+    int getScore();
 };
