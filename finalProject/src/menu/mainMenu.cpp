@@ -1,6 +1,4 @@
 #include "mainMenu.hpp"
-#include "player.hpp"
-#include "ofApp.h"
 
 mainMenu::mainMenu() {
     posX = 1;

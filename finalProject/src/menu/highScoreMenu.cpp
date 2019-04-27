@@ -1,5 +1,4 @@
 #include "highScoreMenu.hpp"
-#include "ofApp.h"
 
 highScoreMenu::highScoreMenu() {}
 
