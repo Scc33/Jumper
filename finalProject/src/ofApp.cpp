@@ -36,6 +36,8 @@ void ofApp::setup() {
     
     settingsM.setupSettingsButtons();
     
+    gameEndedM.setupEndgameButtons();
+    
     //loader::ReadSettings();
 }
 
@@ -162,49 +164,14 @@ bool ofApp::isHighScore() {
     return false;
 }
 
-std::vector<int> ofApp::calcNewHighScores(int score, std::vector<int> oldHighScores, int &pos) {
-    std::vector<int> newHighScores;
-    bool newScore = false;
-    
-    for (int i = 0; i < oldHighScores.size(); i++) {
-        if (score >= oldHighScores.at(i) && !newScore) {
-            newHighScores.push_back(score);
-            pos = i;
-            newScore = true;
-        }
-        newHighScores.push_back(oldHighScores.at(i));
-    }
-    newHighScores.pop_back();
-    
-    return newHighScores;
-}
-
-std::vector<std::string> ofApp::calcNewHighScoreNames(std::string name, std::vector<std::string> oldHighScoreNames, int pos) {
-    std::vector<std::string> newHighScoreNames;
-    
-    int count = 0;
-    std::cout << pos << std::endl;
-    for (int i = 0; i < oldHighScoreNames.size(); i++) {
-        if (count == pos) {
-            newHighScoreNames.push_back(name);
-        }
-        newHighScoreNames.push_back(oldHighScoreNames.at(i));
-        count++;
-    }
-    
-    newHighScoreNames.pop_back();
-
-    return newHighScoreNames;
-}
-
 void ofApp::onButtonEvent(ofxDatGuiButtonEvent e) {
     if (e.target == highScoreConfirm) {
         startMenuRunning = true;
         gameEndedScreen = false;
         
         int position = 0;
-        highScores = calcNewHighScores(score, highScores, position);
-        highScoreNames = calcNewHighScoreNames(newHighScoreName, highScoreNames, position);
+        highScores = highScoreCalculator::calcNewHighScores(score, highScores, position);
+        highScoreNames = highScoreCalculator::calcNewHighScoreNames(newHighScoreName, highScoreNames, position);
         
         loader::WriteScores(hScoreFileLoc, highScores, highScoreNames);
         hScoreM.setHighScores(highScores, highScoreNames);

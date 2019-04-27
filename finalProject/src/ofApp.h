@@ -8,7 +8,9 @@
 #include "highScoreMenu.hpp"
 #include "marketMenu.hpp"
 #include "settingsMenu.hpp"
+#include "gameEndedMenu.hpp"
 #include "load.hpp"
+#include "highScoreCalculator.hpp"
 #include "ofxDatGuiGameTheme.h"
 #include "globals.hpp"
 
@@ -22,6 +24,7 @@ private:
     highScoreMenu hScoreM;
     marketMenu marketM;
     settingsMenu settingsM;
+    gameEndedMenu gameEndedM;
     
     bool gameStarted;
     double airtime;
@@ -64,8 +67,6 @@ public:
     int gravityCalculation();
     bool hasCollided();
     bool isHighScore();
-    std::vector<int> calcNewHighScores(int score, std::vector<int> oldHighScores, int &pos);
-    std::vector<std::string> calcNewHighScoreNames(std::string name, std::vector<std::string> oldHighScoreName, int pos);
     
     //Endamge high score input
     ofxDatGuiTextInput* highScoreInput;
