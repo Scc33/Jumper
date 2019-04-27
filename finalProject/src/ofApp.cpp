@@ -63,8 +63,9 @@ void ofApp::update() {
         if (hasCollided()) {
             gameRunning = false;
             gameEndedScreen = true;
+            
             gameEndedM.setNewScore(score);
-            gameEndedM.newHighScore = gameEndedM.isHighScore();
+            
             gameEndedM.highScoreInput->setFocused(true);
         }
         runGame();

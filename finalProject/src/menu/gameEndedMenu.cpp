@@ -17,7 +17,11 @@ void gameEndedMenu::setupEndgameButtons() {
 }
 
 void gameEndedMenu::setNewScore(int setScore) {
+    std::cout << 2;
     score = setScore;
+    
+    loader::ReadScores(hScoreFileLoc, highScores, highScoreNames);
+    newHighScore = isHighScore();
 }
 
 void gameEndedMenu::runGameEnded() {
@@ -41,6 +45,7 @@ void gameEndedMenu::drawGameEnded() {
 
 bool gameEndedMenu::isHighScore() {
     for (int oldhighScore : highScores) {
+        std::cout << 1 << std::endl;
         if (score >= oldhighScore) {
             return true;
         }
