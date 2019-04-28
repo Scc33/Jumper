@@ -23,6 +23,11 @@ void gameEndedMenu::setupEndgameButtons() {
 void gameEndedMenu::setNewScore(int setScore) {
     score = setScore;
     
+    int newScore = 0;
+    loader::ReadMoney(moneyFileLoc, newScore);
+    newScore += score;
+    loader::WriteMoney(moneyFileLoc, newScore);
+    
     loader::ReadScores(hScoreFileLoc, highScores, highScoreNames);
     newHighScore = isHighScore();
 }

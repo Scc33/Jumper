@@ -3,6 +3,7 @@
 #include "ofxDatGuiGameTheme.h"
 #include "player.hpp"
 #include "globals.hpp"
+#include "load.hpp"
 
 class mainMenu {
 private:

@@ -46,6 +46,8 @@ void mainMenu::runStartMenu() {
     settingsButton->update();
     highScoreButton->update();
     exitButton->update();
+    
+    loader::ReadMoney(moneyFileLoc, totalMoney);
 }
 
 void mainMenu::drawStartMenu() {

@@ -7,6 +7,8 @@ void marketMenu::runMarket() {
     greenThemeButton->update();
     purpleThemeButton->update();
     marketBackButton->update();
+    
+    loader::ReadMoney(moneyFileLoc, totalMoney);
 }
 
 void marketMenu::drawMarket() {
