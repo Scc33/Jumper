@@ -14,7 +14,6 @@
 
 class ofApp : public ofBaseApp {
 private:
-    const char menuButton = 'm';
     const int cellSize = 10;
     
     Game game;

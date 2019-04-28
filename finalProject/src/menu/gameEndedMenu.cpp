@@ -46,7 +46,6 @@ void gameEndedMenu::drawGameEnded() {
     } else {
         ofDrawBitmapString("Game over", 100, 100);
         ofDrawBitmapString("Your score was... " + ofToString(score), 150, 150);
-        ofDrawBitmapString("Press 'm' to go to the main colorMenu", 200, 200);
         endButton->draw();
     }
 }

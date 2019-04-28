@@ -41,15 +41,6 @@ void ofApp::update() {
         gameStarted = startMenuRunning;
     }
     
-    if (game.keyIsDown[menuButton]) {
-        startMenuRunning = true;
-        gameRunning = false;
-        gameEndedScreen = false;
-        marketMenuRunning = false;
-        settingsRunning = false;
-        hScoreMenuRunning = false;
-    }
-    
     if (startMenuRunning) {
         mainM.runStartMenu();
     } else if (gameRunning) {
