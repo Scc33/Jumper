@@ -1,8 +1,11 @@
 #include "marketMenu.hpp"
 
-marketMenu::marketMenu() {}
+marketMenu::marketMenu() {
+    littleMoney = false;
+}
 
 void marketMenu::runMarket() {
+    redThemeButton->update();
     blueThemeButton->update();
     greenThemeButton->update();
     purpleThemeButton->update();
@@ -12,30 +15,39 @@ void marketMenu::runMarket() {
 }
 
 void marketMenu::drawMarket() {
+    redThemeButton->draw();
     blueThemeButton->draw();
     greenThemeButton->draw();
     purpleThemeButton->draw();
     marketBackButton->draw();
     
     ofDrawBitmapString("Your total money is " + ofToString(totalMoney), ofGetWidth() * 4 / 5, ofGetHeight() / 10);
+    
+    if (littleMoney) {
+        ofDrawBitmapString("You need more money for that", ofGetWidth() * 4 /5, ofGetHeight() / 2);
+    }
 }
 
 void marketMenu::setupMarketButtons() {
+    redThemeButton = new ofxDatGuiButton("Red Player");
     blueThemeButton = new ofxDatGuiButton("Blue player");
     greenThemeButton = new ofxDatGuiButton("Green player");
     purpleThemeButton = new ofxDatGuiButton("Purple player");
     marketBackButton = new ofxDatGuiButton("Back");
     
+    redThemeButton->onButtonEvent(this, &marketMenu::onButtonEvent);
     blueThemeButton->onButtonEvent(this, &marketMenu::onButtonEvent);
     greenThemeButton->onButtonEvent(this, &marketMenu::onButtonEvent);
     purpleThemeButton->onButtonEvent(this, &marketMenu::onButtonEvent);
     marketBackButton->onButtonEvent(this, &marketMenu::onButtonEvent);
     
+    redThemeButton->setPosition(ofGetWidth()/2 - redThemeButton->getWidth()/2, ofGetHeight()/2 - 135);
     blueThemeButton->setPosition(ofGetWidth()/2 - blueThemeButton->getWidth()/2, ofGetHeight()/2 - 90);
     greenThemeButton->setPosition(blueThemeButton->getX(), blueThemeButton->getY() + 45);
     purpleThemeButton->setPosition(blueThemeButton->getX(), blueThemeButton->getY() + 90);
     marketBackButton->setPosition(blueThemeButton->getX(), blueThemeButton->getY() + 135);
     
+    redThemeButton->setTheme(new ofxDatGuiGameTheme(16));
     blueThemeButton->setTheme(new ofxDatGuiGameTheme(16));
     greenThemeButton->setTheme(new ofxDatGuiGameTheme(16));
     purpleThemeButton->setTheme(new ofxDatGuiGameTheme(16));
@@ -46,11 +58,26 @@ void marketMenu::onButtonEvent(ofxDatGuiButtonEvent e) {
     if (e.target == marketBackButton) {
         startMenuRunning = true;
         marketMenuRunning = false;
+        littleMoney = false;
+    } else if (e.target == redThemeButton) {
+        littleMoney = false;
     } else if (e.target == blueThemeButton) {
-        
+        if (totalMoney < 10) {
+            littleMoney = true;
+        } else {
+            littleMoney = false;
+        }
     } else if (e.target == greenThemeButton) {
-        
+        if (totalMoney < 50) {
+            littleMoney = true;
+        } else {
+            littleMoney = false;
+        }
     } else if (e.target == purpleThemeButton) {
-        
+        if (totalMoney < 100) {
+            littleMoney = true;
+        } else {
+            littleMoney = false;
+        }
     }
 }

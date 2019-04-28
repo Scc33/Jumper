@@ -6,10 +6,13 @@
 
 class marketMenu {
 private:
+    ofxDatGuiButton* redThemeButton;
     ofxDatGuiButton* blueThemeButton;
     ofxDatGuiButton* greenThemeButton;
     ofxDatGuiButton* purpleThemeButton;
     ofxDatGuiButton* marketBackButton;
+    
+    bool littleMoney;
     
 public:
     marketMenu();
