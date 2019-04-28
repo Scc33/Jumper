@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup() {
     ofSetWindowTitle("Game");
-    ofSetFullscreen(true);
+    ofSetFullscreen(fullScreen);
     ofSetFrameRate(60);
     
     posX = 1;

@@ -12,3 +12,5 @@ extern std::string settingsFileLoc;
 extern std::string moneyFileLoc;
 
 extern int totalMoney;
+
+extern bool fullScreen;

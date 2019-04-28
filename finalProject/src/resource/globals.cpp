@@ -13,3 +13,5 @@ std::string settingsFileLoc = "/Users/coughlin/Documents/School/CS 126 C++/of_v0
 std::string moneyFileLoc = "/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/money.txt";
 
 int totalMoney = 0;
+
+bool fullScreen = false;

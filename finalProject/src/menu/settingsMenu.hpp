@@ -7,8 +7,9 @@
 
 class settingsMenu {
 private:
-    ofxDatGuiButton* confirmSettingsButton;
     ofxDatGuiDropdown* colorMenu;
+    ofxDatGuiButton* fullScreenButton;
+    ofxDatGuiButton* windowScreenButton;
     ofxDatGuiButton* settingsBackButton;
     
     bool fullScreen;

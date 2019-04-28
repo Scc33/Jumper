@@ -24,7 +24,7 @@ void marketMenu::drawMarket() {
     ofDrawBitmapString("Your total money is " + ofToString(totalMoney), ofGetWidth() * 4 / 5, ofGetHeight() / 10);
     
     if (littleMoney) {
-        ofDrawBitmapString("You need more money for that", ofGetWidth() * 4 /5, ofGetHeight() / 2);
+        ofDrawBitmapString("You need more money for that", ofGetWidth() * 2 / 3, ofGetHeight() / 2);
     }
 }
 
