@@ -29,10 +29,10 @@ void marketMenu::drawMarket() {
 }
 
 void marketMenu::setupMarketButtons() {
-    redThemeButton = new ofxDatGuiButton("Red Player");
-    blueThemeButton = new ofxDatGuiButton("Blue player");
-    greenThemeButton = new ofxDatGuiButton("Green player");
-    purpleThemeButton = new ofxDatGuiButton("Purple player");
+    redThemeButton = new ofxDatGuiButton("Red Player: 50");
+    blueThemeButton = new ofxDatGuiButton("Blue player: 10");
+    greenThemeButton = new ofxDatGuiButton("Green player: 0");
+    purpleThemeButton = new ofxDatGuiButton("Purple player: 100");
     marketBackButton = new ofxDatGuiButton("Back");
     
     redThemeButton->onButtonEvent(this, &marketMenu::onButtonEvent);
@@ -60,7 +60,11 @@ void marketMenu::onButtonEvent(ofxDatGuiButtonEvent e) {
         marketMenuRunning = false;
         littleMoney = false;
     } else if (e.target == redThemeButton) {
-        littleMoney = false;
+        if (totalMoney < 50) {
+            littleMoney = true;
+        } else {
+            littleMoney = false;
+        }
     } else if (e.target == blueThemeButton) {
         if (totalMoney < 10) {
             littleMoney = true;
@@ -68,11 +72,7 @@ void marketMenu::onButtonEvent(ofxDatGuiButtonEvent e) {
             littleMoney = false;
         }
     } else if (e.target == greenThemeButton) {
-        if (totalMoney < 50) {
-            littleMoney = true;
-        } else {
-            littleMoney = false;
-        }
+        littleMoney = false;
     } else if (e.target == purpleThemeButton) {
         if (totalMoney < 100) {
             littleMoney = true;
