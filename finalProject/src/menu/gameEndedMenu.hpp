@@ -15,6 +15,7 @@ private:
     std::vector<std::string> highScoreNames;
     
     ofxDatGuiButton* highScoreConfirm;
+    ofxDatGuiButton* endButton;
     
 public:
     ofxDatGuiTextInput* highScoreInput;
