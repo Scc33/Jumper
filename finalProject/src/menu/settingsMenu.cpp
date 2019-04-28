@@ -14,6 +14,8 @@ void settingsMenu::drawSettingsMenu() {
     colorMenu->draw();
     fullScreenButton->draw();
     windowScreenButton->draw();
+    
+    ofDrawBitmapString("Changing window status requires restart", ofGetWidth() * 2 / 3, ofGetHeight() / 2);
 }
 
 void settingsMenu::onButtonEvent(ofxDatGuiButtonEvent e) {
@@ -21,18 +23,28 @@ void settingsMenu::onButtonEvent(ofxDatGuiButtonEvent e) {
         startMenuRunning = true;
         settingsRunning = false;
     } else if (e.target == fullScreenButton) {
+        int color = 0;
+        loader::ReadSettings(settingsFileLoc, color, fullScreen);
+        
         fullScreen = true;
         ofSetFullscreen(fullScreen);
+        
+        loader::WriteSettings(settingsFileLoc, color, fullScreen);
     } else if (e.target == windowScreenButton) {
+        int color = 0;
+        loader::ReadSettings(settingsFileLoc, color, fullScreen);
+        
         fullScreen = false;
         ofSetFullscreen(fullScreen);
+        
+        loader::WriteSettings(settingsFileLoc, color, fullScreen);
     }
 }
 
 void settingsMenu::onDropdownEvent(ofxDatGuiDropdownEvent e) {
     ofSetBackgroundColor(colors[e.child]);
     colorMenu->setStripeColor(ofColor::white);
-    loader::WriteSettings(settingsFileLoc, e.child);
+    loader::WriteSettings(settingsFileLoc, e.child, fullScreen);
 }
 
 void settingsMenu::setupSettingsButtons() {

@@ -2,7 +2,11 @@
 
 //--------------------------------------------------------------
 void ofApp::setup() {
-    ofSetWindowTitle("Game");
+    int backgroundColor = 0;
+    loader::ReadSettings(settingsFileLoc, backgroundColor, fullScreen);
+    loader::ReadMoney(moneyFileLoc, totalMoney);
+    
+    ofSetWindowTitle("Jumper");
     ofSetFullscreen(fullScreen);
     ofSetFrameRate(60);
     
@@ -29,11 +33,7 @@ void ofApp::setup() {
     
     gameEndedM.setupEndgameButtons();
     
-    int backgroundColor = 0;
-    loader::ReadSettings(settingsFileLoc, backgroundColor);
     ofSetBackgroundColor(settingsM.colors[backgroundColor]);
-    
-    loader::ReadMoney(moneyFileLoc, totalMoney);
 }
 
 //--------------------------------------------------------------

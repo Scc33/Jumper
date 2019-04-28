@@ -46,18 +46,18 @@ bool loader::ReadScores(std::string fileToReadFrom, std::vector<int> &highScores
     return true;
 }
 
-bool loader::WriteSettings(std::string fileToWriteTo, int color) {
+bool loader::WriteSettings(std::string fileToWriteTo, int color, bool fullScreen) {
     std::ofstream myfile;
     myfile.open(fileToWriteTo, std::ios::in);
     
-    myfile << color;
+    myfile << color << std::endl << fullScreen;
     
     myfile.close();
     
     return true;
 }
 
-bool loader::ReadSettings(std::string fileToReadFrom, int &color) {
+bool loader::ReadSettings(std::string fileToReadFrom, int &color, bool &fullScreen) {
     std::ifstream myfile (fileToReadFrom);
     std::string line;
     
@@ -66,8 +66,14 @@ bool loader::ReadSettings(std::string fileToReadFrom, int &color) {
         return false;
     }
     
+    int count = 0;
     while (getline(myfile, line)) {
-        color = std::stoi(line);
+        if (count == 0) {
+            color = std::stoi(line);
+        } else {
+            fullScreen = std::stoi(line);
+        }
+        count++;
     }
     
     myfile.close();
