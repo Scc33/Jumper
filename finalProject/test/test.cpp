@@ -8,6 +8,8 @@
 #include "highScoreMenu.hpp"
 #include "marketMenu.hpp"
 #include "settingsMenu.hpp"
+#include "gameEndedMenu.hpp"
+#include "globals.hpp"
 
 int main(int argc, char* argv[]) {
     // global setup...
@@ -63,7 +65,7 @@ TEST_CASE("Settings menu") {
 }
 
 TEST_CASE("Engame") {
-    
+    gameEndedMenu endM;
 }
 
 TEST_CASE("Read and writing scores") {
@@ -71,36 +73,46 @@ TEST_CASE("Read and writing scores") {
     std::vector<std::string> highScoreNames;
     
     SECTION("Read score") {
-        REQUIRE(loader::ReadScores("/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/highScores.txt", highScores, highScoreNames) == true);
+        REQUIRE(loader::ReadScores(hScoreFileLoc, highScores, highScoreNames) == true);
     }
     
     SECTION("Write scores") {
-        REQUIRE(loader::WriteScores("/Users/coughlin/Documents/School/CS 126 C++/of_v0.10.1_osx_release/apps/myApps/final-project-Scc33/finalProject/bin/data/highScores.txt", highScores, highScoreNames) == true);
+        REQUIRE(loader::WriteScores(hScoreFileLoc, highScores, highScoreNames) == true);
     }
 }
 
-TEST_CASE("Other reading and writing") {
-    SECTION("Write settings") {
-        
-    }
+TEST_CASE("Read and writing settings") {
+    int color = -1;
+    REQUIRE(loader::ReadSettings(settingsFileLoc, color) == true);
     
     SECTION("Read settings") {
+        REQUIRE(color != -1);
+    }
+    
+    SECTION("Write settings") {
+        REQUIRE(loader::WriteSettings(settingsFileLoc, color) == true);
+    }
+}
+
+TEST_CASE("Read and write market") {
+    SECTION("Read market") {
         
     }
     
     SECTION("Write market") {
         
     }
+}
+
+TEST_CASE("Read and write money") {
+    int money = -1;
+    REQUIRE(loader::ReadMoney(moneyFileLoc, money) == true);
     
-    SECTION("Read market") {
-        
+    SECTION("Read money") {
+        REQUIRE(money != -1);
     }
     
     SECTION("Write money") {
-        
-    }
-    
-    SECTION("Read money") {
-        
+        REQUIRE(loader::WriteMoney(moneyFileLoc, money) == true);
     }
 }
