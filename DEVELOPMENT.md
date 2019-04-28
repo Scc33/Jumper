@@ -98,3 +98,10 @@ Today I also took care of two smaller tasks. One was adding const to all my func
 **Week Four**
 
 *4/28/19*\
+An odd bug that I've been having for awhile is the user cannot input 'm' anywhere in their high score name. I finally figured out today this is because 'm' is triggering the command to go home. So, I updated the game endscreen with a home button and removed the 'm' control. Next, I added the ability to read total money from a file which allows for the long term tracking of total money for the marketplace. Then I tested all the reading and writing funcitons.
+
+After this I headed over to the market menu to add some functionality there. It now checks to see if the user has enough money for a given purchase and tomorrow I am going to implement the actual effect of a purchase. Finally today I added the ability for the user to toggle between windowed and full screen modes. Unfortunately ofxDatGui seems to struggle with this task. Unable to find a workaround I simply provide a warning to the user that changing from windowed to full screen and from full screen to windowed requires a restart. I think I now have all the settings I want, but if I have a little extra time I am going to add the ability to change game speed. 
+
+Up to-do tomorrow is completing the marketplace and tweaking the gameplay to be harder.
+
+*4/29/19*\
