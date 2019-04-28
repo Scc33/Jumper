@@ -14,12 +14,14 @@ void marketMenu::drawMarket() {
     greenThemeButton->draw();
     purpleThemeButton->draw();
     marketBackButton->draw();
+    
+    ofDrawBitmapString("Your total money is " + ofToString(totalMoney), ofGetWidth() * 4 / 5, ofGetHeight() / 10);
 }
 
 void marketMenu::setupMarketButtons() {
-    blueThemeButton = new ofxDatGuiButton("Blue theme");
-    greenThemeButton = new ofxDatGuiButton("Green theme");
-    purpleThemeButton = new ofxDatGuiButton("Purple theme");
+    blueThemeButton = new ofxDatGuiButton("Blue player");
+    greenThemeButton = new ofxDatGuiButton("Green player");
+    purpleThemeButton = new ofxDatGuiButton("Purple player");
     marketBackButton = new ofxDatGuiButton("Back");
     
     blueThemeButton->onButtonEvent(this, &marketMenu::onButtonEvent);

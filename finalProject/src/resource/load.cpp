@@ -83,10 +83,31 @@ bool loader::ReadMarket(std::string fileToReadFrom) {
     
 }
 
-bool loader::WriteMoney(std::string fileToWriteTo) {
+bool loader::WriteMoney(std::string fileToWriteTo, int money) {
+    std::ofstream myfile;
+    myfile.open(fileToWriteTo, std::ios::in);
     
+    myfile << money;
+    
+    myfile.close();
+    
+    return true;
 }
 
-bool loader::ReadMoney(std::string fileToReadFrom) {
+bool loader::ReadMoney(std::string fileToReadFrom, int &money) {
+    std::ifstream myfile (fileToReadFrom);
+    std::string line;
     
+    if (!myfile.is_open()) {
+        std::cout << "Unable to open file" << std::endl << std::endl;
+        return false;
+    }
+    
+    while (getline(myfile, line)) {
+        money = std::stoi(line);
+    }
+    
+    myfile.close();
+    
+    return true;
 }

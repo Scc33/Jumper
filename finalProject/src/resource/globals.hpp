@@ -9,3 +9,6 @@ extern bool hScoreMenuRunning;
 
 extern std::string hScoreFileLoc;
 extern std::string settingsFileLoc;
+extern std::string moneyFileLoc;
+
+extern int totalMoney;

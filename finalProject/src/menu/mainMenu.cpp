@@ -56,6 +56,8 @@ void mainMenu::drawStartMenu() {
     settingsButton->draw();
     highScoreButton->draw();
     exitButton->draw();
+    
+    ofDrawBitmapString("Your total money is " + ofToString(totalMoney), ofGetWidth() * 4 / 5, ofGetHeight() / 10);
 }
 
 void mainMenu::onButtonEvent(ofxDatGuiButtonEvent e) {

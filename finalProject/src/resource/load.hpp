@@ -14,6 +14,6 @@ namespace loader {
     bool WriteMarket(std::string fileToWriteTo);
     bool ReadMarket(std::string fileToReadFrom);
     
-    bool WriteMoney(std::string fileToWriteTo);
-    bool ReadMoney(std::string fileToReadFrom);
+    bool WriteMoney(std::string fileToWriteTo, int money);
+    bool ReadMoney(std::string fileToReadFrom, int &money);
 }

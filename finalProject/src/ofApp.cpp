@@ -32,6 +32,8 @@ void ofApp::setup() {
     int backgroundColor = 0;
     loader::ReadSettings(settingsFileLoc, backgroundColor);
     ofSetBackgroundColor(settingsM.colors[backgroundColor]);
+    
+    loader::ReadMoney(moneyFileLoc, totalMoney);
 }
 
 //--------------------------------------------------------------
