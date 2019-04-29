@@ -1,10 +1,14 @@
 #pragma once
+#include "globals.hpp"
+#include "ofMain.h"
+#include <vector>
 
 class Player {
 private:
     double posX;
     double posY;
     int cellSize;
+    std::vector<ofColor> colors;
     
 public:
     Player();

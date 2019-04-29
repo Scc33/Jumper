@@ -5,6 +5,7 @@ void ofApp::setup() {
     int backgroundColor = 0;
     loader::ReadSettings(settingsFileLoc, backgroundColor, fullScreen);
     loader::ReadMoney(moneyFileLoc, totalMoney);
+    loader::ReadMarket(marketFileLoc, playerColor);
     
     ofSetWindowTitle("Jumper");
     ofSetFullscreen(fullScreen);
@@ -43,6 +44,7 @@ void ofApp::update() {
         gameStarted = startMenuRunning;
     }
     
+    //ofSetColor(255,255,255);
     if (startMenuRunning) {
         mainM.runStartMenu();
     } else if (gameRunning) {

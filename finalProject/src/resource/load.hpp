@@ -11,8 +11,8 @@ namespace loader {
     bool WriteSettings(std::string fileToWriteTo, int color, bool fullScreen);
     bool ReadSettings(std::string fileToReadFrom, int &color, bool &fullScreen);
     
-    bool WriteMarket(std::string fileToWriteTo);
-    bool ReadMarket(std::string fileToReadFrom);
+    bool WriteMarket(std::string fileToWriteTo, int color);
+    bool ReadMarket(std::string fileToReadFrom, int &color);
     
     bool WriteMoney(std::string fileToWriteTo, int money);
     bool ReadMoney(std::string fileToReadFrom, int &money);

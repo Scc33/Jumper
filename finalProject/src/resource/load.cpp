@@ -81,12 +81,33 @@ bool loader::ReadSettings(std::string fileToReadFrom, int &color, bool &fullScre
     return true;
 }
 
-bool loader::WriteMarket(std::string fileToWriteTo) {
+bool loader::WriteMarket(std::string fileToWriteTo, int color) {
+    std::ofstream myfile;
+    myfile.open(fileToWriteTo, std::ios::in);
     
+    myfile << color;
+    
+    myfile.close();
+    
+    return true;
 }
 
-bool loader::ReadMarket(std::string fileToReadFrom) {
+bool loader::ReadMarket(std::string fileToReadFrom, int &color) {
+    std::ifstream myfile (fileToReadFrom);
+    std::string line;
     
+    if (!myfile.is_open()) {
+        std::cout << "Unable to open file" << std::endl << std::endl;
+        return false;
+    }
+    
+    while(getline(myfile, line)) {
+        color = std::stoi(line);
+    }
+    
+    myfile.close();
+    
+    return true;
 }
 
 bool loader::WriteMoney(std::string fileToWriteTo, int money) {

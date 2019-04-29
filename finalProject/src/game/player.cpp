@@ -1,8 +1,11 @@
 #include "player.hpp"
-#include "ofMain.h"
 
 Player::Player() {
-    
+    colors.push_back(ofColor::fromHex(16764939));
+    colors.push_back(ofColor::fromHex(3121622));
+    colors.push_back(ofColor::fromHex(2020207));
+    colors.push_back(ofColor::fromHex(12989014));
+    colors.push_back(ofColor::fromHex(3289650));
 }
 
 void Player::setPlayer(double setX, double setY, int setCellSize) {
@@ -17,7 +20,7 @@ void Player::updatePlayerLocation(double updateX, double updateY) {
 }
 
 void Player::drawPlayer() {
-    ofSetColor(0, 255, 0);
+    ofSetColor(colors[playerColor]);
     ofFill();
     
     ofDrawRectangle(posX*cellSize, posY*cellSize, cellSize, cellSize);
