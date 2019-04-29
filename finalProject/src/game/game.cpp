@@ -19,7 +19,7 @@ void Game::drawObstacles() {
     
     for (int i = 0; i < obstacles.size(); i++) {
         ofDrawRectangle(obstacles.at(i), gameRows * cellSize - 340, cellSize, cellSize * 4);
-        obstacles.at(i) -= 2;
+        obstacles.at(i) -= 2.5;
         
         if (obstacles.at(i) < 0) {
             obstacles.erase(obstacles.begin());
@@ -42,7 +42,7 @@ bool Game::hasCollided() const {
 //Needs tweaking to look better
 int Game::gravityCalculation() {
     if (posY < gameRows - 34) {
-        airtime += .02;
+        airtime += .024;
         posY += 1 * airtime * airtime;
     } else {
         airtime = 0;
@@ -57,23 +57,23 @@ int Game::gravityCalculation() {
 
 void Game::runGame() {
     if (keyIsDown[' ']) {
-        posY -= .8;
+        posY -= .65;
     }
     
     if (keyIsDown['a']) {
-        posX -= .8;
+        posX -= .65;
     }
     
     if (keyIsDown['w']) {
-        posY -= .8;
+        posY -= .65;
     }
     
     if (keyIsDown['s']) {
-        posY += .8;
+        posY += .65;
     }
     
     if (keyIsDown['d']) {
-        posX += .8;
+        posX += .65;
     }
     
     if (posX < 1) {
@@ -93,7 +93,7 @@ void Game::runGame() {
     //Randomly adds a new obstacle
     //Chance of new obstacle being creating increases as game goes on
     chanceOfNewObstacle += ofRandom(0, updateChanceOfNewObstacle);
-    if (ofRandom(0, chanceOfNewObstacle) > 2) {
+    if (ofRandom(0, chanceOfNewObstacle) > 1.8) {
         obstacles.push_back(ofGetWidth());
         chanceOfNewObstacle = 0;
         updateChanceOfNewObstacle += .001;
