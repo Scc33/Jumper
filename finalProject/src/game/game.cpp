@@ -7,6 +7,7 @@ void Game::setGameGrid(int gridCols, int gridRows, int setCellSize) {
     gameCols = gridCols;
     gameRows = gridRows;
     cellSize = setCellSize;
+    speed = 3;
 }
 
 void Game::setGamePlayer(Player &setPlayer) {
@@ -14,12 +15,12 @@ void Game::setGamePlayer(Player &setPlayer) {
 }
 
 void Game::drawObstacles() {
-    ofSetColor(200,50,50);
+    ofSetColor(255,255,255);
     ofFill();
     
     for (int i = 0; i < obstacles.size(); i++) {
-        ofDrawRectangle(obstacles.at(i), gameRows * cellSize - 340, cellSize, cellSize * 4);
-        obstacles.at(i) -= 2.5;
+        ofDrawRectangle(obstacles.at(i), gameRows * cellSize - 360, cellSize, cellSize * 6);
+        obstacles.at(i) -= speed;
         
         if (obstacles.at(i) < 0) {
             obstacles.erase(obstacles.begin());
@@ -31,7 +32,7 @@ void Game::drawObstacles() {
 //This doesn't seem to work from some angles (Or too fast?)
 bool Game::hasCollided() const {
     for (int obstacle : obstacles) {
-        if (posX * cellSize <= obstacle && posX * cellSize >= obstacle - cellSize && posY > gameRows - 36) {
+        if (posX * cellSize <= obstacle && posX * cellSize >= obstacle - cellSize && posY > gameRows - 38) {
             return true;
         }
     }
@@ -57,23 +58,23 @@ int Game::gravityCalculation() {
 
 void Game::runGame() {
     if (keyIsDown[' ']) {
-        posY -= .65;
+        posY -= .60;
     }
     
     if (keyIsDown['a']) {
-        posX -= .65;
+        posX -= .60;
     }
     
     if (keyIsDown['w']) {
-        posY -= .65;
+        posY -= .60;
     }
     
     if (keyIsDown['s']) {
-        posY += .65;
+        posY += .60;
     }
     
     if (keyIsDown['d']) {
-        posX += .65;
+        posX += .60;
     }
     
     if (posX < 1) {
@@ -93,10 +94,11 @@ void Game::runGame() {
     //Randomly adds a new obstacle
     //Chance of new obstacle being creating increases as game goes on
     chanceOfNewObstacle += ofRandom(0, updateChanceOfNewObstacle);
-    if (ofRandom(0, chanceOfNewObstacle) > 1.8) {
+    if (ofRandom(0, chanceOfNewObstacle) > 1.7) {
         obstacles.push_back(ofGetWidth());
         chanceOfNewObstacle = 0;
-        updateChanceOfNewObstacle += .001;
+        updateChanceOfNewObstacle += .0012;
+        speed += 0.1;
     }
     
     player.updatePlayerLocation(posX, posY);
@@ -124,6 +126,7 @@ void Game::setupGame() {
     
     obstacles.clear();
     obstacles.push_back(ofGetWidth());
+    obstacles.push_back(ofGetWidth() * 3 / 2);
     chanceOfNewObstacle = 0;
     updateChanceOfNewObstacle = .005;
 }
