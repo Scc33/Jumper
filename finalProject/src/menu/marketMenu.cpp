@@ -64,20 +64,27 @@ void marketMenu::onButtonEvent(ofxDatGuiButtonEvent e) {
             littleMoney = true;
         } else {
             littleMoney = false;
+            playerColor = 0;
+            std::cout << playerColor << std::endl;
         }
     } else if (e.target == blueThemeButton) {
         if (totalMoney < 10) {
             littleMoney = true;
         } else {
             littleMoney = false;
+            playerColor = 1;
         }
     } else if (e.target == greenThemeButton) {
+        playerColor = 2;
         littleMoney = false;
     } else if (e.target == purpleThemeButton) {
         if (totalMoney < 100) {
             littleMoney = true;
         } else {
             littleMoney = false;
+            playerColor = 3;
         }
     }
+    std::cout << playerColor << std::endl;
+    loader::WriteMarket(marketFileLoc, playerColor);
 }

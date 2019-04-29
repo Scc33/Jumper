@@ -1,11 +1,10 @@
 #include "player.hpp"
 
 Player::Player() {
-    colors.push_back(ofColor::fromHex(16764939));
-    colors.push_back(ofColor::fromHex(3121622));
-    colors.push_back(ofColor::fromHex(2020207));
-    colors.push_back(ofColor::fromHex(12989014));
-    colors.push_back(ofColor::fromHex(3289650));
+    colors.push_back(ofColor::fromHex(0xff0012)); //Red
+    colors.push_back(ofColor::fromHex(0x526eff)); //Blue
+    colors.push_back(ofColor::fromHex(0x00ff3e)); //Green
+    colors.push_back(ofColor::fromHex(0x7f4fca)); //Purple
 }
 
 void Player::setPlayer(double setX, double setY, int setCellSize) {
@@ -20,6 +19,7 @@ void Player::updatePlayerLocation(double updateX, double updateY) {
 }
 
 void Player::drawPlayer() {
+    loader::ReadMarket(marketFileLoc, playerColor);
     ofSetColor(colors[playerColor]);
     ofFill();
     

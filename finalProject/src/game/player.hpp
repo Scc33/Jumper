@@ -2,6 +2,7 @@
 #include "globals.hpp"
 #include "ofMain.h"
 #include <vector>
+#include "load.hpp"
 
 class Player {
 private:
