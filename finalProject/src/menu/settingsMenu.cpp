@@ -10,6 +10,8 @@ void settingsMenu::runSettingsMenu() {
 }
 
 void settingsMenu::drawSettingsMenu() {
+    ofSetColor(255,255,255);
+    
     settingsBackButton->draw();
     colorMenu->draw();
     fullScreenButton->draw();

@@ -42,6 +42,8 @@ void gameEndedMenu::runGameEnded() {
 }
 
 void gameEndedMenu::drawGameEnded() {
+    ofSetColor(255,255,255);
+    
     if (newHighScore) {
         ofDrawBitmapString("Congrats on the new High Score", 100, 100);
         ofDrawBitmapString("Your score was... " + ofToString(score), 150, 150);

@@ -17,6 +17,8 @@ void highScoreMenu::updateHighScores() {
 }
 
 void highScoreMenu::drawHighScores() {
+    ofSetColor(255,255,255);
+    
     int pos = ofGetHeight()/2 - 180;
     
     for (int i = 0; i < highScores.size(); i++) {

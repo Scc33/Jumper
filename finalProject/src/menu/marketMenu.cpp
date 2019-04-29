@@ -21,6 +21,7 @@ void marketMenu::drawMarket() {
     purpleThemeButton->draw();
     marketBackButton->draw();
     
+    ofSetColor(255,255,255);
     ofDrawBitmapString("Your total money is " + ofToString(totalMoney), ofGetWidth() * 4 / 5, ofGetHeight() / 10);
     
     if (littleMoney) {

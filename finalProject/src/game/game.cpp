@@ -103,7 +103,7 @@ void Game::runGame() {
 }
 
 void Game::drawGame() {
-    ofSetColor(255,0,0);
+    ofSetColor(10,10,10);
     ofFill();
     ofDrawRectangle(0, gameRows * cellSize - 300, gameCols * cellSize, 300);
     
@@ -111,6 +111,7 @@ void Game::drawGame() {
     
     player.drawPlayer();
     
+    ofSetColor(255,255,255);
     ofDrawBitmapString("Your score is " + ofToString(score), ofGetWidth() * 4 / 5, ofGetHeight() / 10);
 }
 

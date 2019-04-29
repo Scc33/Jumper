@@ -44,7 +44,6 @@ void ofApp::update() {
         gameStarted = startMenuRunning;
     }
     
-    //ofSetColor(255,255,255);
     if (startMenuRunning) {
         mainM.runStartMenu();
     } else if (gameRunning) {
