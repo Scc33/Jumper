@@ -16,8 +16,6 @@ bool loader::WriteScores(std::string fileToWriteTo, std::vector<int> highScores,
     return true;
 }
 
-//Reads the model from a specified file and loads that data into a model object,
-//if can't open the file "Unable to open file" is printed
 bool loader::ReadScores(std::string fileToReadFrom, std::vector<int> &highScores, std::vector<std::string> &highScoreNames) {
     highScores.clear();
     highScoreNames.clear();

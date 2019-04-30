@@ -29,7 +29,6 @@ void Game::drawObstacles() {
     }
 }
 
-//This doesn't seem to work from some angles (Or too fast?)
 bool Game::hasCollided() const {
     for (int obstacle : obstacles) {
         if (posX * cellSize <= obstacle && posX * cellSize >= obstacle - cellSize && posY > gameRows - 38) {
@@ -40,7 +39,6 @@ bool Game::hasCollided() const {
     return false;
 }
 
-//Needs tweaking to look better
 int Game::gravityCalculation() {
     if (posY < gameRows - 34) {
         airtime += .024;
@@ -58,7 +56,7 @@ int Game::gravityCalculation() {
 
 void Game::runGame() {
     if (keyIsDown[' ']) {
-        posY -= .60;
+        posY -= .40;
     }
     
     if (keyIsDown['a']) {
@@ -94,10 +92,10 @@ void Game::runGame() {
     //Randomly adds a new obstacle
     //Chance of new obstacle being creating increases as game goes on
     chanceOfNewObstacle += ofRandom(0, updateChanceOfNewObstacle);
-    if (ofRandom(0, chanceOfNewObstacle) > 1.7) {
+    if (ofRandom(0, chanceOfNewObstacle) > 17) {
         obstacles.push_back(ofGetWidth());
         chanceOfNewObstacle = 0;
-        updateChanceOfNewObstacle += .0012;
+        updateChanceOfNewObstacle += .012;
         speed += 0.1;
     }
     
@@ -105,7 +103,7 @@ void Game::runGame() {
 }
 
 void Game::drawGame() {
-    ofSetColor(10,10,10);
+    ofSetColor(15,15,15);
     ofFill();
     ofDrawRectangle(0, gameRows * cellSize - 300, gameCols * cellSize, 300);
     
@@ -128,7 +126,7 @@ void Game::setupGame() {
     obstacles.push_back(ofGetWidth());
     obstacles.push_back(ofGetWidth() * 3 / 2);
     chanceOfNewObstacle = 0;
-    updateChanceOfNewObstacle = .005;
+    updateChanceOfNewObstacle = .05;
 }
 
 int Game::getScore() const {

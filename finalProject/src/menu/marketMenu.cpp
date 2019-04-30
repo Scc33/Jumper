@@ -86,6 +86,6 @@ void marketMenu::onButtonEvent(ofxDatGuiButtonEvent e) {
             playerColor = 3;
         }
     }
-    std::cout << playerColor << std::endl;
+
     loader::WriteMarket(marketFileLoc, playerColor);
 }

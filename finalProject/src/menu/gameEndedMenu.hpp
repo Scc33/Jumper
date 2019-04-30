@@ -29,8 +29,7 @@ public:
     
     void setupEndgameButtons();
     void setNewScore(int setScore);
-    void setHighScores(std::vector<int> setHighScores,
-                       std::vector<std::string> setHighScoreNames);
+    void setHighScores(std::vector<int> setHighScores, std::vector<std::string> setHighScoreNames);
     
     bool isHighScore() const;
     
