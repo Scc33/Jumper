@@ -105,3 +105,4 @@ After this I headed over to the market menu to add some functionality there. It 
 Up to-do tomorrow is completing the marketplace and tweaking the gameplay to be harder.
 
 *4/29/19*\
+I implemented reading and writing player color from a file and made tweaks to game coloring and the overall difficutly. Then I created new catch tests for reading market information from fle. Today I showed off my game to some friends and let them play test it. It was both a fun and rewarding experience. I got to show of my creation which I was really proud of and I noticed some new bugs from watching them play.
