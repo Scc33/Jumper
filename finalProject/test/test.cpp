@@ -2,6 +2,7 @@
 #include "ofApp.h"
 #include "catch.hpp"
 
+#include "game.hpp"
 #include "player.hpp"
 #include "load.hpp"
 #include "mainMenu.hpp"
@@ -16,6 +17,14 @@ int main(int argc, char* argv[]) {
     int result = Catch::Session().run(1, argv);
     // global clean-up...
     return result;
+}
+
+TEST_CASE("Game") {
+    Game game;
+    
+    SECTION("Score") {
+        REQUIRE(game.getScore() == 0);
+    }
 }
 
 TEST_CASE("Player") {
