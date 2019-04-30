@@ -13,7 +13,6 @@ private:
     ofxDatGuiButton* settingsBackButton;
     
     bool fullScreen;
-    double speed;
     
     vector<string> options;
     string getHex(int hex) const;
