@@ -8,12 +8,12 @@ For my final project I would like to create a platformer game. The game that I h
 The game will obviously be created using openFrameworks and since it is a game it can leverage a windowed interface very nicelly. I have discovered a really cool outside library called ofxGameOfLife which perfectly fits with what I have in mind and I think it will greatly speed up the development process. In addition with speeding up the development process this library will contribute to the overall aesthetic of the game. I also have discovered ofxDatGui which allows for the creation of cool looking menus which I will use to make the main menu, marketplace, high scores, and setting screens.
  
  **Desired Features**
- 1. The actual platform game
- 2. A menu that allows for the pausing of a game, seeing the high scores, and toggling settings
- 3. A list of highest scores on that machine that is saved to a file
- 4. Game settings can be saved to a file to maintain game state from game to game
+ 1. The actual platform game (Completed)
+ 2. A menu that allows for the pausing of a game, seeing the high scores, and toggling settings (Completed)
+ 3. A list of highest scores on that machine that is saved to a file (Completed)
+ 4. Game settings can be saved to a file to maintain game state from game to game (Completed)
  5. Difficulty settings which would change how points are scored 
- 6. A marketplace which allows for the spending of points earned in game to skins and themes
+ 6. A marketplace which allows for the spending of points earned in game to skins and themes (Completed)
  
  **Stretch Features**
  1. Sound for each movement the character can take and the ability to toggle it on and off
