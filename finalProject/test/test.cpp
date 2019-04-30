@@ -83,24 +83,28 @@ TEST_CASE("Read and writing scores") {
 
 TEST_CASE("Read and writing settings") {
     int color = -1;
-    REQUIRE(loader::ReadSettings(settingsFileLoc, color) == true);
+    bool fullScreen = false;
+    REQUIRE(loader::ReadSettings(settingsFileLoc, color, fullScreen) == true);
     
     SECTION("Read settings") {
         REQUIRE(color != -1);
     }
     
     SECTION("Write settings") {
-        REQUIRE(loader::WriteSettings(settingsFileLoc, color) == true);
+        REQUIRE(loader::WriteSettings(settingsFileLoc, color, fullScreen) == true);
     }
 }
 
 TEST_CASE("Read and write market") {
-    SECTION("Read market") {
-        
+    int market = -1;
+    REQUIRE(loader::ReadMarket(moneyFileLoc, market) == true);
+    
+    SECTION("Read money") {
+        REQUIRE(market != -1);
     }
     
-    SECTION("Write market") {
-        
+    SECTION("Write money") {
+        REQUIRE(loader::WriteMoney(moneyFileLoc, market) == true);
     }
 }
 
