@@ -17,7 +17,7 @@ private:
     double velY;
     std::vector<int> obstacles;
     Player player;
-    int speed;
+    double speed;
     
     int gravityCalculation();
     void drawObstacles();

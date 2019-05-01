@@ -22,9 +22,9 @@ void settingsMenu::drawSettingsMenu() {
     easyDifficulty->draw();
     
     if (difficultySetting == 1) {
-        ofDrawBitmapString("Easy setting", ofGetWidth() * 2 / 3, ofGetHeight() / 2 - 50);
+        ofDrawBitmapString("Easy setting, 1x score", ofGetWidth() * 2 / 3, ofGetHeight() / 2 - 50);
     } else {
-        ofDrawBitmapString("Hard setting", ofGetWidth() * 2 / 3, ofGetHeight() / 2 - 50);
+        ofDrawBitmapString("Hard setting, 2x score", ofGetWidth() * 2 / 3, ofGetHeight() / 2 - 50);
     }
     ofDrawBitmapString("Changing window status requires restart", ofGetWidth() * 2 / 3, ofGetHeight() / 2);
 }

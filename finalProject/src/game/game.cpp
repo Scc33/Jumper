@@ -18,19 +18,23 @@ void Game::drawObstacles() {
     ofFill();
     
     for (int i = 0; i < obstacles.size(); i++) {
-        ofDrawRectangle(obstacles.at(i), gameRows * cellSize - 360, cellSize, cellSize * 6);
+        ofDrawRectangle(obstacles.at(i), gameRows * cellSize - 360, cellSize * 2, cellSize * 6);
         obstacles.at(i) -= speed;
         
         if (obstacles.at(i) < 0) {
             obstacles.erase(obstacles.begin());
             score += 1 * difficultySetting;
+            
+            //This makes the game faster and increases the number of obstacles
+            updateChanceOfNewObstacle += .012 * (difficultySetting / 1.5);
+            speed += 0.1 * difficultySetting;
         }
     }
 }
 
 bool Game::hasCollided() const {
     for (int obstacle : obstacles) {
-        if (posX * cellSize <= obstacle && posX * cellSize >= obstacle - cellSize && posY > gameRows - 38) {
+        if (posX * cellSize <= obstacle && posX * cellSize >= obstacle - cellSize * 2 && posY > gameRows - 40) {
             return true;
         }
     }
@@ -91,11 +95,9 @@ void Game::runGame() {
     //Randomly adds a new obstacle
     //Chance of new obstacle being creating increases as game goes on
     chanceOfNewObstacle += ofRandom(0, updateChanceOfNewObstacle);
-    if (ofRandom(0, chanceOfNewObstacle) > 15) {
+    if (ofRandom(0, chanceOfNewObstacle) > 15 / (difficultySetting / 1.5)) {
         obstacles.push_back(ofGetWidth());
         chanceOfNewObstacle = 0;
-        updateChanceOfNewObstacle += .012 * (difficultySetting / 1.5);
-        speed += 0.1 * difficultySetting;
     }
     
     player.updatePlayerLocation(posX, posY);
