@@ -7,7 +7,6 @@ void Game::setGameGrid(int gridCols, int gridRows, int setCellSize) {
     gameCols = gridCols;
     gameRows = gridRows;
     cellSize = setCellSize;
-    speed = 3;
 }
 
 void Game::setGamePlayer(Player &setPlayer) {
@@ -24,7 +23,7 @@ void Game::drawObstacles() {
         
         if (obstacles.at(i) < 0) {
             obstacles.erase(obstacles.begin());
-            score++;
+            score += 1 * difficutlySetting;
         }
     }
 }
@@ -96,7 +95,7 @@ void Game::runGame() {
         obstacles.push_back(ofGetWidth());
         chanceOfNewObstacle = 0;
         updateChanceOfNewObstacle += .012;
-        speed += 0.1;
+        speed += 0.1 * difficutlySetting;
     }
     
     player.updatePlayerLocation(posX, posY);
@@ -116,6 +115,8 @@ void Game::drawGame() {
 }
 
 void Game::setupGame() {
+    speed = 3 * difficutlySetting;
+    
     airtime = 0;
     score = 0;
     

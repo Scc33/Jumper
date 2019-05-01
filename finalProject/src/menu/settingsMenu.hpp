@@ -10,6 +10,8 @@ private:
     ofxDatGuiDropdown* colorMenu;
     ofxDatGuiButton* fullScreenButton;
     ofxDatGuiButton* windowScreenButton;
+    ofxDatGuiButton* hardDifficulty;
+    ofxDatGuiButton* easyDifficulty;
     ofxDatGuiButton* settingsBackButton;
     
     bool fullScreen;
