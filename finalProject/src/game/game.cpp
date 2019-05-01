@@ -23,7 +23,7 @@ void Game::drawObstacles() {
         
         if (obstacles.at(i) < 0) {
             obstacles.erase(obstacles.begin());
-            score += 1 * difficutlySetting;
+            score += 1 * difficultySetting;
         }
     }
 }
@@ -91,11 +91,11 @@ void Game::runGame() {
     //Randomly adds a new obstacle
     //Chance of new obstacle being creating increases as game goes on
     chanceOfNewObstacle += ofRandom(0, updateChanceOfNewObstacle);
-    if (ofRandom(0, chanceOfNewObstacle) > 17) {
+    if (ofRandom(0, chanceOfNewObstacle) > 15) {
         obstacles.push_back(ofGetWidth());
         chanceOfNewObstacle = 0;
-        updateChanceOfNewObstacle += .012;
-        speed += 0.1 * difficutlySetting;
+        updateChanceOfNewObstacle += .012 * (difficultySetting / 1.5);
+        speed += 0.1 * difficultySetting;
     }
     
     player.updatePlayerLocation(posX, posY);
@@ -115,7 +115,7 @@ void Game::drawGame() {
 }
 
 void Game::setupGame() {
-    speed = 3 * difficutlySetting;
+    speed = 3 * difficultySetting;
     
     airtime = 0;
     score = 0;

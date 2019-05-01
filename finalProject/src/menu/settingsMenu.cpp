@@ -21,6 +21,11 @@ void settingsMenu::drawSettingsMenu() {
     hardDifficulty->draw();
     easyDifficulty->draw();
     
+    if (difficultySetting == 1) {
+        ofDrawBitmapString("Easy setting", ofGetWidth() * 2 / 3, ofGetHeight() / 2 - 50);
+    } else {
+        ofDrawBitmapString("Hard setting", ofGetWidth() * 2 / 3, ofGetHeight() / 2 - 50);
+    }
     ofDrawBitmapString("Changing window status requires restart", ofGetWidth() * 2 / 3, ofGetHeight() / 2);
 }
 
@@ -45,9 +50,9 @@ void settingsMenu::onButtonEvent(ofxDatGuiButtonEvent e) {
         
         loader::WriteSettings(settingsFileLoc, color, fullScreen);
     } else if (e.target == hardDifficulty) {
-        difficutlySetting = 2;
+        difficultySetting = 2;
     } else if (e.target == easyDifficulty) {
-        difficutlySetting = 1;
+        difficultySetting = 1;
     }
 }
 

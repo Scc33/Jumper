@@ -15,7 +15,7 @@ std::string marketFileLoc = "/Users/coughlin/Documents/School/CS 126 C++/of_v0.1
 
 int totalMoney = 0;
 
-int difficutlySetting = 1;
+int difficultySetting = 1;
 
 bool fullScreen = false;
 

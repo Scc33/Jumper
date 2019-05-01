@@ -15,7 +15,7 @@ extern std::string marketFileLoc;
 
 extern int totalMoney;
 
-extern int difficutlySetting;
+extern int difficultySetting;
 
 extern bool fullScreen;
 
