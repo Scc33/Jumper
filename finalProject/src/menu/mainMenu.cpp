@@ -23,6 +23,7 @@ void mainMenu::runStartMenu() {
     posX += velX;
     posY += velY;
     
+    //Bounces the player around the screen
     if (posX < 1) {
         posX = 1;
         velX *= -1;

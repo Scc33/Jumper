@@ -56,6 +56,8 @@ void marketMenu::setupMarketButtons() {
 }
 
 void marketMenu::onButtonEvent(ofxDatGuiButtonEvent e) {
+    //Creates warning if you don't have enough money otherwise updates the player color
+    
     if (e.target == marketBackButton) {
         startMenuRunning = true;
         marketMenuRunning = false;

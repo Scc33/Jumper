@@ -27,14 +27,14 @@ void Game::drawObstacles() {
             
             //This makes the game faster and increases the number of obstacles
             updateChanceOfNewObstacle += .04 * (difficultySetting / 1.5);
-            speed += 0.05 * difficultySetting;
+            speed += 0.02 * difficultySetting;
         }
     }
 }
 
 bool Game::hasCollided() const {
     for (int obstacle : obstacles) {
-        if (posX * cellSize <= obstacle && posX * cellSize >= obstacle - cellSize * 2 && posY > gameRows - 40) {
+        if (posX * cellSize >= obstacle && posX * cellSize <= obstacle + cellSize * 2 && posY > gameRows - 40) {
             return true;
         }
     }
@@ -58,6 +58,7 @@ int Game::gravityCalculation() {
 }
 
 void Game::runGame() {
+    //Controls
     if (keyIsDown[' ']) {
         posY -= .40;
     }
@@ -78,6 +79,7 @@ void Game::runGame() {
         posX += .60;
     }
     
+    //Keeps from walking out of the screeen
     if (posX < 1) {
         posX = 1;
     } else if (posX > gameCols - 2) {
@@ -116,6 +118,7 @@ void Game::drawGame() {
     ofDrawBitmapString("Your score is " + ofToString(score), ofGetWidth() * 4 / 5, ofGetHeight() / 10);
 }
 
+//Called each time the game is started and sets up the initial variables
 void Game::setupGame() {
     speed = 3 * difficultySetting;
     

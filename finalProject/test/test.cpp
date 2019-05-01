@@ -63,18 +63,22 @@ TEST_CASE("Main menu") {
 
 TEST_CASE("High score menu") {
     highScoreMenu hScoreM;
+    REQUIRE(hScoreM != nullptr);
 }
 
 TEST_CASE("Market menu") {
     marketMenu marketM;
+    REQUIRE(marketM != nullptr);
 }
 
 TEST_CASE("Settings menu") {
     settingsMenu settingsM;
+    REQUIRE(settingsM != nullptr);
 }
 
 TEST_CASE("Engame") {
     gameEndedMenu endM;
+    REQUIRE(endM != nullptr);
 }
 
 TEST_CASE("Read and writing scores") {

@@ -26,7 +26,6 @@ void ofApp::setup() {
     mainM.setupButtons();
     
     hScoreM.setupHScoreButtons();
-    hScoreM.updateHighScores();
     
     marketM.setupMarketButtons();
     

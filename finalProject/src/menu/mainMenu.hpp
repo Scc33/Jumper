@@ -7,11 +7,13 @@
 
 class mainMenu {
 private:
+    //Position and velocity of the player that bounces around the screen
     double posX;
     double posY;
     double velX;
     double velY;
     
+    //Size of the screen
     int gameCols;
     int gameRows;
     int cellSize;
@@ -38,7 +40,6 @@ public:
     void runStartMenu();
     void drawStartMenu();
     
-    //Buttons
     void setupButtons();
     void onButtonEvent(ofxDatGuiButtonEvent e);
     

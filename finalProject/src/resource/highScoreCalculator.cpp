@@ -1,5 +1,6 @@
 #include "highScoreCalculator.hpp"
 
+//Caculates if there is a new high score
 std::vector<int> highScoreCalculator::calcNewHighScores(int score, std::vector<int> oldHighScores, int &pos) {
     std::vector<int> newHighScores;
     bool newScore = false;
@@ -17,6 +18,7 @@ std::vector<int> highScoreCalculator::calcNewHighScores(int score, std::vector<i
     return newHighScores;
 }
 
+//Updates names if there is a new high score
 std::vector<std::string> highScoreCalculator::calcNewHighScoreNames(std::string name, std::vector<std::string> oldHighScoreNames, int pos) {
     std::vector<std::string> newHighScoreNames;
     

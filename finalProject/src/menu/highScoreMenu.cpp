@@ -10,6 +10,8 @@ void highScoreMenu::setupHScoreButtons() {
     hScoresBackButton->setPosition(ofGetWidth()/2 - hScoresBackButton->getWidth()/2, ofGetHeight()/2 + 90);
     
     hScoresBackButton->setTheme(new ofxDatGuiGameTheme(16));
+    
+    updateHighScores();
 }
 
 void highScoreMenu::updateHighScores() {

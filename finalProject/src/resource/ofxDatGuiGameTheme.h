@@ -1,8 +1,8 @@
 #pragma once
 #include "ofxDatGuiTheme.h"
 
+//Theme used by all ofxDatGui buttons throughout the game
 class ofxDatGuiGameTheme: public ofxDatGuiTheme {
-    
 public:
     ofxDatGuiGameTheme(int fontSize) {
         stripe.visible = false;

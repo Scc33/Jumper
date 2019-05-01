@@ -87,12 +87,14 @@ void settingsMenu::setupSettingsButtons() {
     easyDifficulty->setTheme(new ofxDatGuiGameTheme(16));
     hardDifficulty->setTheme(new ofxDatGuiGameTheme(16));
     
+    //Available background colors
     colors.push_back(ofColor::fromHex(16764939));
     colors.push_back(ofColor::fromHex(3121622));
     colors.push_back(ofColor::fromHex(2020207));
     colors.push_back(ofColor::fromHex(12989014));
     colors.push_back(ofColor::fromHex(3289650));
     
+    //Converts colors to string which can be displayed
     vector<string> options;
     for (int i=0; i<colors.size(); i++) {
         options.push_back(getHex(colors[i].getHex()));
@@ -108,13 +110,15 @@ void settingsMenu::setupSettingsButtons() {
     colorMenu->expand();
 }
 
+//Convert decimal value to hex
 string settingsMenu::getHex(int hex) const {
-    // convert decimal value to hex //
     std::stringstream ss;
     ss<< std::hex << hex;
     std::string res(ss.str());
+    
     while(res.size() < 6) {
         res += "0";
     }
+    
     return "#" + ofToUpper(res);
 }

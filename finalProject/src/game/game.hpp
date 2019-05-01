@@ -4,19 +4,29 @@
 
 class Game {
 private:
-    double airtime;
-    double chanceOfNewObstacle;
-    double updateChanceOfNewObstacle;
+    //Score += 1 or += 2 depending on the difficulty setting
     int score;
+    
+    //Game size
     int gameCols;
     int gameRows;
     int cellSize;
+    
+    //Player position
     double posX;
     double posY;
-    double velX;
-    double velY;
+    
+    //Used for gravity calculations
+    double airtime;
+
+    double chanceOfNewObstacle;
+    double updateChanceOfNewObstacle;
     std::vector<int> obstacles;
+    
+    //Player that is drawn and moves around the map
     Player player;
+    
+    //Speed the obstacles move at
     double speed;
     
     int gravityCalculation();

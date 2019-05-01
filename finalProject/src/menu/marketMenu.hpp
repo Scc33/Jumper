@@ -12,6 +12,7 @@ private:
     ofxDatGuiButton* purpleThemeButton;
     ofxDatGuiButton* marketBackButton;
     
+    //Flag to determine if not enough money warning should be drawn
     bool littleMoney;
     
 public:

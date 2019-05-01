@@ -20,6 +20,7 @@ private:
     string getHex(int hex) const;
     
 public:
+    //Selected color will be written to file
     vector<ofColor> colors;
     
     settingsMenu();

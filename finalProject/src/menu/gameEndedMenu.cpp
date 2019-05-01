@@ -32,6 +32,7 @@ void gameEndedMenu::setNewScore(int setScore) {
     newHighScore = isHighScore();
 }
 
+//Displays textbox to enter in high score or just a button to go home
 void gameEndedMenu::runGameEnded() {
     if (newHighScore) {
         highScoreInput->update();

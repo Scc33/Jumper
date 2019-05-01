@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+//Functions to load information from files
 namespace loader {
     bool WriteScores(std::string fileToWriteTo, std::vector<int> highScores, std::vector<std::string> highScoreNames);
     bool ReadScores(std::string fileToReadFrom, std::vector<int> &highScores, std::vector<std::string> &highScoreNames);
