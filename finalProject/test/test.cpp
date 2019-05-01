@@ -6,10 +6,6 @@
 #include "player.hpp"
 #include "load.hpp"
 #include "mainMenu.hpp"
-#include "highScoreMenu.hpp"
-#include "marketMenu.hpp"
-#include "settingsMenu.hpp"
-#include "gameEndedMenu.hpp"
 #include "globals.hpp"
 
 int main(int argc, char* argv[]) {
@@ -59,26 +55,6 @@ TEST_CASE("Main menu") {
         REQUIRE(mainM.getPosX() == 1);
         REQUIRE(mainM.getPosY() == 1);
     }
-}
-
-TEST_CASE("High score menu") {
-    highScoreMenu hScoreM;
-    REQUIRE(hScoreM != nullptr);
-}
-
-TEST_CASE("Market menu") {
-    marketMenu marketM;
-    REQUIRE(marketM != nullptr);
-}
-
-TEST_CASE("Settings menu") {
-    settingsMenu settingsM;
-    REQUIRE(settingsM != nullptr);
-}
-
-TEST_CASE("Engame") {
-    gameEndedMenu endM;
-    REQUIRE(endM != nullptr);
 }
 
 TEST_CASE("Read and writing scores") {

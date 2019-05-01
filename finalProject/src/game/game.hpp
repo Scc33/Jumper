@@ -31,6 +31,7 @@ private:
     
     int gravityCalculation();
     void drawObstacles();
+    void obstacleGenerator();
     
 public:
     bool keyIsDown[255];

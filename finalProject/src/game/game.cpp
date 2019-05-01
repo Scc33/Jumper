@@ -21,6 +21,7 @@ void Game::drawObstacles() {
         ofDrawRectangle(obstacles.at(i), gameRows * cellSize - 360, cellSize * 2, cellSize * 6);
         obstacles.at(i) -= speed;
         
+        //Detects if an obect is off the screen
         if (obstacles.at(i) + cellSize * 2 < 0) {
             obstacles.erase(obstacles.begin());
             score += 1 * difficultySetting;
@@ -32,6 +33,17 @@ void Game::drawObstacles() {
     }
 }
 
+//Randomly adds a new obstacle
+//Chance of new obstacle being creating increases as game goes on
+void Game::obstacleGenerator() {
+    chanceOfNewObstacle += ofRandom(0, updateChanceOfNewObstacle);
+    if (ofRandom(0, chanceOfNewObstacle) > 18 / (difficultySetting / 1.5)) {
+        obstacles.push_back(ofGetWidth());
+        chanceOfNewObstacle = 0;
+    }
+}
+
+//Detects if player has collided with an obstacle
 bool Game::hasCollided() const {
     for (int obstacle : obstacles) {
         if (posX * cellSize >= obstacle && posX * cellSize <= obstacle + cellSize * 2 && posY > gameRows - 40) {
@@ -42,6 +54,7 @@ bool Game::hasCollided() const {
     return false;
 }
 
+//Brings player back to the ground
 int Game::gravityCalculation() {
     if (posY < gameRows - 34) {
         airtime += .024;
@@ -94,13 +107,7 @@ void Game::runGame() {
     
     gravityCalculation();
     
-    //Randomly adds a new obstacle
-    //Chance of new obstacle being creating increases as game goes on
-    chanceOfNewObstacle += ofRandom(0, updateChanceOfNewObstacle);
-    if (ofRandom(0, chanceOfNewObstacle) > 18 / (difficultySetting / 1.5)) {
-        obstacles.push_back(ofGetWidth());
-        chanceOfNewObstacle = 0;
-    }
+    obstacleGenerator();
     
     player.updatePlayerLocation(posX, posY);
 }
