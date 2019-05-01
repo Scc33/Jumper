@@ -21,13 +21,13 @@ void Game::drawObstacles() {
         ofDrawRectangle(obstacles.at(i), gameRows * cellSize - 360, cellSize * 2, cellSize * 6);
         obstacles.at(i) -= speed;
         
-        if (obstacles.at(i) < 0) {
+        if (obstacles.at(i) + cellSize * 2 < 0) {
             obstacles.erase(obstacles.begin());
             score += 1 * difficultySetting;
             
             //This makes the game faster and increases the number of obstacles
-            updateChanceOfNewObstacle += .012 * (difficultySetting / 1.5);
-            speed += 0.1 * difficultySetting;
+            updateChanceOfNewObstacle += .04 * (difficultySetting / 1.5);
+            speed += 0.05 * difficultySetting;
         }
     }
 }
@@ -95,7 +95,7 @@ void Game::runGame() {
     //Randomly adds a new obstacle
     //Chance of new obstacle being creating increases as game goes on
     chanceOfNewObstacle += ofRandom(0, updateChanceOfNewObstacle);
-    if (ofRandom(0, chanceOfNewObstacle) > 15 / (difficultySetting / 1.5)) {
+    if (ofRandom(0, chanceOfNewObstacle) > 18 / (difficultySetting / 1.5)) {
         obstacles.push_back(ofGetWidth());
         chanceOfNewObstacle = 0;
     }
@@ -127,9 +127,8 @@ void Game::setupGame() {
     
     obstacles.clear();
     obstacles.push_back(ofGetWidth());
-    obstacles.push_back(ofGetWidth() * 3 / 2);
     chanceOfNewObstacle = 0;
-    updateChanceOfNewObstacle = .05;
+    updateChanceOfNewObstacle = 0.3;
 }
 
 int Game::getScore() const {
