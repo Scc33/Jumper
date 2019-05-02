@@ -111,3 +111,6 @@ I implemented reading and writing player color from a file and made tweaks to ga
 I was really nervous at the start of today because for some reason my game just stopped compiling. I think it was due to my computer updating, but I'm really not sure. After debugging this for awhile, cleaning the project, and reinstalling openFrameworks I was eventually able to get everything working again. Very nerve wracking! After I had that all sorted I did some tidying up in the repository including: updating the proposal, the readme, and adding screenshots of the game.
 
 After this tidy work I went back to add a difficulty setting which is the last feature I had set forth in my proposal. The difficulty setting controls the game speed and scoring. After this I did some game balancing, bug fixing the collision system, documenting, and cleaning up. Tomorrw I am going to go over everything just to make sure I have all my bases covered, but I think I'm done! It's been a good time.
+
+***5/1/19***\
+Today was the last day of the project, but I didn't have much left to do. I play tested the game a more looking for additional bugs and I made a few edits to the code base to make things prettier. I updated the README and I made this final additional to the DEVELOPMENT file.
