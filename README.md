@@ -8,6 +8,9 @@ WASD for movement across the screen and space bar to jump. When the 'W' key and 
 **High Scores and Settings**\
 High scores and settings are accessible in game through menus. These are saved to files to maintain state from game to game, however due to time constraints their file locations are hard coded. To change the location of where you want these files to be saved go to globals.cpp and edit their file location values.
 
+**Scaling Note**\
+I tried my best to design the game to scale to any screen size and I include a windowed/fullscreen setting.
+
 **Screenshots**\
 Game screen\
 ![Alt text](/Screenshots/Game.png?raw=true "Game screen")
@@ -20,13 +23,10 @@ Market\
 Settings\
 ![Alt text](/Screenshots/SettingsMenu.png?raw=true "Settings")
 
-Thanks to the following addons:
-
+Requires the following outside libraries.\
 ofxGameOfLife:\
 https://github.com/bernardoaraujor/ofxGameOfLife
-
 ofxDatGui:\
 https://github.com/braitsch/ofxDatGui
-
 ofxGui:\
 https://openframeworks.cc/documentation/ofxGui/
