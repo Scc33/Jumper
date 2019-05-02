@@ -19,6 +19,8 @@ private:
     //Used for gravity calculations
     double airtime;
 
+    //Obstacles and the chance a new obstacle will be created
+    //Updated every update cycle
     double chanceOfNewObstacle;
     double updateChanceOfNewObstacle;
     std::vector<int> obstacles;
@@ -29,6 +31,7 @@ private:
     //Speed the obstacles move at
     double speed;
     
+    //Game functionality
     int gravityCalculation();
     void drawObstacles();
     void obstacleGenerator();
@@ -44,6 +47,7 @@ public:
     void drawGame();
     void setupGame();
     
+    //Determines the end of the game
     bool hasCollided() const;
     
     int getScore() const;

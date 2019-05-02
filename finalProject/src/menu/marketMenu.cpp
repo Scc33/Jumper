@@ -48,11 +48,12 @@ void marketMenu::setupMarketButtons() {
     purpleThemeButton->setPosition(blueThemeButton->getX(), blueThemeButton->getY() + 90);
     marketBackButton->setPosition(blueThemeButton->getX(), blueThemeButton->getY() + 135);
     
-    redThemeButton->setTheme(new ofxDatGuiGameTheme(16));
-    blueThemeButton->setTheme(new ofxDatGuiGameTheme(16));
-    greenThemeButton->setTheme(new ofxDatGuiGameTheme(16));
-    purpleThemeButton->setTheme(new ofxDatGuiGameTheme(16));
-    marketBackButton->setTheme(new ofxDatGuiGameTheme(16));
+    const ofxDatGuiGameTheme *gameTheme = new ofxDatGuiGameTheme(16);
+    redThemeButton->setTheme(gameTheme);
+    blueThemeButton->setTheme(gameTheme);
+    greenThemeButton->setTheme(gameTheme);
+    purpleThemeButton->setTheme(gameTheme);
+    marketBackButton->setTheme(gameTheme);
 }
 
 void marketMenu::onButtonEvent(ofxDatGuiButtonEvent e) {

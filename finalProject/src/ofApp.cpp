@@ -15,12 +15,14 @@ void ofApp::setup() {
     posY = 1;
     gameStarted = startMenuRunning;
 
+    //Create player and game
     player.setPlayer(posX, posY, cellSize);
     grid.setup(ofGetWidth(), ofGetHeight(), cellSize);
     
     game.setGameGrid(grid.getCols(), grid.getRows(), cellSize);
     game.setGamePlayer(player);
     
+    //Create menus
     mainM.setMainMenu(grid.getCols(), grid.getRows(), cellSize);
     mainM.setMainMenuPlayer(player);
     mainM.setupButtons();
@@ -33,6 +35,7 @@ void ofApp::setup() {
     
     gameEndedM.setupEndgameButtons();
     
+    //Set background color to the stored color in settings
     ofSetBackgroundColor(settingsM.colors[backgroundColor]);
 }
 
@@ -52,8 +55,9 @@ void ofApp::update() {
             
             gameEndedM.setNewScore(game.getScore());
             gameEndedM.highScoreInput->setFocused(true);
+        } else {
+            game.runGame();
         }
-        game.runGame();
     } else if (gameEndedScreen) {
         gameEndedM.runGameEnded();
     } else if (marketMenuRunning) {

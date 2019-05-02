@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string>
 
+//Declarations for global variables
+
 bool startMenuRunning = true;
 bool gameRunning = false;
 bool gameEndedScreen = false;
