@@ -1,6 +1,6 @@
-# Final Project - Jumper
+# Jumper
 
-A classic platform game that takes inspiration from the famous no internet game in the chrome browser. Avoid the obstacles at all costs and see if you can get a new high score! Please enjoy and have fun! :)
+A classic platform side scroller game that takes inspiration from the famous no-internet game in the chrome browser. Avoid the obstacles at all costs and see if you can get a new high score! Please enjoy and have fun! :)
 
 **Controls**\
 WASD for movement across the screen and space bar to jump. When the 'W' key and space bar are pressed at the same time the player double jumps.
@@ -9,7 +9,7 @@ WASD for movement across the screen and space bar to jump. When the 'W' key and 
 High scores and settings are accessible in game through menus. These are saved to files to maintain state from game to game, however due to time constraints their file locations are hard coded. To change the location of where you want these files to be saved go to globals.cpp and edit their file location values.
 
 **Scaling Note**\
-I tried my best to design the game to scale to any screen size and I include a windowed/fullscreen setting.
+There are some unresolved issues with scaling so toggling fullscreen mode requires a game restart.
 
 **Screenshots**\
 Game screen\
