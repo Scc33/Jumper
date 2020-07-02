@@ -23,6 +23,9 @@ Market\
 Settings\
 ![Alt text](/Screenshots/SettingsMenu.png?raw=true "Settings")
 
+Built using C++ and openFrameworks.\
+https://openframeworks.cc
+
 Requires the following outside libraries.\
 ofxGameOfLife:\
 https://github.com/bernardoaraujor/ofxGameOfLife
